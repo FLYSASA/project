@@ -1,12 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="description" content="hungerFm" /> <!--给搜索引擎看的,引擎根据这个收录排名-->
     <meta charset="UTF-8">
+    <meta name="referrer" content="never">  <!--音乐来自百度音乐，因百度音乐对请求来源有限制，在测试时需要添加这一行-->
     <title>music player</title>
+
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_448304_47new50n1nabgldi.css"> <!--字体图标引入-->
+    <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css">
+    <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+
 </head>
 <body>
-<p>87878</p>
+<section id="page-music">
+    <main class="layout clearfix">
+        <!--左栏-->
+        <div class="aside">
+            <figure></figure>     <!--figure标签规定独立的流内容（图像、图表、照片、代码等等）-->
+            <div class="actions">
+                <span class="btn-collect iconfont icon-heart"></span>
+                <span class="btn-play iconfont icon-pause"></span>
+                <span class="btn-next iconfont icon-next"></span>
+            </div>
+        </div>
+
+        <!--右栏-->
+        <div class="detail">
+            <span class="tag">90后</span> <!--标签-->
+            <h1>It's a new day</h1> <!--曲名-->
+            <ul class="icons">  <!--收藏点赞-->
+                <li><span class="iconfont icon-earphone"></span>3333</li>
+                <li><span class="iconfont icon-heart"></span>128</li>
+                <li><span class="iconfont icon-like"> </span>20</li>
+            </ul>
+            <!--进度条-->
+            <div class="area-bar">
+                <div class="bar">
+                    <div class="bar-progress"></div>
+                </div>
+                <div class="current-time">1:02</div>
+            </div>
+            <div class="author">周杰伦</div>
+            <div class="lyric">
+                <p>hello world</p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="layout">
+            <!--左右轮播键-->
+            <span class="iconfont icon-left"></span>
+            <span class="iconfont icon-right"></span>
+
+            <!--轮播-->
+            <div class="box">
+                <ul class="clearfix">
+                    <li>
+                        <div class="cover"
+                             style="background-image:url(http://cloud.hunger-valley.com/music/public_tuijian_spring.jpg-small)"></div>
+                        <h3>漫步春天</h3>
+                    </li>
+                    <li>
+                        <div class="cover" style="background-image:url(http://cloud.hunger-valley.com/music/public_tuijian_spring.jpg-small)"></div>
+                        <h3>漫步春天</h3>
+                    </li>
+                    <li>
+                        <div class="cover" style="background-image:url(http://cloud.hunger-valley.com/music/public_tuijian_spring.jpg-small)"></div>
+                        <h3>漫步春天</h3>
+                    </li>
+                    <li>
+                        <div class="cover" style="background-image:url(http://cloud.hunger-valley.com/music/public_tuijian_spring.jpg-small)"></div>
+                        <h3>漫步春天</h3>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </footer>
+</section>
+<section id="page-cover"></section>
+<div class="bg"></div>
 </body>
 </html>
