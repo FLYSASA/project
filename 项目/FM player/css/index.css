@@ -1,0 +1,201 @@
+body{
+    font: 12px/1.5  BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, PingFang SC, Source Han Sans CN, Hiragino Sans GB, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background-color: rgba(250, 250, 250, 0.933333)
+}
+
+.fm-music{
+    position: relative;
+    width: 340px;
+    border-radius: 5px;
+    margin: 30px auto;
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.2);
+}
+.fm-music .iconfont{
+    opacity: .8;
+    cursor: pointer;
+    transition: all .3s;
+}
+.fm-music .iconfont:hover{
+    opacity: 1;
+}
+.fm-music header {
+    position: relative;
+    height: 35px;
+    background: linear-gradient(#02ada2, #0c959b);;
+    border-radius: 5px 5px 0 0;
+}
+
+/*左上角icon-ball样式及位置*/
+.fm-music .icon-ball {
+    position: relative;
+    margin-top: 12px;
+    margin-left: 20px;
+}
+.fm-music .icon-ball:before {
+    content: '';
+    position: absolute;
+    left: 15px;
+}
+
+.fm-music .icon-ball:after {
+    content: '';
+    position: absolute;
+    left: 30px;
+}
+.fm-music .icon-ball,
+.fm-music .icon-ball:before,
+.fm-music .icon-ball:after {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: rgba(255,255,255,0.4);
+    box-shadow: 0 0 1px 1px rgba(0,0,0,0.2) inset, 0 -2px 2px 2px rgb(11, 152, 156) inset, 0 1px 1px 1px rgba(255,255,255,0.2), 0 -1px 1px 0px rgba(0,0,0,0.2);
+    border-radius: 50%;
+}
+
+/*音量标志位置样式确定*/
+.fm-music .volume{
+    position: absolute;
+    right: 0;
+    top: 6px;
+    margin-right: 20px;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(255,255,255,.4);
+}
+.fm-music .volume-bar{
+    position: absolute;
+    right: 6px;
+    top: 6px;
+}
+.fm-music .volume-bar span{
+    display: block;
+    width: 8px;
+    height: 2px;
+    margin-top: 3px;
+    background-color: #91bdb4;
+    cursor: pointer;
+}
+.fm-music .volume-bar span.active,
+.fm-music .volume-bar span.active ~ span {
+    background-color: #ced9d3
+}
+
+/*nav导航*/
+.fm-music nav{
+    height: 35px;
+    background: linear-gradient(#2c3c35, #313431);
+    overflow: hidden;
+}
+.fm-music nav .icon-arrow-left{
+    float: left;
+    color: #e8edea;
+    margin-left: 20px;
+    margin-top: 6px;
+}
+.fm-music nav .icon-arrow-right{
+    float: right;
+    color: #e8edea;
+    margin-right: 20px;
+    margin-top: 6px;
+}
+.fm-music nav .channels{
+    margin: 5px 42px;
+    font-size: 0;
+    text-align: center;
+}
+.fm-music nav .channels .active{
+    color: #e8edea;
+    font-size: 17px;
+}
+.fm-music nav li{
+    display: inline-block;
+    color: #7d807e;
+    font-weight: bold;
+    font-size: 14px;
+    width: 84px;
+}
+
+.fm-music main{
+    padding: 15px 20px;
+    background-color: #e8edea;
+}
+.fm-music main img{
+    float:left;
+    width: 85px;
+    height: 85px;
+}
+.fm-music main .detail{
+    position: relative;
+    margin-left: 105px;
+}
+.fm-music .singer{
+    font-size: 13px;
+    color: #7f8281;
+    font-weight: bold;
+}
+.fm-music .title{
+    font-size: 13px;
+    color: #000;
+    font-weight: bold;
+}
+.fm-music .time{
+    position: absolute;
+    right: 0;
+    top: 20px;
+    font-weight: bold;
+    color: #91bdb4;
+}
+.fm-music .progress-bar{
+    position: relative;
+    margin-top: 12px;
+    height: 3px;
+    background-color: #ced9d3;
+    cursor: pointer;
+}
+.fm-music .progress-bar .progress{
+    position: absolute;
+    width: 30%;
+    height: 3px;
+    background-color: #91bdb4;
+    transition: all .3s;
+}
+.fm-music .buttons{
+    margin-top: 16px;
+    text-align: center;
+}
+.fm-music .buttons:after{
+    content: '';
+    display: block;
+    clear: both;
+}
+.fm-music .buttons .iconfont{
+    font-size: 21px;
+    color: #3f413f;
+}
+.fm-music .buttons .icon-heart{
+    float: left;
+}
+.fm-music .buttons .icon-heart.active{
+    color: #d9414e;
+}
+.fm-music .buttons .icon-next{
+    float: right;
+}
+.fm-music footer{
+    text-align: center;
+    position: absolute;
+    bottom: -30px;
+    width: 100%;
+}
+.fm-music footer li{
+    display: none;
+    color: #91bdb4;
+    font-size: 14px;
+    font-weight: bold;
+}
+.fm-music footer li.active{
+    display: block;
+}
+
+
