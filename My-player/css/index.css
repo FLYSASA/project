@@ -1,0 +1,347 @@
+.layout{
+    margin: 0 auto;
+    width: 600px;
+}
+@media (min-width: 700px) {
+    .layout {
+        width: 600px;
+    }
+}
+@media (min-width: 900px) {
+    .layout {
+        width: 800px;
+    }
+}
+@media (min-width: 1000px) {
+    .layout {
+        width: 900px;
+    }
+}
+@media (min-width: 1200px) {
+    .layout {
+        width: 1100px;
+    }
+}
+/*渐变背景设置*/
+.bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background: -webkit-linear-gradient(left, #7E898F 0%, #636C75 100%), -webkit-radial-gradient(at top, rgba(255, 255, 255, 0.5) 0%, rgba(0, 0, 0, 0.55) 100%), -webkit-radial-gradient(at top, rgba(255, 255, 255, 0.5) 0%, rgba(0, 0, 0, 0.08) 63%);
+    background: linear-gradient(90deg, #7E898F 0%, #636C75 100%), radial-gradient(at top, rgba(255, 255, 255, 0.5) 0%, rgba(0, 0, 0, 0.55) 100%), radial-gradient(at top, rgba(255, 255, 255, 0.5) 0%, rgba(0, 0, 0, 0.08) 63%);
+    background-blend-mode: multiply, screen;
+}
+.bg::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.4);
+}
+
+/*main区域设置*/
+main{
+    padding-top: 8vh; /*100vh==视口高度  即12/100*视口高度 */
+    height: calc(100% - 24vh);
+}
+
+main .aside{
+    float: left;
+    width: 40vh;
+    padding-bottom: 2vh;
+    border-radius: 0.5vh;
+    background: rgba(0,0,0,0.3);
+    color: #fff;
+    text-align: center;
+}
+/*head css*/
+main .head{
+    display: flex;
+    height: 8vh;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 1px solid #fec514;
+}
+main .tag{
+    font-size: 2vh;
+    padding-left: 1vh;
+    padding-right: 1vh;
+    height: 3vh;
+    line-height: 3vh;
+    background: #fec514;
+    border-radius: .2em;
+    color: #000000;
+}
+main .icon-earphone{
+    font-size: 2.5vh;
+}
+
+main  figure{
+    width: 15vh;
+    height: 15vh;
+    margin: 6vh auto;
+    border-radius: 50%;
+    background: url(http://cloud.hunger-valley.com/music/public_tuijian_spring.jpg-middle) no-repeat center center;
+    background-size: cover;
+}
+main h3{
+    font-size: 2.5vh;
+    margin: 0 auto;
+}
+main .author{
+    font-size: 1vh;
+    padding: 2vh;
+}
+
+/*mar*/
+main .aside-bar{
+    margin: 2vh;
+    cursor: pointer;
+}
+main .bar-area{
+    display: flex;
+    margin-bottom: 0.5vh;
+    justify-content: space-between;
+}
+
+/*进度条区域*/
+main .bar{
+    position: relative;
+    width: 26vh;
+    height: .6vh;
+    margin-right: 1vh;
+    border-radius: .2vh;
+    background: #6d6d6d;
+    margin-top: 2.5vh;
+}
+main .bar-progress{
+    position: absolute;
+    left: 0;
+    width: 30%;
+    height: .6vh;
+    border-radius: .2vh;
+    background: -webkit-linear-gradient(left, #fec514, #EE4000);
+    background: linear-gradient(left, #fec514, #EE4000);
+    transition: width .6s;
+}
+
+/*音量控制区域*/
+main .voice-bar{
+    position: relative;
+    width: 8vh;
+    height: .6vh;
+    border-radius: .2vh;
+    background: #6d6d6d;
+    cursor: pointer;
+    margin-top: 2.5vh;
+}
+main .voice-progress{
+    position: absolute;
+    left: 0;
+    width: 80%;
+    height: .6vh;
+    border-radius: .2vh;
+    background: -webkit-linear-gradient(left, #fec514, #EE4000);
+    background: linear-gradient(left, #fec514, #EE4000);
+    transition: width .8s;
+}
+
+.bar-progress:after, .voice-progress:after {
+    content: '';
+    width: 1vh;
+    height: 1vh;
+    border-radius: 50%;
+    background: #fff;
+    position: absolute;
+    right: -.2vh;
+    top: -.2vh;   /*高度的一半减去父亲高度一半*/
+}
+
+/*时间*/
+main .text{
+    position: relative;
+    display: flex;
+    margin-top: 2vh;
+    font-size: 1.8vh;
+    justify-content: space-between;
+}
+main .time{
+    display: flex;
+    width: 26vh;
+    justify-content: space-between;
+
+}
+main .volume{
+    opacity: 0.8
+}
+
+
+/*按钮区*/
+.actions{
+    display: flex;
+    width: 25vh;
+    margin: 0 auto;
+    justify-content: space-between;
+    align-items: center;
+}
+.actions .iconfont{
+    font-size: 4vh;
+    color: #fec514;
+    cursor: pointer;
+}
+.no-voice{
+    font-size: 1.8vh;
+    color: #fec514;
+    cursor: pointer;
+}
+
+/*detail区域*/
+main .detail{
+    margin-left: 56vh;
+    color: #fff;
+    position: relative;
+}
+.detail h3{
+    height: 5vh;
+    line-height: 5vh;
+    text-align: center;
+    font-size: 5vh;
+    color: #ccc;
+    opacity: 0.8;
+}
+.detail .lyric{
+    margin-top: 20vh;
+    font-size: 3.2vh;
+    border-bottom: 1px dotted #ccc;
+    color: #ccc;
+}
+.detail .author{
+    position: absolute;
+    right: 0;
+    top: 40vh;
+    font-size: 2.5vh;
+    border-bottom: 1px dotted #ccc;
+    color: #ccc;
+    font-style: italic;
+
+}
+
+
+/*footer css*/
+footer{
+    height: 24vh;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0px -.25vh .25vh .25vh rgba(255,255,255,0.2);
+}
+footer .layout{
+    position: relative;   /* 给左右键定位用 */
+}
+
+/* 左右键 */
+footer .iconfont{
+    position: absolute;
+    top: 4vh;
+    font-size: 6vh;
+    color: rgba(255,255,255,0.4);
+    transition: all .4s;
+    cursor: pointer;
+    opacity: 0;
+}
+footer:hover .iconfont{
+    opacity: 1;
+}
+footer .iconfont:hover{
+    color: rgba(255,255,255,0.8)
+}
+.icon-left{
+    left: -8vh;
+}
+.icon-right{
+    right: -8vh;
+}
+
+/* 轮播图 */
+footer .box{
+    position: relative;
+    overflow: hidden;       /* 溢出隐藏 */
+    height: 24vh;         /*设定高度的原因是内部元素ul设置为absolute后,脱离了文档流,box高度为0 不显示*/
+}
+footer ul{
+    position: absolute;
+    left: 0;
+}
+footer li{
+    float: left;
+    margin: 2vh 2vh 0 2vh;
+    width: 20vh;
+    height: 20vh;
+
+    text-align: center;
+    cursor: pointer;
+}
+footer li:hover{
+    box-shadow: 0 0 .5vh .5vh rgba(255,255,255,0.8);
+}
+/* 设置图片 */
+footer li .cover{
+    height: 16vh;
+    background-size: cover;
+    background-position: center center;
+}
+
+footer h3{
+    font-size: 2vh;
+    color: rgba(255,255,255,0.6);
+    margin-top: 1vh;
+}
+
+footer li.active {
+    box-shadow: 0 0 .5vh .5vh rgba(255,255,255,0.8);
+}
+
+.boomText{
+    display: inline-block;
+    opacity: 0;
+}
+
+/*推送区域*/
+#personal {
+    position: fixed;
+    right: 10px;
+    top: 10px;
+}
+#personal a {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 17px;
+    color: #afafaf;
+    border: 1px solid #afafaf;
+    transition: all .3s;
+}
+#personal a:hover {
+    background: #afafaf;
+    color: #000;
+}
+
+/*旋转图片*/
+@keyframes xuanzhuan {           /* @keyframes动画是循环的，而transform 只执行一遍.*/
+    0% {                         /*0% 是动画的开始时间，50%是动画完成一半的时间，100% 动画的结束时间。百分比后面的花括号写：在动画执行过程中的某时间点要完成的变化。*/
+        transform: rotate(0deg);  /*rotate()旋转*/
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+
+

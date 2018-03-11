@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="description" content="myFm" /> <!--给搜索引擎看的,引擎根据这个收录排名-->
+    <meta charset="UTF-8">
+    <meta name="referrer" content="never">  <!--音乐来自百度音乐，因百度音乐对请求来源有限制，在测试时需要添加这一行-->
+    <title>music player</title>
+
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_448304_47new50n1nabgldi.css"> <!--字体图标引入-->
+    <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+
+</head>
+<body>
+<section id="page-music">
+    <main class="layout clearfix">
+        <div class="aside">
+            <div class="head">
+                <span class="tag">90后</span>
+                <span class="iconfont icon-earphone"> 3333</span>
+            </div>
+            <figure></figure>
+            <h3>告白气球</h3>
+            <span class="author">周杰伦</span>
+            <div class="aside-bar">
+                <div class="bar-area">
+                    <div class="bar">
+                        <div class="bar-progress"></div>
+                    </div>
+                    <div class="voice-bar">
+                        <div class="voice-progress"></div>
+                    </div>
+                </div>
+                <div class="text">
+                    <div class="time">
+                        <div class="current-time">0:00</div>
+                        <div class="total-time">3:33</div>
+                    </div>
+                    <div class="volume">音量</div>
+                </div>
+            </div>
+            <div class="actions">
+                <span class="btn-play iconfont icon-play"></span>
+                <span class="btn-next iconfont icon-next"></span>
+                <span class="no-voice">静音</span>
+            </div>
+        </div>
+
+        <div class="detail">
+            <h3>歌 词</h3>
+            <div class="lyric">
+                <p>塞納河畔左岸的咖啡我手一杯品嚐你的美留下唇印的嘴...</p>
+            </div>
+            <span class="author">周杰伦</span>
+
+        </div>
+    </main>
+    <footer>
+        <div class="layout">
+            <!--左右轮播键-->
+            <span class="iconfont icon-left"></span>
+            <span class="iconfont icon-right"></span>
+
+            <!--轮播-->
+            <div class="box">
+                <ul class="clearfix">
+                    <li>
+                        <div class="cover"
+                             style="background-image:url(http://cloud.hunger-valley.com/music/public_tuijian_spring.jpg-small)"></div>
+                        <h3>漫步春天</h3>
+                    </li>
+                    <li>
+                        <div class="cover" style="background-image:url(http://cloud.hunger-valley.com/music/public_tuijian_spring.jpg-small)"></div>
+                        <h3>漫步春天</h3>
+                    </li>
+                    <li>
+                        <div class="cover" style="background-image:url(http://cloud.hunger-valley.com/music/public_tuijian_spring.jpg-small)"></div>
+                        <h3>漫步春天</h3>
+                    </li>
+                    <li>
+                        <div class="cover" style="background-image:url(http://cloud.hunger-valley.com/music/public_tuijian_spring.jpg-small)"></div>
+                        <h3>漫步春天</h3>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <div class="bg"></div>
+
+</section>
+<section id="personal">
+    <a href="https://fehey.com/" target="_blank">博客</a>
+    <a href="https://github.com/EryouHao/hey-Audio" target="_blank">github源码</a>
+</section>
+<section id="page-cover"></section>
+<div class="bg"></div>
+
+
+
+<script src="js/music.js"></script>
+</body>
+</html>
