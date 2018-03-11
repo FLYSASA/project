@@ -81,8 +81,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="195" />
-    <option name="y" value="84" />
+    <option name="x" value="-183" />
+    <option name="y" value="187" />
     <option name="width" value="1932" />
     <option name="height" value="858" />
   </component>
@@ -225,15 +225,15 @@
       <option name="presentableId" value="Default" />
       <updated>1520734756867</updated>
       <workItem from="1520734758079" duration="34000" />
-      <workItem from="1520757445304" duration="9523000" />
+      <workItem from="1520757445304" duration="9835000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9557000" />
+    <option name="totallyTimeSpent" value="9869000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="195" y="84" width="1932" height="858" extended-state="0" />
+    <frame x="-183" y="187" width="1932" height="858" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.124217115" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -287,6 +287,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="299">
           <caret line="89" column="13" lean-forward="true" selection-start-line="89" selection-start-column="13" selection-end-line="89" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/我的FM设计稿/实际项目/My-player/js/music.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2583">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
