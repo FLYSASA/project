@@ -220,11 +220,7 @@ main .detail{
     color: #fff;
     position: relative;
 }
-@media (max-width: 450px){
-    main .detail{
-        display: none;
-    }
-}
+
 .detail h3{
     height: 5vh;
     line-height: 5vh;
@@ -233,11 +229,27 @@ main .detail{
     color: #ccc;
     opacity: 0.8;
 }
+@media (max-width: 450px){
+    main h3{
+         display: none;
+     }
+}
 .detail .lyric{
     margin-top: 20vh;
     font-size: 3.2vh;
     border-bottom: 1px dotted #ccc;
     color: #ccc;
+}
+@media (max-width: 450px){
+    .detail .lyric{
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-11vh);
+        font-size: 1vh;
+        border-bottom: none;
+        margin-top: 0;
+    }
 }
 .detail .author{
     position: absolute;
@@ -247,7 +259,11 @@ main .detail{
     border-bottom: 1px dotted #ccc;
     color: #ccc;
     font-style: italic;
-
+}
+@media (max-width: 450px){
+    .detail .author{
+        display: none;
+    }
 }
 
 
