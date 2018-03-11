@@ -136,16 +136,20 @@ var Fm = {
             _this.loadMusic()                                  //第二件事 触发事件
         })
 
+        //播放 暂停
         _this.$container.find('.aside .btn-play').on('click',function(){
             if($(this).hasClass('icon-pause')){
                 $(this).removeClass('icon-pause').addClass('icon-play')
                 _this.audio.pause()
+                _this.$container.find('.aside figure').css('animation','')
             }else{
                 $(this).removeClass('icon-play').addClass('icon-pause')
                 _this.audio.play()
+                _this.$container.find('.aside figure').css('animation','xuanzhuan 5s linear infinite')
             }
         })
 
+        //下一曲
         _this.$container.find('.aside .btn-next').on('click',function(){
             _this.loadMusic()
         })
