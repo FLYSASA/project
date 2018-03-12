@@ -136,7 +136,7 @@ main .bar{
 main .bar-progress{
     position: absolute;
     left: 0;
-    width: 30%;
+    width: 0%;
     height: .6vh;
     border-radius: .2vh;
     background: -webkit-linear-gradient(left, #fec514, #EE4000);
@@ -225,6 +225,7 @@ main .detail{
         width: 100%;
         height: 100%;
         margin-left: 0;
+        visibility: hidden;
     }
 }
 
@@ -256,6 +257,7 @@ main .detail{
         font-size: 1vh;
         border-bottom: none;
         margin-top: 0;
+        visibility:visible
     }
 }
 .detail .author{
