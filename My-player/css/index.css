@@ -70,7 +70,7 @@ main .aside{
     main .aside{
         position: absolute;
         left: 50%;
-        transform: translate(-50%,0);  /*移动自身一半*/
+        transform: translate(-50%,0);  /*移动自身一半,绝对居中*/
     }
 }
 /*head css*/
@@ -220,6 +220,13 @@ main .detail{
     color: #fff;
     position: relative;
 }
+@media (max-width:450px){
+    main .detail{
+        width: 100%;
+        height: 100%;
+        margin-left: 0;
+    }
+}
 
 .detail h3{
     height: 5vh;
@@ -242,9 +249,9 @@ main .detail{
 }
 @media (max-width: 450px){
     .detail .lyric{
-        position: fixed;
+        position: absolute;
         left: 50%;
-        top: 50%;
+        top: 62%;
         transform: translate(-50%,-11vh);
         font-size: 1vh;
         border-bottom: none;
@@ -260,11 +267,17 @@ main .detail{
     color: #ccc;
     font-style: italic;
 }
+@media (max-width: 800px){
+    .detail .author{
+        display: none;
+    }
+}
 @media (max-width: 450px){
     .detail .author{
         display: none;
     }
 }
+
 
 
 /*footer css*/

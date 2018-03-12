@@ -17,14 +17,14 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.6877888">
+    <splitter split-orientation="horizontal" split-proportion="0.5075908">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/index.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="349">
-                  <caret line="58" column="0" lean-forward="true" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+                <state relative-caret-position="175">
+                  <caret line="19" column="23" lean-forward="false" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="23" />
                   <folding />
                 </state>
               </provider>
@@ -37,7 +37,7 @@
           <file leaf-file-name="music.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/js/music.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-2350">
+                <state relative-caret-position="3575">
                   <caret line="143" column="74" lean-forward="false" selection-start-line="143" selection-start-column="74" selection-end-line="143" selection-end-column="74" />
                   <folding>
                     <marker date="1520790186251" expanded="true" signature="3586:3632" ph="..." />
@@ -49,8 +49,8 @@
           <file leaf-file-name="index.css" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/css/index.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="513">
-                  <caret line="247" column="27" lean-forward="false" selection-start-line="247" selection-start-column="27" selection-end-line="247" selection-end-column="27" />
+                <state relative-caret-position="425">
+                  <caret line="269" column="22" lean-forward="false" selection-start-line="269" selection-start-column="22" selection-end-line="269" selection-end-column="22" />
                   <folding />
                 </state>
               </provider>
@@ -69,8 +69,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/js/music.js" />
-        <option value="$PROJECT_DIR$/css/index.css" />
         <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/css/index.css" />
       </list>
     </option>
   </component>
@@ -81,8 +81,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="509" />
-    <option name="y" value="129" />
+    <option name="x" value="306" />
+    <option name="y" value="66" />
     <option name="width" value="1641" />
     <option name="height" value="908" />
   </component>
@@ -110,20 +110,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="My-player" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="My-player" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="My-player" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -233,15 +219,16 @@
       <workItem from="1520734758079" duration="34000" />
       <workItem from="1520757445304" duration="9835000" />
       <workItem from="1520783214769" duration="6634000" />
-      <workItem from="1520791954661" duration="1606000" />
+      <workItem from="1520791954661" duration="1785000" />
+      <workItem from="1520819581895" duration="1038000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18109000" />
+    <option name="totallyTimeSpent" value="19326000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="509" y="129" width="1641" height="908" extended-state="0" />
+    <frame x="306" y="66" width="1641" height="908" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.06769231" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -273,6 +260,32 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1450">
+          <caret line="58" column="0" lean-forward="true" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/music.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3575">
+          <caret line="143" column="74" lean-forward="false" selection-start-line="143" selection-start-column="74" selection-end-line="143" selection-end-column="74" />
+          <folding>
+            <marker date="1520790186251" expanded="true" signature="3586:3632" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/index.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2250">
@@ -335,7 +348,7 @@
     <entry file="file://$USER_HOME$/Desktop/我的FM设计稿/实际项目/My-player/js/music.js" />
     <entry file="file://$PROJECT_DIR$/js/music.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2350">
+        <state relative-caret-position="3575">
           <caret line="143" column="74" lean-forward="false" selection-start-line="143" selection-start-column="74" selection-end-line="143" selection-end-column="74" />
           <folding>
             <marker date="1520790186251" expanded="true" signature="3586:3632" ph="..." />
@@ -343,18 +356,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/index.css">
+    <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="247" column="27" lean-forward="false" selection-start-line="247" selection-start-column="27" selection-end-line="247" selection-end-column="27" />
+        <state relative-caret-position="175">
+          <caret line="19" column="23" lean-forward="false" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
+    <entry file="file://$PROJECT_DIR$/css/index.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="58" column="0" lean-forward="true" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+        <state relative-caret-position="425">
+          <caret line="269" column="22" lean-forward="false" selection-start-line="269" selection-start-column="22" selection-end-line="269" selection-end-column="22" />
           <folding />
         </state>
       </provider>
