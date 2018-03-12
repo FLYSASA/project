@@ -121,6 +121,7 @@ main .bar-area{
     display: flex;
     margin-bottom: 0.5vh;
     justify-content: space-between;
+    z-index: 99;
 }
 
 /*进度条区域*/
