@@ -111,6 +111,11 @@ main .author{
     font-size: 1vh;
     padding: 2vh;
 }
+@media (max-width: 450px){
+    main .author{
+        font-size: 3vh;
+    }
+}
 
 /*mar*/
 main .aside-bar{
@@ -258,7 +263,8 @@ main .detail{
         font-size: 1vh;
         border-bottom: none;
         margin-top: 0;
-        visibility:visible
+        visibility: visible;
+        font-size: 3vh;
     }
 }
 .detail .author{
