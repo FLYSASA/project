@@ -872,9 +872,9 @@ section {
 			width: 1140px;
 		}
 	}
-	@media(max-width:1140px){
+	@media(max-width:1140px){         /* 保证轮播不随窗口自适应与别的模块冲突 */
 		#header{
-			width: 1140px !important; 
+			width: 1140px !important;   
 		}
 		#header .carousel{
 			width: 1140px !important; 
