@@ -3,6 +3,7 @@
 <head>
 	<title>企业网站模块化</title>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="./src/css/index.css">
 	<link rel="stylesheet" type="text/css" href="./src/css/icons/iconfont.css">
 	<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_601921_36bomk6op0mp9zfr.css">
@@ -48,7 +49,7 @@
 				</div>
 			</div>
 		</div>  
-		<div class="container">			
+		<div class="container">			<!-- 因为子元素position:absolute脱离文档流相对浏览器左上角定位,父元素依然文档流所以处在carousel下方-->
 			<div class="intro">
 				<div class="intro-lead-in">Welcome To Our Studio!</div>	
 				<div class="intro-leading">It's Nice To Meet You</div>
@@ -420,11 +421,11 @@
 	<div class="ct"></div>
 
 <!-- ./指同级目录下 ../指父级目录下 -->
-<script data-main="./dist/js/index.merge.min.js" src="./src/js/lib/bower_components/require.js"></script>	<!-- data_main指向整合好的js,src指向require.js -->
+<script data-main="./dist/js/index.merge.min.js" src="./src/js/lib/bower_components/require.js"></script>	<!-- data_main指向整合好的js,src指向require.js --> 
 <!-- <script src="./src/js/lib/bower_components/require.js"></script> 
 	<script>
 		requirejs.config({
-			baseUrl: 'js',
+			baseUrl: './src/js',
 			paths: {
 				'jquery': 'lib/bower_components/jquery-3.2.0.min'
 			}

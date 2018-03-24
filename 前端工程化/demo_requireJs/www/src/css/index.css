@@ -37,7 +37,6 @@ body {
 html,
 body {
 	height: 100%;
-	
 }
 
 a {
@@ -866,5 +865,30 @@ section {
 	}
 	.bullet {
 		display: inline-block;
+	}
+
+	@media(max-width:1140px){
+		section{                 /* 将之前自适应的宽度写死,缩放的时候不会出现随窗口自适应(出现白边)而是按写死的宽度等比缩放 */
+			width: 1140px;
+		}
+	}
+	@media(max-width:1140px){
+		#header{
+			width: 1140px !important; 
+		}
+		#header .carousel{
+			width: 1140px !important; 
+		}
+		.carousel-container{
+			width: 1140px !important; 
+		}
+		.carousel .img-ct img{
+			width: 1140px !important;
+		}
+		
+		#header .intro{
+			left: 570px;	    /* 此时宽度是1140px */	
+		}
+		
 	}
 
