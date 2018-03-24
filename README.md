@@ -20,8 +20,10 @@
  
  
  ### 2.[工程化 项目预览](http://flysasa.top/project//前端工程化/demo_requireJs/www/index.html)
-使用require js 实现一个 主页，涉及的知识：各种组件(首屏轮播组件、回到顶部组件、懒加载瀑布流组件)封装,组件化思路、ajax、跨域、requirejs。 
+使用require js 实现一个html5主页，涉及的知识：各种组件(首屏轮播组件、回到顶部组件、瀑布流ajax获取新闻组件)封装,组件化思路、ajax、跨域、requirejs。 
 
 ##### 功能概要
+基本功能:
+首屏全屏轮播、回到顶部、获取新闻等
   
 
