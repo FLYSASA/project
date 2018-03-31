@@ -1,11 +1,15 @@
-###项目流程:
+### 项目流程:
 
 前期准备:
 #### 安装webpack:
-`npm install webpack -g`
-如果上面的指令下载速度太慢的话,运行
-`npm config set registry https://registry.npm.taobao.org/ `
-想要恢复原来的:
+`npm install webpack -g`  
+
+如果上面的指令下载速度太慢的话,运行  
+
+`npm config set registry https://registry.npm.taobao.org/ `  
+
+想要恢复原来的:  
+
 `npm config delete registry`
 
 #### ES Modules
@@ -21,6 +25,7 @@ run 官方实例:
 3. 命令行 `webpack` (如果没有全局安装webpack无法使用)
 
 运行结果,自动新建了一个dist文件夹
+
 ![微信截图_20180331175023](https://i.loli.net/2018/03/31/5abf5a04c5995.png)
 
 命令行显示:
