@@ -1,0 +1,3 @@
+import bar from './bar'  //import...from... 从一个模块引入...
+
+bar()
