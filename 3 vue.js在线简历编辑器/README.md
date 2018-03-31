@@ -277,3 +277,82 @@ var app = new Vue({
 完美运行.
 
 2. modify
+解析上面的例子
+```html
+<div id="app">
+    {{ message }}
+</div>   
+```
+
+```js
+var app = new Vue({
+    el: '#app',
+    data: {
+        message: 'Hello Vue!',
+    }
+})
+```
+
+1. div里的 {{message}}怎么变成了Hello Vue!
+看来`hello Vue!`和`message`有某种对应关系,我们把Hello Vue!改成Hello miao~,
+改完保存,运行`webpack`
+
+![](https://i.loli.net/2018/03/31/5abfa3834ac67.png)
+
+看来我们的猜测是对的,data和message与页面中的{{message}}存在绑定关系.
+接下来我们可以继续猜测,然后通过modify类验证.
+
+2. `div id="app"`与`el: #app`有对应关系,那么我们试着把div的id="app"改成id="miaomiao".
+> 注意:改Html是不需要运行`webpack`的,然后我们直接刷新page.html试试:
+
+![](https://i.loli.net/2018/03/31/5abfa4a092529.png)
+
+果然报错,找不到#app,说明我们的猜测正确.
+
+你还可以继续猜,然后modify,比如data,改el等.
+
+> 注意: 每次改完js都要运行webpack重新打包.
+
+-----------------------------------------------
+
+
+### Vue 待办事项小应用项目实践
+学会一个框架的最好办法--做毁一个项目
+
+首先我们新建项目目录:
+1. 命令行进入文件夹2-vue-demo的上级目录
+2. `mkdir 3-vue-demo`
+3. `cp -r 2-vue-demo 3-vue-demo1`  //将2-vue-demo里的东西拷贝到3-vue-demo1
+
+我们的目标只有一个,就是搞清楚怎样用Vue.js进行开发.
+
+#### 需求
+这个项目的英文名暂定为Todo,它有以下功能:
+- 用户可以新建一个待办事项
+- 用户可以删除一个待办事项
+- 用户可以将一个待办事项标记为已完成
+- 用户刷新页面之后,待办事项还在
+
+### 开始
+首先我们用Html描绘一下我们的界面
+```html
+<!-- page.html -->
+<html>
+  <head>
+    <meta charset=utf-8>
+  </head>
+  <body>
+    <div id="app">
+      <div class="newTask">
+        <input type="text">
+      </div>
+      <ol class="todos">
+      </ol>
+    </div>
+    <script src="bundle.js"></script>
+  </body>
+</html>
+```
+1. meta要加上,不然出现中文就乱码了
+2. 加一个`div#app`,用于给Vue初始化
+3. `div.newTask > input`用于让用户输入待办的内容

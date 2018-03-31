@@ -79,7 +79,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _bar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bar */ \"./bar.js\");\n/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.common.js\");\n/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);\n  //import...from... 从一个模块引入...\r\n\r\n\r\nvar app = new vue__WEBPACK_IMPORTED_MODULE_1___default.a({\r\n    el: '#app',\r\n    data: {\r\n        message: 'Hello Vue!'\r\n    }\r\n})\n\n//# sourceURL=webpack:///./app.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _bar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bar */ \"./bar.js\");\n/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.common.js\");\n/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);\n  //import...from... 从一个模块引入...\r\n\r\n\r\nvar app = new vue__WEBPACK_IMPORTED_MODULE_1___default.a({\r\n    el: '#app',\r\n    data: {\r\n        message: 'Hello miao~!'\r\n    }\r\n})\n\n//# sourceURL=webpack:///./app.js?");
 
 /***/ }),
 
