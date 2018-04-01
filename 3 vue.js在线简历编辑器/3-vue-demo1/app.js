@@ -24,17 +24,21 @@ var app = new Vue({
     created: function(){
         window.onbeforeunload = (()=>{
             let dataString = JSON.stringify(this.todoList)
-            window.localStorage.setItem('myData',dataString)           
+            let newTodoStr = this.newTodo //保存输入框内未提交的内容
+            window.localStorage.setItem('myData',dataString) 
+            window.localStorage.setItem('myNew',newTodoStr)  
         })
         let oldDataString = window.localStorage.getItem('myData')
+        let oldnewData = window.localStorage.getItem('myNew')
         let oldData = JSON.parse(oldDataString)
         this.todoList = oldData || []
+        this.newTodo = oldnewData
     },
     methods: {
         addTodo: function(){
             this.todoList.push({
                 title: this.newTodo,  //这里面的属性都是todo的
-                createAt: new Date(),
+                createAt:(new Date()).toLocaleDateString() + " " + (new Date()).toLocaleTimeString(),
                 done: false //添加一个done属性
             })
             this.newTodo = ''
