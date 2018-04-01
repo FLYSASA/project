@@ -693,6 +693,12 @@ var app = new Vue({
 > 关于为什么要先将数据JSON化,再存储到localStorage里面,是**因为DOM的存储机制是通过存储字符串类型的键/值对,来提供一种安全的存取方式,这个附加功能目标是提供一个全面的,可以用来创建交互式应用程序的方法** 参考: https://developer.mozilla.org/zh-CN/docs/Web/Guide/API/DOM/Storage.
 
 综上:存储在任何storage里的数据不能是对象(数组也是对象),只能是**字符串**,使用浏览器自身提供的 JSON 解析和序列化方法来存取对象是比较好的，也是比较常见的方法。清除所有缓存`localStorage.clear()`.参考: https://www.cnblogs.com/xiaojingyuan/p/5757975.html.
+或者利用浏览器关闭事件清除缓存:
+```js
+window.onunload=function(){
+    localStorage.clear();
+}
+```
 > `JSON.stringify()` 返回与指定值对应的**JSON字符串**
 > `JSON.parse()`  解析JSON字符串并返回**对应值**
 > 另外需要注意的是`this.todoList = oldData || []`,一定要有`|| []`,因为如果刚开始用户打开页面时不存在oldData的,后面使用数组push的方法,由于`this.todoList`指代不明会报错

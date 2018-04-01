@@ -32,7 +32,8 @@ var app = new Vue({
         let oldnewData = window.localStorage.getItem('myNew')
         let oldData = JSON.parse(oldDataString)
         this.todoList = oldData || []
-        this.newTodo = oldnewData
+        this.newTodo = oldnewData || ''
+
     },
     methods: {
         addTodo: function(){
