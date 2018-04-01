@@ -79,19 +79,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _bar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bar */ \"./bar.js\");\n/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.common.js\");\n/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);\n  //import...from... 从一个模块引入...\r\n\r\n\r\nvar app = new vue__WEBPACK_IMPORTED_MODULE_1___default.a({\r\n    el: '#app',\r\n    data: {\r\n        message: 'Hello miao~!'\r\n    }\r\n})\n\n//# sourceURL=webpack:///./app.js?");
-
-/***/ }),
-
-/***/ "./bar.js":
-/*!****************!*\
-  !*** ./bar.js ***!
-  \****************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return bar; });\nfunction bar(){ //使用export default命令，为模块指定默认输出，这样就不需要知道所要加载模块的变量名\r\n    alert('Hello Webpack!')\r\n}\n\n//# sourceURL=webpack:///./bar.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.common.js\");\n/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);\n// import Vue from 'vue'\r\n// var app = new Vue({\r\n//     el: '#app',\r\n//     data: {\r\n//         newTodo: '',\r\n//         todoList: []\r\n//     },\r\n//     created: function(){\r\n//         let i = 0\r\n//         setInterval (()=>{\r\n//             this.newTodo = i //this.newTodo就是data.newTodo,实际上 this.newTodo 是 data.newTodo 的代理\r\n//             i += 1\r\n//         },1000)\r\n//     }\r\n// })\r\n\r\n\r\nvar app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({\r\n    el: '#app',\r\n    data: {\r\n        newTodo: '',\r\n        todoList: [],\r\n    },\r\n    created: function(){\r\n        window.onbeforeunload = (()=>{\r\n            let dataString = JSON.stringify(this.todoList)\r\n            window.localStorage.setItem('myData',dataString)           \r\n        })\r\n        let oldDataString = window.localStorage.getItem('myData')\r\n        let oldData = JSON.parse(oldDataString)\r\n        this.todoList = oldData || []\r\n    },\r\n    methods: {\r\n        addTodo: function(){\r\n            this.todoList.push({\r\n                title: this.newTodo,  //这里面的属性都是todo的\r\n                createAt: new Date(),\r\n                done: false //添加一个done属性\r\n            })\r\n            this.newTodo = ''\r\n        },\r\n        removeTodo: function(todo){\r\n            const index = this.todoList.indexOf(todo)  \r\n            this.todoList.splice(index,1)   //从index的位置开始删除一个\r\n        }\r\n    }\r\n})\r\n\r\n\r\n\r\n\n\n//# sourceURL=webpack:///./app.js?");
 
 /***/ }),
 

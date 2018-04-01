@@ -6,10 +6,20 @@
 <body>
     <div id="app">
         <div class="newTask">
-            <input type="text">
+            <input type="text" v-model="newTodo" @keyup.enter="addTodo">
         </div>
-    </div>
-    <ol class="todos"></ol>
+        <ol class="todos">
+            <li v-for="todo in todoList">
+              <input type="checkbox" v-model="todo.done">{{todo.title}}
+
+              <span v-if="todo.done">已完成</span>
+              <span v-else></span>
+
+              <button @click="removeTodo(todo)">X</button>  <!-- todo即此时正遍历的这个 -->
+            </li>
+        </ol>
+
+    </div>  
     <script src="./dist/bundle.js"></script>
 </body>
 
