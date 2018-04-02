@@ -316,7 +316,7 @@ var app = new Vue({
 -----------------------------------------------
 
 
-### Vue 待办事项小应用项目实践
+### Vue 待办事项小应用项目实践 3-vue-demo1
 学会一个框架的最好办法--做毁一个项目
 
 首先我们新建项目目录:
@@ -710,3 +710,452 @@ window.onunload=function(){
 http://flysasa.top/project/3%20vue.js%E5%9C%A8%E7%BA%BF%E7%AE%80%E5%8E%86%E7%BC%96%E8%BE%91%E5%99%A8/3-vue-demo1/page.html
 
 > 由于放到github-page上网速原因,加载可能会出现{{}}标记.如果不想让用户看到这些,可以参考:  https://cn.vuejs.org/v2/api/#v-cloak
+
+--------------------------------
+### 无后台应用 4-vue-demo2
+#### 我们需要一台服务器吗?
+上个实例中,我们的数据存在localStorage中,这样有很多弊端:
+
+1. 如果用户清空缓存,那么todoList就没了
+2. 如果用户换一台电脑,那么todoList也看不见了
+
+所以我们是不是应该买一台服务器来存所有用户的数据?
+
+可以但是服务器是要钱的,我们现在没必要花这个钱.
+
+#### No Backend(无后台)
+没有服务器能不能存数据呢?
+答案是: **不能**,但是又**能**
+
+说**不能**使因为,无论如何我们都需要一个地方存数据
+数**能**是因为我们不要自己买服务器
+
+这次我们使用**LeanCloud**的免费服务来存储我们的所有数据.
+
+#### 创建LeanCloud账户
+去https://leancloud.cn/创建一个账户.
+创建成功后,你需要验证你的邮箱,否则无法创建应用.
+
+#### 创建resumer应用:
+如下图:
+![](https://i.loli.net/2018/04/01/5ac0edf7028e6.png)
+创建成功后就放在那里,因为接下来我们要安装LeanCloud的「[JavaScript SDK 文档](https://leancloud.cn/docs/sdk_setup-js.html)」来开发登录、注册功能
+
+### 登录和注册
+首先还是用html把界面做出来
+
+#### 页面分区
+目前我们的页面的结构是
+`div#app > div.newTask > ol.todos`
+
+我们要改成
+```html
+div#app
+    section#signInAndSignUp
+    section#todo
+        div.newTask + ol.todos
+```
+
+最终结果是:
+```html
+ <div id="app">
+        <section id="signInAndSignUp">
+            <div>
+                <label><input type="radio" name="type" value="signup">注册</label>
+                <label><input type="radio" name="type" value="login">登入</label>
+            </div>
+            <div class="signup">
+                <form>
+                    <div class="formRow">
+                        用户名<input type="text">
+                    </div>
+                    <div class="formRow">
+                        密码<input type="password">
+                    </div>
+                    <div class="formActions">
+                        <input type="submit" value="注册">
+                    </div>
+                </form>
+            </div>
+            <div class="login">
+                <form>
+                    <div class="formRow">
+                        用户名<input type="text">
+                    </div>
+                    <div class="formRow">
+                        密码<input type="password">
+                    </div>
+                    <div class="formActions">
+                        <input type="submit" value="登入">
+                    </div>
+                 </form>
+            </div>
+        </section> 
+
+        <section id="todo">
+                <div class="newTask">
+                    <input type="text" v-model="newTodo" @keyup.enter="addTodo">
+                </div>
+                <ol class="todos">
+                    <li v-cloak v-for="todo in todoList">
+                        <input type="checkbox" v-model="todo.done">{{todo.title}} {{todo.createAt}}    
+                        <span class="done" v-if="todo.done">已完成</span>
+                        <span v-else></span>        
+                        <button @click="removeTodo(todo)">X</button>  <!-- todo即此时正遍历的这个 -->
+                    </li>
+                </ol>
+        </section>
+    </div>  
+```
+![](https://i.loli.net/2018/04/01/5ac101a5b27f0.png)
+
+#### Tab切换
+我们希望:
+1. 用户点击「〇注册」这个 radio button 的时候显示注册表单
+2. 用户点击「〇登入」这个 radio button 的时候显示登入表单
+3. 默认显示注册表单
+
+所以我们需要加一个变量,叫做`actionType`,它有两个取值: 'signup'和login,都是字符串
+```js
+...
+el: '#app',
+data: {
+    actionType: 'signup',
+}
+...
+```
+然后将actionType与radio button绑定(使用v-model):
+```html
+<div>
+    <label><input type="radio" name="type" value="signup" v-model="actionType">注册</label>
+    <label><input type="radio" name="type" value="login" v-model="actionType">登入</label>
+</div>
+```
+最后让两个表单根据actionType来显示和隐藏(注意单引号):
+```html
+<div class="signup" v-if="actionType=='signup'">
+    <form>
+        <div class="formRow">
+            用户名<input type="text">
+        </div>
+        <div class="formRow">
+            密码<input type="password">
+        </div>
+        <div class="formActions">
+            <input type="submit" value="注册">
+        </div>
+    </form>
+</div>
+<div class="login" v-if="actionType=='login'">
+    <form>
+        <div class="formRow">
+            用户名<input type="text">
+        </div>
+        <div class="formRow">
+            密码<input type="password">
+        </div>
+        <div class="formActions">
+            <input type="submit" value="登入">
+        </div>
+        </form>
+</div>
+```
+这样一来,用户点击radio button时就会改变actionType的值(在单选框中v-model必须保持一致,value值不一样,当点选不同radio的时候,v-model的值会替换成不同value值),actionType的值一变,两个表单就会一个隐藏一个现实.
+
+#### 注册
+要实现注册功能,首先我们要用数据来表达表单里的每个字段.
+```js
+data: {
+    actionType: 'signup',
+    formData: {
+        username: '',
+        passwird: ''
+    }
+}
+```
+
+然后将input与数据绑定起来,另外还要绑定form的submit事件:
+```html
+//page.html
+<div class="signUp" v-if="actionType === 'signUp'">
+    <form @submit.prevent=signUp> <!--👈-->
+        <div class="formRow">
+          用户名<input type="text" v-model="formData.username"> <!--👈-->
+        </div>
+        <div class="formRow">
+          密码<input type="password" v-model="formData.password"> <!--👈-->
+        </div>
+        <div class="formActions">
+          <input type="submit" value="注册">
+        </div>
+    </form>
+</div>
+```
+
+> 注意js修改后用webpack重新打包
+
+接下来我们来完善signup的逻辑,在写代码之前,我们需要阅读leanCloud的文档
+
+1. 安装 Leancloud SDK
+https://leancloud.cn/docs/sdk_setup-js.html
+`npm install leanclound-storage --save`
+
+2. 初始化
+https://leancloud.cn/docs/sdk_setup-js.html#hash20935048
+
+进入 控制台 > 设置 > 应用 Key 来获取 App ID 以及 App Key。
+
+```js
+//app.js
+
+import Vue from 'vue'
+import AV from 'leancloud-storage'
+
+var APP_ID = 'sbLVjiiurqmnXDdi0zBJsy35-gzGzoHsz'
+var APP_KEY = 'q68Gdtw5uPzJNDvCpYijbluS'
+
+AV.init({
+    appId: APP_ID,
+    appKey: APP_KEY
+})
+
+var app = new Vue({
+    ...
+```   
+
+3. 验证leancloud SDK安装成功
+https://leancloud.cn/docs/sdk_setup-js.html#hash1262261
+在项目中编写如下测试代码:
+```js
+...
+AV.init({
+   appId: APP_ID,
+   appKey: APP_KEY
+});
+var TestObject = AV.Object.extend('TestObject');
+var testObject = new TestObject();
+testObject.save({
+  words: 'Hello World!'
+}).then(function(object) {
+  alert('LeanCloud Rocks!');
+})
+
+var app = new Vue(){
+    ...
+}
+```
+刷新page.html后看到:
+![](https://i.loli.net/2018/04/02/5ac1d2b030bc7.png)
+
+然后打开 控制台 > 存储 > 数据 > TestObject，如果看到如下内容，说明 SDK 已经正确地执行了上述代码，安装完毕。
+
+!](https://i.loli.net/2018/04/02/5ac1d30c3a4f7.png)
+
+
+如果可以用AV对象了,然后把上面的验证代码删掉.
+
+4. 接下来我们看leancloud [关于注册的文档](https://leancloud.cn/docs/leanstorage_guide-js.html#用户名和密码注册) ,可以使用我们的「copy-run-modify」套路。按照文档的例子，我们写出这样的代码：
+
+```js
+//app.js
+methods: {
+    addTodo: function(){
+      ...
+    },
+    removeTodo: function(todo){
+      ...
+    },
+    signUp: function () {
+      let user = new AV.User();
+      user.setUsername(this.formData.username);
+      user.setPassword(this.formData.password);
+      user.signUp().then(function (loginedUser) {
+        console.log(loginedUser);
+      }, function (error) {
+      });
+    }
+  }
+```
+
+刷新页面,我们选择注册,然后用户名填入「123123」，密码填入「123123」，先别急着提交，打开开发者工具，切到 Network，然后提交：
+
+![微信截图_20180402151043](https://i.loli.net/2018/04/02/5ac1d78f8ad30.png)
+
+你会发现发了两个请求到leancloud的服务器,这两个请求就是向leancloud的服务器存入用户名和密码.
+然后再切换到console,你会看到打印出的loginedUser
+
+![微信截图_20180402151415](https://i.loli.net/2018/04/02/5ac1d851d75de.png)
+
+这里我们只关注它的三个属性: attributes,createdAt,id
+
+其中attributes就是我们传给数据库的username(我们不是还传了一个password吗? 服务器是不会把passworad传给前端的)
+createAt是这个数据创建的时间,id是用户的id,也是我们区别用户的唯一凭据.
+
+好了,到此为止,我们的注册功能已经做好了.是不是很简单.
+
+#### 去数据库看看这个用户
+
+你到LeanCloud的[控制面板](https://leancloud.cn/dashboard/data.html?appid=sbLVjiiurqmnXDdi0zBJsy35-gzGzoHsz#/_User) 点击存储,然后点击[_use]就能看到这个用户的数据了:
+
+![](https://i.loli.net/2018/04/02/5ac1dc91cbc52.png)
+
+
+#### 登入
+注册做完了接下来是登入,步骤也差不多
+首先绑定数据,我们复用注册的formData这个数据,因为
+1. 字段相同,都是username和password
+2. 这样一来用户切换登录注册的时候,已输入的数据就不需要再输入一遍
+3. 当然你想用另一个数据formData2也行
+```js
+    <div class="login" v-if="actionType === 'login'"> 
+        <form @submit.prevent="login">  <!--👈-->
+            <div class="formRow">
+            用户名<input type="text" v-model="formData.username"> <!--👈-->
+            </div>
+            <div class="formRow">
+            密码<input type="password" v-model="formData.password"> <!--👈-->
+            </div>
+            <div class="formActions">
+            <input type="submit" value="登入">
+            </div>
+        </form>
+    </div>
+```
+
+然后看一下[leancloud文档](https://leancloud.cn/docs/leanstorage_guide-js.html#hash964666),添加login方法:
+```js
+login: function({
+    AV.User.logIn(this.formData.username,this.formData.password).then(function(loginedUser){
+        console.log(loginedUser)
+    },function(error){})
+})
+```
+
+接下来刷新page.html,选择`登入`,输入用户名「123123」，密码「123123」。
+观察network 和 console,会得到跟注册类似的结果.
+
+好了登录功能就完成了.
+
+### 登录前后
+我们希望
+- 登录之前,不显示section#todo,显示section#section#signInAndSignUp
+- 登录之后，显示 section#todo，不显示 section#signInAndSignUp
+
+那么我们如何判断用户是否已登录?
+
+leancloud文档说AV.User.current()可以获取当前已登录的用户.那么我们这么做:
+
+```js
+//app.js
+data: {
+    ...
+    todoList: [],
+    currentUser: null,
+}
+...
+ signUp: function () {
+      let user = new AV.User();
+      user.setUsername(this.formData.username);
+      user.setPassword(this.formData.password);
+      user.signUp().then((loginedUser) => { // 👈，将 function 改成箭头函数，方便使用 this
+        this.currentUser = this.getCurrentUser() // 👈
+      }, (error) => {
+        alert('注册失败') // 👈
+      });
+    },
+    login: function () {
+      AV.User.logIn(this.formData.username, this.formData.password).then((loginedUser) => { // 👈
+        this.currentUser = this.getCurrentUser() // 👈
+      }, function (error) {
+        alert('登录失败') // 👈
+      });
+    },
+    getCurrentUser: function () { // 👈
+      let {id, createdAt, attributes: {username}} = AV.User.current()
+      // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
+      return {id, username, createdAt} // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Object_initializer#ECMAScript_6%E6%96%B0%E6%A0%87%E8%AE%B0
+    }
+
+```
+
+```html
+<!-- page.html -->
+<section id="signInAndSignUp" v-if="!currentUser">
+...
+<section id="todo" v-if="currentUser">
+```
+然后刷新page.html,登录之后,登录表单就不见了.
+
+#### 其他功能
+##### 添加登出功能:
+```js
+//app.js
+...
+logout: function(){         //登出功能
+    AV.User.logout()
+    this.currentUser = null
+    window.location.reload()   //相当于页面刷新按钮
+}
+...
+```
+
+```html
+<!-- html -->
+<section id="todo" v-if="currentUser">
+    <p><button @click="logout">登出</button></p>   <!-- 登出按钮 -->
+    <div class="newTask">
+        <input type="text" v-model="newTodo" @keyup.enter="addTodo">
+    </div>
+    <ol class="todos">
+        <li v-cloak v-for="todo in todoList">
+            <input type="checkbox" v-model="todo.done">{{todo.title}} {{todo.createAt}}    
+            <span class="done" v-if="todo.done">已完成</span>
+            <span v-else></span>        
+            <button @click="removeTodo(todo)">X</button>  <!-- todo即此时正遍历的这个 -->
+        </li>
+    </ol>
+</section>
+```
+
+##### 功能:如果用户已经登入,就直接展示todo
+```js
+//app.js
+created: function(){
+        window.onbeforeunload = (()=>{
+            let dataString = JSON.stringify(this.todoList)
+            let newTodoStr = this.newTodo //保存输入框内未提交的内容
+            window.localStorage.setItem('myData',dataString) 
+            window.localStorage.setItem('myNew',newTodoStr)  
+        })
+        let oldDataString = window.localStorage.getItem('myData')
+        let oldnewData = window.localStorage.getItem('myNew')
+        let oldData = JSON.parse(oldDataString)
+        this.todoList = oldData || []
+        this.newTodo = oldnewData || ''
+
+        this.currentUser = this.getCurrentUser()  //检查用户是否登录   ++++++++++++ 新加
+
+    },
+```
+```js
+...
+getCurrentUser: function(){   //验证是否已经登录,已经登录的话隐藏注册登录窗口
+            // let {id,createAt,attributes: {username}} = AV.User.current()  //语法:链接：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
+            // return {id,username,createAt}  //语法: https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Object_initializer#ECMAScript_6%E6%96%B0%E6%A0%87%E8%AE%B0
+
+            let current = AV.User.current()
+            if(current){
+                let {id,createAt,attributes: {username}} = current
+                return {id,username,createAt}
+            }else{
+                return null
+            }
+        },
+...
+```
+
+这样这两个功能就完成了.
+
+
+
+
