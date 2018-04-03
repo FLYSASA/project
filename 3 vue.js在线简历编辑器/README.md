@@ -1186,11 +1186,17 @@ current对象:
 
 ### 小结:
 > 上面给各个功能按钮分别绑定<登录><注册><登出>功能,其核心在于都返回一个值赋给状态currentUser(初始为null),当返回值为对象时(含有id,username,createAt)等属性,则登录注册页面消失,todo显示.登出功能直接返回null即可.
+
 > `a.().then((b)=>{})` b是a.()的返回值,作为箭头函数的参数.
+
 > `signUp()`需要`AV.User.setUsername`和`setPassword`才能用`AV.User.signUp`返回一个对象
+
 > `logIn()`直接`AV.User.logIn(data)`就能返回对象.
+
 > `getCurrentUser`方法 用于返回一个对象值(含有id,username,createAt)等属性,并返回其给`currentUser`.
+
 > 直接`AV.User.current()`可以获取登录状态,并返回包含很多属性值的对象.
+
 > 当每次执行<登录><注册>功能时都会触发`getCurrentUser`方法,判断此时是否为登录态`if(AV.User.current())`,并完成返回对象值,赋值给`currentUser`.
 
 
