@@ -126,7 +126,7 @@ npm WARN step-2 No license field.
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/FLYSASA/xxx.git"
+    "url": "https://github.com/FLYSASA/xxx.git"
   }
 }
 ```
@@ -949,7 +949,7 @@ var app = new Vue(){
 
 然后打开 控制台 > 存储 > 数据 > TestObject，如果看到如下内容，说明 SDK 已经正确地执行了上述代码，安装完毕。
 
-!](https://i.loli.net/2018/04/02/5ac1d30c3a4f7.png)
+![](https://i.loli.net/2018/04/02/5ac1d30c3a4f7.png)
 
 
 如果可以用AV对象了,然后把上面的验证代码删掉.
@@ -1153,9 +1153,45 @@ getCurrentUser: function(){   //验证是否已经登录,已经登录的话隐�
         },
 ...
 ```
+current对象:
+![](https://i.loli.net/2018/04/03/5ac370002daec.png)
 
 这样这两个功能就完成了.
 
+### 综上: 几个关键因素
+1. `currentUser` 出现在data中初始值是`null`,view里出现于`<section id="signInAndSignUp" v-if="!currentUser">`(登录注册部分)和`<section id="todo" v-if="currentUser">`(备忘部分)用于判断是否显示登录注册部分还是备忘部分.
+
+2. 具体判断显与否的方法是给`currentUser`赋值,赋值动作在注册,登入,登出行为(signUp,logIn,logOut)里完成. currentUser不为null即为真.此时登录注册部分不显示,todo显示.
+
+3. 另外的关键性因素是`formData`,出现于data,初始时formData:{username:' ',password:' '},在view中出现是在,用户名和密码输入框如`用户名<input type="text" v-model="formData.username">`. 两者双向绑定,当用户在框内输入时,data端立即改变值.当获取到新的username和password时,为登录和注册行为提供依据.
+
+4. 注册功能`signUp` 用到关键对象`AV.User()`远程存储对象. 这个对象有很多重要的方法如下: 
+- `AV.User.signUp()` **注册功能**
+这个功能与注册按钮绑定,用这个功能前需要先通过`AV.User`发送两个参数:`AV.User.setUsername(this.formData.username)`和`AV.User.setPassword(this.formData.password)`,用户输入导致参数更新,更新后的参数通过`AV.User.setxxxx`发送给远程库.发送完后,即可用`AV.User.signUp()`注册.注册成功后会返回一个对象`loginedUser`.  另外注册完成后给`currentUser`赋值一个状态`this.getCurrentUser`.便于注册部分的显与否.
+
+- `AV.User.login()` **登录功能**
+这个功能与登入按钮绑定,同样需要两个参数(this.formData.username,this.formData.password),发送参数后,如果成功返回对象`loginedUser`,则登录成功,成功后也给`currentUser`赋值状态`this.getCurrentUser`,如果error,则`登录失败`
+
+- `AV.User.logOut()` **登出功能**
+这个功能与登出按钮绑定,不需要参数直接`AV.User.logOut()`即可,并也同时给`currentUser`赋值一个状态值`'null'`,显示登录注册部分,不显示todo部分.登出后记得
+`window.location.reload()`刷新页面
+
+- `AV.User.current()`  **登录状态**
+如果存在`AV.User.current()`,即为登录态. `AV.User.current()`也是一个对象,里面有`id,createAt,username等`各种属性.
+
+5. 关键性因素`this.getCurrentUser`,用于给`currentUser`赋值,以决定哪一部分显示与否.定义一个`getCurrentUser`方法并返回需要的值.返回的值很简单,当`if(AV.User.current())`登录状态为真,即可返回值.此时用ES6 的解构赋值获取需要的值:
+如:`let {id,createAt,attributes: {username}} = AV.User.current()`
+因为username是attributes属性,所以需要`attributes: {username}`的形式,最后返回`return {id,createAt,username}`即可. 如果为否,返回null.
+
+
+### 小结:
+> 上面给各个功能按钮分别绑定<登录><注册><登出>功能,其核心在于都返回一个值赋给状态currentUser(初始为null),当返回值为对象时(含有id,username,createAt)等属性,则登录注册页面消失,todo显示.登出功能直接返回null即可.
+> `a.().then((b)=>{})` b是a.()的返回值,作为箭头函数的参数.
+> `signUp()`需要`AV.User.setUsername`和`setPassword`才能用`AV.User.signUp`返回一个对象
+> `logIn()`直接`AV.User.logIn(data)`就能返回对象.
+> `getCurrentUser`方法 用于返回一个对象值(含有id,username,createAt)等属性,并返回其给`currentUser`.
+> 直接`AV.User.current()`可以获取登录状态,并返回包含很多属性值的对象.
+> 当每次执行<登录><注册>功能时都会触发`getCurrentUser`方法,判断此时是否为登录态`if(AV.User.current())`,并完成返回对象值,赋值给`currentUser`.
 
 
 

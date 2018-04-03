@@ -6,13 +6,13 @@
 </head>
 <body>
     <div id="app">
-        <section id="signInAndSignUp" v-if="!currentUser">
+        <section id="signInAndSignUp" v-if="!currentUser"> <!-- 如果没有登陆 -->
             <div>
                 <label><input type="radio" name="type" value="signUp" v-model="actionType">注册</label>
                 <label><input type="radio" name="type" value="login" v-model="actionType">登入</label>
             </div>
             <div class="signUp" v-if="actionType==='signUp'">
-                <form @submit.prevent="signUp">  <!-- 注册功能 -->
+                <form @submit.prevent="signUp">  <!-- 注册功能 submit.prevent阻止默认事件绑定注册事件-->
                     <div class="formRow">
                         用户名<input type="text" v-model="formData.username">   <!-- 注册功能 -->
                     </div>
@@ -25,9 +25,9 @@
                 </form>
             </div>
             <div class="login" v-if="actionType==='login'">
-                <form @submit.prevent="login">   <!-- 登录功能 -->
+                <form @submit.prevent="login">   <!-- 登录功能 submit.prevent阻止默认事件绑定登入事件-->
                     <div class="formRow">
-                        用户名<input type="text" v-model="formData.username">
+                        用户名<input type="text" v-model="formData.username"> <!-- 和signUp复用formData这样用户切换时不要重复输入 -->
                     </div>
                     <div class="formRow">
                         密码<input type="password" v-model="formData.password">
@@ -39,7 +39,7 @@
             </div>
         </section> 
 
-        <section id="todo" v-if="currentUser">
+        <section id="todo" v-if="currentUser">  <!-- v-if判断是否已登录 -->
             <p><button @click="logout">登出</button></p>   <!-- 登出按钮 -->
             <div class="newTask">
                 <input type="text" v-model="newTodo" @keyup.enter="addTodo">
