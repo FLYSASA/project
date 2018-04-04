@@ -1143,7 +1143,8 @@ getCurrentUser: function(){   //验证是否已经登录,已经登录的话隐�
             // let {id,createAt,attributes: {username}} = AV.User.current()  //语法:链接：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
             // return {id,username,createAt}  //语法: https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Object_initializer#ECMAScript_6%E6%96%B0%E6%A0%87%E8%AE%B0
 
-            let current = AV.User.current()
+            let current = AV.User.current()  //当前用户: https://leancloud.cn/docs/leanstorage_guide-js.html#hash748191977
+            console.log(current)
             if(current){
                 let {id,createAt,attributes: {username}} = current
                 return {id,username,createAt}
@@ -1199,5 +1200,331 @@ current对象:
 
 > 当每次执行<登录><注册>功能时都会触发`getCurrentUser`方法,判断此时是否为登录态`if(AV.User.current())`,并完成返回对象值,赋值给`currentUser`.
 
+
+
+-------------------------
+## 5-vue-demo3
+
+## 数据关联
+之前的几步,虽然我们应该支持注册和登录了,但是用户的数据依然存在于`localStorage`,这一步我们将把数据存到用户名下,也就是让数据与用户关联起来.
+
+### 保存todo
+之前的步骤里,我们是在窗口关闭的时候将数据保存到`localStorage`,这次我们也计划在窗口关闭的时候将数据保存到`leancloud`
+
+#### 第一次尝试
+我们要用的API基本都在《[数据存储开发指南 · JavaScript](https://leancloud.cn/docs/leanstorage_guide-js.html)》里。
+
+> commit: 页面关闭或刷新时保存数据 代码如下:
+```js
+//app.js
+created: function(){ //created生命周期钩子函数(Vue实例创建之后使用),用于设置数据监听等
+        window.onbeforeunload = (()=>{
+            let dataString = JSON.stringify(this.todoList)
+
+            var AVTodos = AV.Object.extend('AllTodos')                             //demo-5 新增
+            var avTodos = new AVTodos()
+            avTodos.set('content',dataString)
+            avTodos.save().then(function(todo){
+                //保存成功后
+                console.log('保存成功')
+            },function(error){
+                //处理异常
+                console.error('保存失败')
+            })            
+        })
+        this.currentUser = this.getCurrentUser()  //检查用户是否登录
+    },
+    ...
+```
+修改好后,`webpack --watch`刷新页面两次.
+
+刷新页面之后,发现一个严重的问题,我们无法调试这段代码!
+
+为什么呢? 
+因为普通的请求如果发出去,我们是可以看见Network里面有一个请求的但是这次的代码是写在`window.onbeforeunload`里的,所以这个请求已发出,页面就刷新了,Network也清空了.
+
+怎么办?
+这时候有两个办法:
+1. **使用debugger**
+我们在`avTodos.save`这句话结束后,写上一句`debugger`
+```js
+avTodos.save().then(function(todo){
+    //保存成功后
+    console.log('保存成功')
+},function(error){
+    //处理异常
+    console.error('保存失败')
+})  
+debugger //    <======
+```
+
+然后刷新页面,就发现断点设置成功了.现在去Network看看有没有保存todos请求,居然还是没有...
+看了这个时候请求还没发出去,那么我们到底要怎么看到这个请求呢?
+
+2. **使用`preserve log`
+
+![](https://i.loli.net/2018/04/04/5ac424aa12526.png)
+
+勾选这个之后,就能让页面刷新时不清空`Network`
+我们删掉`debugger`,刷新页面,再刷新一次
+
+> 注意为什么要刷新两次? 
+第一次是让新代码载入页面,第二次是为了触发`beforeunload`事件
+
+![](https://i.loli.net/2018/04/04/5ac425a92eefa.png)
+
+从结果可以看到,AllTodos保存请求失败了,被`canceled`
+浏览器为什么会把我的请求取消掉呢?
+因为:
+> 如果一个页面就要死了(刷新就表示不要当前页面了,当前页面可以死了),那么这个页面发出的请求也就没有意义了.既然没有意义,浏览器为什么浪费时间去发这个页面请求呢? 所以浏览器直接取消了这个请求.
+
+**综上: `beforeunload`事件里面的所有请求都发不出去,会被取消!**
+
+至此我们第一次保存数据的尝试失败,因为我们在`beforeunload`事件里不能存数据到leanCloud.
+
+
+## 第二次尝试
+真正的程序员,怎么可能被一次失败打倒.接下来我们尝试第二次.
+
+注意,一旦推导出`beforeunload`行不通,就不要再死磕它了.必须推翻以前的思维,重新思考.重新思考我们的目的是什么.
+
+我们是不是希望把用户的数据保存在leanCloud? 那么我们可不可以在用户对数据进行操作的时候马上把数据存到leanCloud,也就是**在每次用户新增,删除todo的时候,就发送一个请求**
+即`addTodo`是`saveTodos`,`removeTodo`时也`saveTodos`
+如下代码:
+```js
+ methods: {
+        //方案2: 每次增删todo时保存数据
+        saveTodos: function(){
+            let dataString = JSON.stringify(this.todoList)
+            var AVTodos = AV.Object.extend('AllTodos')
+            var avTodos = new AVTodos()
+            avTodos.set('content',dataString)
+            avTodos.save().then(function(todo){
+                alert('保存成功')
+            },function(error){
+                alert('保存失败')
+            })
+        },
+        addTodo: function(){
+            this.todoList.push({
+                title: this.newTodo,  //这里面的属性都是todo的
+                createAt:(new Date()).toLocaleDateString() + " " + (new Date()).toLocaleTimeString(),
+                done: false //添加一个done属性
+            })
+            this.newTodo = ''    //必须要重置不然会和现在的数组产生关联
+
+            //保存数据到远端
+            this.saveTodos()     
+        },
+        removeTodo: function(todo){
+            let index = this.todoList.indexOf(todo)  
+            this.todoList.splice(index,1)   //从index的位置开始删除一个
+
+            //保存数据到远端
+            this.saveTodos()
+        },
+```
+
+刷新页面:
+1. 新增一个todo,看到保存的请求
+2. 删除一个todo,看到保存的请求
+
+就说明成功了
+
+
+### 读取todo
+存完数据,就要读数据了.
+这个时候我们相信这个功能要怎么做,怎么读数据.
+
+每个todo都有一个id,我们可以通过id查询对应的todo,但是我们怎么知道当前用户有哪些todo呢?
+
+我们目前没有办法知道当前用户有哪些todo...
+
+于是需要返工了.我们保存todo的逻辑有问题:**没有将用户和todo关联起来**
+
+### 重新设计保存逻辑
+1. todo存在用户名下
+2. 只有todo所属的用户能读写这些todo
+
+我们可以使用 LeanCloud 提供的 ACL 功能来实现上面两个功能。「ACL（Access Control List）」概念
+
+翻看《数据存储开发指南 · JavaScript》，找到「角色」这一章节，你会看到一个链接：[JavaScript 权限管理使用指南](https://leancloud.cn/docs/acl-guide.html#hash-1171845695)
+
+修改如下: 
+```js
+saveTodos: function(){
+            let dataString = JSON.stringify(this.todoList)
+            var AVTodos = AV.Object.extend('AllTodos')
+            var avTodos = new AVTodos()
+
+            var acl = new AVTodos.ACL()
+            acl.setReadAccess(AV.User.current(),true)    //只有这个用户对象(AV.User.current()) 可以读取
+            acl.setWirteAccess(AV.User.current(),true)   //只有这个用户 可以写
+
+
+
+            avTodos.set('content',dataString)
+
+            avTodos.setACL(acl)                          //设置访问控制
+
+            avTodos.save().then(function(todo){
+                alert('保存成功')
+            },function(error){
+                alert('保存失败')
+            })
+        },
+        ...
+```
+
+### 重新读取todo
+还是需要看文档,我们很容易在文档里找到一个 [根据 id 获取数据的 API](https://leancloud.cn/docs/leanstorage_guide-js.html#hash-2027098679)。
+
+但这不是我们想要的,我们无id可用.继续翻看文档.
+
+你发现有一个「例子」是不需要 id 也能获取数据的，那就是[批量操作](https://leancloud.cn/docs/leanstorage_guide-js.html#hash787692837)的例子
+
+```js
+  var query = new AV.Query('Todo');
+  query.find().then(function (todos) {
+    todos.map(function(todo) {
+      todo['status'] = 1;
+    });
+    return AV.Object.saveAll(todos);
+  }).then(function(todos) {
+    // 更新成功
+  }, function (error) {
+    // 异常处理
+  });
+```
+
+修改代码如下:
+```js
+    created: function(){
+        this.currentUser = this.getCurrentUser()  //获取登录状态对象
+
+        if(this.currentUser){
+            var query = new AV.Query('AllTodos');
+            query.find()
+            .then(function (todos) {
+                console.log(todos)
+            }, function(error){
+                console.error(error) 
+            })
+        }
+    },
+```
+
+刷新页面,看到控制台拿到数据了!
+
+![QQ截图20180404135607](https://i.loli.net/2018/04/04/5ac4690c7ec8a.png)
+
+但是为什么是一个数组?
+
+一个用户的AllTodos应该只有一个,而不是多个
+
+原因是，我们存了多个 AllTodos。
+
+我们在用户添加一个 todo 的时候，存了一个 AllTodos；
+在用户添加第二个 todo 的时候，又存了一个「新的」AllTodos；
+在用户删除一个 todo 的时候，我们又又存了一个「新的」AllTodos……
+
+也就是说，我们的保存逻辑还是有问题。
+
+正确的保存逻辑是:
+1. 如果发现当前用户没有存过 AllTodos，那么就存一个「新的」AllTodos
+2. 如果发现当前用户存过 AllTodos，那么就应该更新「之前的」AllTodos
+
+### 再次编写存储逻辑
+首先，我们去 LeanCloud 的控制面板把 AllTodos 表删除杂项(记得保留初始的第一个)：
+
+![FireShot Capture 1 - 数据管理 - LeanCloud_ - https___leancloud.cn_dashboard_data.html](https://i.loli.net/2018/04/05/5ac509c6b5ec3.png)
+
+然后重写存储逻辑
+
+- 根据id选择save(create)或者update
+```js
+   created: function(){
+        this.currentUser = this.getCurrentUser()  //获取登录状态对象
+
+        if(this.currentUser){
+            var query = new AV.Query('AllTodos');
+            query.find()
+            .then((todos) => {
+                let avAllTodos = todos[0]  //因为理论上AllTodos只有一个,所以我们取结果第一项
+                console.log(avAllTodos.attributes)
+                let id = avAllTodos.id
+                this.todoList = JSON.parse(avAllTodos.attributes.content)
+                this.todoList.id = id  // 为什么给 todoList 这个数组设置 id？因为数组也是对象啊
+            }, function(error){
+                console.error(error) 
+            })
+        }
+    },
+    methods: {
+        updateTodos: function(){
+            // 想要知道如何更新对象，先看文档 https://leancloud.cn/docs/leanstorage_guide-js.html#hash-2091393899
+            let dataString = JSON.stringify(this.todoList)  //// JSON 在序列化这个有 id 的数组的时候，会得出怎样的结果？
+            let avTodos = AV.Object.createWithoutData('AllTodos',this.todoList.id)
+            avTodos.set('content',dataString)
+            avTodos.save().then(()=>{
+                console.log('更新成功')
+            })
+        },
+        //方案2: 每次增删todo时保存数据
+        saveTodos: function(){
+            let dataString = JSON.stringify(this.todoList)
+            var AVTodos = AV.Object.extend('AllTodos')  //构建一个构建一个 AV.Object https://leancloud.cn/docs/leanstorage_guide-js.html#hash799084270
+            var avTodos = new AVTodos()
+
+            var acl = new AVTodos.ACL()
+            acl.setReadAccess(AV.User.current(),true)    //只有这个用户对象(AV.User.current()) 可以读取
+            acl.setWirteAccess(AV.User.current(),true)   //只有这个用户 可以写
+
+
+
+            avTodos.set('content',dataString)
+
+            avTodos.setACL(acl)                          //设置访问控制
+
+            avTodos.save().then(function(todo){
+                this.todoList.id = todo.id   //// 一定要记得把 id 挂到 this.todoList 上，否则下次就不会调用 updateTodos 了
+                alert('保存成功')
+            },function(error){
+                alert('保存失败')
+            })
+        },
+
+        //更新或保存todo
+        saveOrUpdateTodos: function(){
+            if(this.todoList.id){
+                this.updateTodos()
+            }else{
+                this.saveTodos()
+            }
+        },
+
+        addTodo: function(){
+            this.todoList.push({
+                title: this.newTodo,  //这里面的属性都是todo的
+                createAt:(new Date()).toLocaleDateString() + " " + (new Date()).toLocaleTimeString(),
+                done: false //添加一个done属性
+            })
+            this.newTodo = ''    //必须要重置不然会和现在的数组产生关联
+
+            //保存数据到远端
+            //this.saveTodos() 
+            this.saveOrUpdateTodos() // 不能用 saveTodos 了    
+        },
+        removeTodo: function(todo){
+            let index = this.todoList.indexOf(todo)  
+            this.todoList.splice(index,1)   //从index的位置开始删除一个
+
+            //保存数据到远端
+            //this.saveTodos()
+            this.saveOrUpdateTodos() // 不能用 saveTodos 了
+        },
+
+```
+- 去除多余的alert,使用对用户无打扰的console.log
 
 
