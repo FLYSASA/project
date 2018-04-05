@@ -1611,4 +1611,4 @@ saveOrUpdateTodos: function(){
 >3. 登录signIn后
 >4. 登出logout后,赋值为null
 
-最后的实例预览链接: 
+最后的实例预览链接: http://flysasa.top/project/3%20vue.js%E9%A1%B9%E7%9B%AE/5-vue-demo3/page.html
