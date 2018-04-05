@@ -1551,11 +1551,11 @@ export default {
 
 5. `created`钩子函数(页面重新加载就会由触发一次,如登录等.),主要内容: 
 - 获取当前登录态赋值给currentUser来决定是否显示todo. 
-- 如果是登录态,则通过`AV.query`(参数是className)的实例query, 通过`find()`方法 返回`todos`表对象(`AllTodos的数组`)(包含了权限,内容等各种数据),理论上只存在一个,后面的修改都在其基础上数据更新.
+- 触发`fetchTodos`函数,如果是登录态,则通过`AV.query`(参数是className)的实例query, 通过`find()`方法 返回`todos`表对象(`AllTodos的数组`)(包含了权限,内容等各种数据),理论上只存在一个,后面的修改都在其基础上数据更新.
 - 为了保险起见,取`todos[0]`第一个`AllTodos`,然后获取到id,并`avAllTodos.attributes.content`(todo的内容)转为字符串形式,更新给todoList,并显示在页面上.
 - 将id作为属性赋给这个`todoList`数组.
 
-6. `fetchTodos`函数 有时候会出现登出重新登录后不显示todo的bug.解决办法:重新读取一次AllTodos利用`fetchTodos`函数(在created里执行)封装读取过程,赋值云端的数据给todoList数组.
+6. 定义`fetchTodos`函数 有时候会出现登出重新登录后不显示todo的bug.解决办法:在login函数里登录后触发`this.fetchTodos()`重新读取一次数据.AllTodos利用`fetchTodos`函数(在created里执行)封装读取过程,赋值云端的数据给todoList数组.
 
 7. `updateTodo`函数 上面的是加载已有todo的函数,接下来定义本地新建todo后更新到云端的updateTodos函数.
 参考: https://leancloud.cn/docs/leanstorage_guide-js.html#hash810954180
@@ -1590,7 +1590,7 @@ saveOrUpdateTodos: function(){
 将`currentUser`赋值于`this.getCurrentUser()` 这个值通过`AV.User.current()`登录态对象获取,
 获取三个属性即可(username,id,createAt) ,返回的值可以部署到页面上,也可以判断是否显示注册登录.
 
-13. 定义`login`登录功能  关键对象: `AV.User.login(username,passWord)`,同样返回then((loginedUser)=>{}),同样赋值给currentUser
+13. 定义`login`登录功能  关键对象: `AV.User.login(username,passWord)`,同样返回then((loginedUser)=>{}),同样赋值给currentUser,记得触发`fetchTodos()` todos更新
 
 14. 定义`logOut`登出功能 关键对象: `AV.User.logOut()` 同样赋值currentUser为null. `window.location.reload()`  刷新页面
 

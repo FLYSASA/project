@@ -44,23 +44,23 @@ var app = new Vue({
     //获取user的AllTodos  
     created: function () {  //注意created钩子函数触发时机: 实例创建完成后被调用,挂载阶段还没开始,$el属性目前不可见.
         this.currentUser = this.getCurrentUser()  //this.getCurrentUser()即返回的三个值id,createAt.className
-        if(this.currentUser){
-            var query = new AV.Query('AllTodos')  //不需要id也能获取到对象
-            query.find()
-            .then(function(todos){
-                //绑定id
-                let avAllTodos = todos[0]  //理论上AllTodos只有一个,我们取结果的第一项
-                let id = avAllTodos.id
-                //获取该id下的content数据,并转成字符串
-                this.todoList = JSON.parse(avAllTodos.attributes.content)  //content: "[{"title":"222","createAt":"2018/4/5 上午1:13:13","done":false}]"
-                //给这个总备忘录一个id 与 那边对应
-                this.todoList.id = id 
-            },function(error){
-                console.log(error)
-            })
-        }
+        // if(this.currentUser){
+        //     var query = new AV.Query('AllTodos')  //不需要id也能获取到对象
+        //     query.find()
+        //     .then(function(todos){
+        //         //绑定id
+        //         let avAllTodos = todos[0]  //理论上AllTodos只有一个,我们取结果的第一项
+        //         let id = avAllTodos.id
+        //         //获取该id下的content数据,并转成字符串
+        //         this.todoList = JSON.parse(avAllTodos.attributes.content)  //content: "[{"title":"222","createAt":"2018/4/5 上午1:13:13","done":false}]"
+        //         //给这个总备忘录一个id 与 那边对应
+        //         this.todoList.id = id 
+        //     },function(error){
+        //         console.log(error)
+        //     })
+        // }
 
-        this.fetchTodos()   //重新登录后,显示之前存储的todo
+        this.fetchTodos()   //用这个函数指代上面那一堆
     },
     methods: {
         fetchTodos: function(){
@@ -166,6 +166,7 @@ var app = new Vue({
         login: function(){
             AV.User.logIn(this.formData.username,this.formData.password).then((loginedUser)=>{
                 this.currentUser = this.getCurrentUser()
+                this.fetchTodos()   //登录成功后读取 todos
             },function(error){
                 alert('登录失败')
             })
