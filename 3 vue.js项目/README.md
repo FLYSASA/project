@@ -1610,3 +1610,5 @@ saveOrUpdateTodos: function(){
 >2. 注册signUp后
 >3. 登录signIn后
 >4. 登出logout后,赋值为null
+
+最后的实例预览链接: 
