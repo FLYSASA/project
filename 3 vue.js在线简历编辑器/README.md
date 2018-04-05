@@ -1605,3 +1605,8 @@ saveOrUpdateTodos: function(){
 >- savaTodos和updateTodos 都是用于数据更新,区别在于前者用于首次创建todo的时候,创建过程中会在远端创建一个`AllTodos`className-使用`AV.Project.extend(AllTodos)`创建子类,并使用子类的new实例来保存内容. 后者直接用`let avTodos = AV.Object.createWithoutData('AllTodos',this.todoList.id)` 一步到位,通过id与AllTodos管理并创建了实例,然后直接通过`avTodos`来保存内容.
 >- 页面加载的时候,需要给个created钩子函数来自动加载数据.加载前需要`this.currentUser = this.getCurrentUser()`,通过赋值判断是否是登录态,是的话使用AV.Query('AllTodos'),不需要id.获取到AllTodos后,根据其属性值来更新view.
 >- 在给this.todoList push新的数据后,一定要记得重置`this.newTodo = ''`
+>- `this.currentUser = this.getCurrentUser()` 出现在页面重载的时候,用于赋值于currentUser,决定页面的展示部分,有下面几个场景:
+>1. 钩子函数created页面刚加载的时候
+>2. 注册signUp后
+>3. 登录signIn后
+>4. 登出logout后,赋值为null
