@@ -41,8 +41,8 @@ var app = new Vue({
         //当currentUser = this.getCurrentUser() =>return {id,createAt,username},不为null即是true
     },
 
-    //获取user的AllTodos
-    created: function () {
+    //获取user的AllTodos  
+    created: function () {  //注意created钩子函数触发时机: 实例创建完成后被调用,挂载阶段还没开始,$el属性目前不可见.
         this.currentUser = this.getCurrentUser()  //this.getCurrentUser()即返回的三个值id,createAt.className
         if(this.currentUser){
             var query = new AV.Query('AllTodos')  //不需要id也能获取到对象
@@ -71,7 +71,7 @@ var app = new Vue({
                     let avAllTodos = todos[0] // 因为理论上 AllTodos 只有一个，所以我们取结果的第一项
                     let id = avAllTodos.id
                     this.todoList = JSON.parse(avAllTodos.attributes.content) // 为什么有个 attributes？因为我从控制台看到的
-                    this.todoList.id = id // 为什么给 todoList 这个数组设置 id？因为数组也是对象啊
+                    this.todoList.id = id // 为什么可以给 todoList 这个数组设置 id？因为数组也是对象
                 },function(error){
                     console.log(error)
                 })
@@ -81,17 +81,17 @@ var app = new Vue({
             //如何更新对象https://leancloud.cn/docs/leanstorage_guide-js.html#hash810954180
             let dataString = JSON.stringify(this.todoList)  //json序列化有id属性的数组
             // 将avTodos与AllTodos关联,第一个参数是 className，第二个参数是 objectId
-            let avTodos = AV.Object.createWithoutData('AllTodos',this.todoList.id) //假如 id 已知，则可以通过如下接口从本地构建一个 AV.Object 来更新这个对象
+            let avTodos = AV.Object.createWithoutData('AllTodos',this.todoList.id) //假如 id 已知(从saveTodos中获取)，则可以通过如下接口从本地构建一个 AV.Object 来更新这个对象
             avTodos.set('content',dataString)   //set与save总是前后出现
             avTodos.save().then(()=>{
                 console.log('更新成功')
             })
 
         },
-        //储存数据到远端,只有在登录和注册时候才会触发
+        //储存数据到远端,只有登录(从未创建过todo)和注册时候才会触发
         saveTodos: function(){
             let dataString = JSON.stringify(this.todoList)  //将数组todoList JSON化
-            var AVTodos = AV.Object.extend('AllTodos')
+            var AVTodos = AV.Object.extend('AllTodos')   //远程创建AllTodos className
             var avTodos = new AVTodos()
 
             //添加访问权限控制:https://leancloud.cn/docs/acl-guide.html#hash-1171845695
@@ -103,7 +103,7 @@ var app = new Vue({
             avTodos.set('content',dataString)     //添加新增内容
             avTodos.save().then(function(todo){  //todo因为不断被set新的内容不断被更新数据
 
-                //一定要把id挂到 this.todoList上,否则下次就不会调用updateTodos了
+                //一定要把id储存到 this.todoList上,否则this.todoList.id在updateTodos中将无值可用
                 this.todoList.id = todo.id    //
                 alert('保存成功')
             },function(error){

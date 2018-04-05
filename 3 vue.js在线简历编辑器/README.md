@@ -1525,6 +1525,83 @@ saveTodos: function(){
         },
 
 ```
-- 去除多余的alert,使用对用户无打扰的console.log
+> 小结流程: 
+1. 使用leanCloud云端来保存本地数据,首先需要 `npm install leancloud-storage --save`安装依赖
+2. 在leancloud,创建一个应用,获取到`APP_ID` `APP_KEY`(从leancloud 应用个人应用设置下可以看到). 然后初始化`AV.init` 
+3. 核心元素: `AV.Object`,需要明确的是我们保存的一切数据都是储存在这个对象上的. 使用它需要创建其实例.
+4. 创建钩子函数`created`: 触发时机,实例创建完成后被调用,挂载阶段还没开始,$el属性目前不可用. 可以简单理解为页面加载时.
 
+理解各个生命周期钩子:
+```js
+export default {
+    beforecreate() {
+        //  创建前状态
+    }
+    created () {
+        //  创建完毕状态
+    }
+    beforeMount(){
+        //  挂载前状态
+    }
+    mounted(){
+        //  挂载结束状态
+    }
+}
+```
 
+5. `created`钩子函数(页面重新加载就会由触发一次,如登录等.),主要内容: 
+- 获取当前登录态赋值给currentUser来决定是否显示todo. 
+- 如果是登录态,则通过`AV.query`(参数是className)的实例query, 通过`find()`方法 返回`todos`表对象(`AllTodos的数组`)(包含了权限,内容等各种数据),理论上只存在一个,后面的修改都在其基础上数据更新.
+- 为了保险起见,取`todos[0]`第一个`AllTodos`,然后获取到id,并`avAllTodos.attributes.content`(todo的内容)转为字符串形式,更新给todoList,并显示在页面上.
+- 将id作为属性赋给这个`todoList`数组.
+
+6. `fetchTodos`函数 有时候会出现登出重新登录后不显示todo的bug.解决办法:重新读取一次AllTodos利用`fetchTodos`函数(在created里执行)封装读取过程,赋值云端的数据给todoList数组.
+
+7. `updateTodo`函数 上面的是加载已有todo的函数,接下来定义本地新建todo后更新到云端的updateTodos函数.
+参考: https://leancloud.cn/docs/leanstorage_guide-js.html#hash810954180
+- 将本地数组`this.todoList` [JSON字符串化](https://blog.csdn.net/wangxiaohu__/article/details/7254598/ ) . 
+- 通过`let avTodos = AV.Object.createWithoutData('AllTodos',this.todoList.id)`使用className和储存到`this.todoList.id`作为参数来构建一个AV.Object中的AllTodos的实例(利用核心元素中的className对象储存数据) 
+- `avTodos.set('content', dataString)`,使用set方法将json字符串化的`todoList数组`储存的`content`属性(该属性通过`avAllTodos.attributes.content`读取)里面.
+-  更新完后保存`save()`即可.
+
+8. - 定义`savaTodos`函数用于第一次储存数据到远端. 同样只要涉及到储存数据,就需要把todoList json字符串化.
+- 也同样需要使用`AV.Object`对象,由于是第一次存储到远端,需要`var AVTodos = AV.Object.extend('AllTodos')`创建一个AV.Object的子类.参考https://leancloud.cn/docs/leanstorage_guide-js.html#hash799084270
+- 然后创建该对象的实例 另外第一次创建AllTodos还需要设置访问权限.`var acl = new AV.ACL()  acl.setReadAccess(AV.User.current(),true) acl.setWriteAccess(AV.User.current(),true)`,`AV.User.current()`是当前用户. 上面的意思是当前用户才可读,才可写. 另外需要注意的是`AV.User.current()`和`AllTodos`是同一个对象值. 只是`AV.User.current`只有在登录态才有值.
+- avTodos.setACL(acl) //设置访问控制  avTodos.set('content',dataString)     //添加新增内容
+ avTodos.save().then()  //储存并触发后续函数.
+- 最后在后续回调函数里,必须记得 `this.todoList.id = todo.id`  todo是返回的对象作为then()里函数的参数.一定要把id储存到 `this.todoList`上,否则`this.todoList.id`在`updateTodos`中将无值可用
+
+9. 定义`saveOrUpdateTodos`条件函数:
+```js
+saveOrUpdateTodos: function(){
+    if(this.todoList.id){   //有了id说明已经跑了一遍saveTodos了(已创建好初步类表),不能再跑第二遍,所以执行updateTodos
+        this.updateTodos()
+    }else{                      //第一次创建todo,返回todo对象,将todo.id 赋给this.todoList,这样this.todoList有了值,下次将可以顺利执行更新函数
+        this.saveTodos()        //意思是saveTodos仅执行一次(创造了一个className),第二次便执行更新todos,因为不需要重新创建AllTodos了
+    }
+},
+```
+
+10. 定义`addTodo` 即在`this.todoList`里push三个属性值(this.newTodo,createAt,done),push完后需要记得,将this.newTodo重置为'',否则将会view更新,导致数组原来存储的值也更新. 最后触发条件函数`this.saveOrUpdateTodos()`
+
+11. 定义`removeTodo` 即主要获取到索引值index,使用`this.todoList`数组方法indexOf(todo),这个todo是此时正在遍历的这个.然后使用数组方法`splice(index,1)`,删掉索引位置的一位.即可. 最后触发条件函数`this.saveOrUpdateTodos()`
+
+12. 定义`signUp`注册功能.  关键对象: `AV.User()`,创建其实例. 创建好后,其注册功能需要设置好username和password(这两个值与输入框相绑定),设置好后`user.signUp()`注册,然后then()返回loginedUser对象 参考:https://leancloud.cn/docs/leanstorage_guide-js.html#hash-452155059,
+将`currentUser`赋值于`this.getCurrentUser()` 这个值通过`AV.User.current()`登录态对象获取,
+获取三个属性即可(username,id,createAt) ,返回的值可以部署到页面上,也可以判断是否显示注册登录.
+
+13. 定义`login`登录功能  关键对象: `AV.User.login(username,passWord)`,同样返回then((loginedUser)=>{}),同样赋值给currentUser
+
+14. 定义`logOut`登出功能 关键对象: `AV.User.logOut()` 同样赋值currentUser为null. `window.location.reload()`  刷新页面
+
+15. 定义`getCurrentUser` 函数, 用于返回一个对象(三个属性:id,createAt,username)赋给`this.currentUser`.
+
+16. 完
+
+<br>
+<br>
+
+> 综上: 
+>- savaTodos和updateTodos 都是用于数据更新,区别在于前者用于首次创建todo的时候,创建过程中会在远端创建一个`AllTodos`className-使用`AV.Project.extend(AllTodos)`创建子类,并使用子类的new实例来保存内容. 后者直接用`let avTodos = AV.Object.createWithoutData('AllTodos',this.todoList.id)` 一步到位,通过id与AllTodos管理并创建了实例,然后直接通过`avTodos`来保存内容.
+>- 页面加载的时候,需要给个created钩子函数来自动加载数据.加载前需要`this.currentUser = this.getCurrentUser()`,通过赋值判断是否是登录态,是的话使用AV.Query('AllTodos'),不需要id.获取到AllTodos后,根据其属性值来更新view.
+>- 在给this.todoList push新的数据后,一定要记得重置`this.newTodo = ''`
