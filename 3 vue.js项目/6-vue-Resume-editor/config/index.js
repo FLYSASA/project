@@ -51,12 +51,13 @@ module.exports = {
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
     // assetsPublicPath: '/',
-    assetsPublicPath: 'project/3 vue.js项目/6-vue-Resume-editor/dist/',   //资源的根目录,这个是通过http服务器运行的url路径。
+    assetsPublicPath: '',   //资源的根目录,这个是通过http服务器运行的url路径。
 
 
     /**
      * Source Maps
      */
+    
 
     productionSourceMap: true,
     // https://webpack.js.org/configuration/devtool/#production
