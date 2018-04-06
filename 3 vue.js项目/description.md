@@ -478,9 +478,17 @@ import ResumePreview from './components/ResumePreview'
 
 
 ### 预览
-- 首先需要将`config/index.js` 中的`assetsPublicPath` 改为
+- 首先需要将`config/index.js` 中的`assetsPublicPath` 改为`/my-project/resumer/dist`
 
-  
+commit: [修改 assetsPublicPath](https://github.com/FLYSASA/project/commit/338dd1edf3cfa614792e69b237f322a4d45e032f)
+
+然后运行
+```npm run build```
+就会生成一个dist目录,dist/index.html就是可以直接预览的页面(不过必须是http协议)
+
+我的预览链接: 
+
+
 
 
 
