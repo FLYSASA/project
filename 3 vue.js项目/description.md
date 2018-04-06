@@ -468,8 +468,17 @@ import ResumePreview from './components/ResumePreview'
 
 
    另外:
-   - commit : [add styles for topbar]()
-   - commit: 对齐文字,调节内外边距,都改为16px距离
+   - commit : [topbar样式 间距等](https://github.com/FLYSASA/project/commit/ec440715c87d95f8550923e7e36da18f5bee5fc0)
+ 
+
+
+看看页面效果:
+
+![微信截图_20180406105521](https://i.loli.net/2018/04/06/5ac6e1e63ffeb.png)
+
+
+### 预览
+- 首先需要将`config/index.js` 中的`assetsPublicPath` 改为
 
   
 
