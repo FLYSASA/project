@@ -149,7 +149,7 @@ autoOpenBrowser: false,//是否自动打开浏览器
 src目录的结构如下:
 ```
 src
-├── App.vue              # App.vue 是主组件，后面讲什么是组件
+├── App.vue              # App.vue 是**主组件**，后面讲什么是组件
 ├── assets                 # assets 用于放置代码之外的资源，比如图片、字体等
 ├── components       # components 用于放置主组件之外的组件，vue 组件的后缀都是 .vue
 ├── main.js                # JS 入口文件，浏览器执行的第一行代码在这里，所以我们先看这里
@@ -361,4 +361,19 @@ export default {
 
 
 #### 补充HTML & CSS
+UI预览在这里: https://jirengu-inc.github.io/jrg-project-5/resumer_mockups/index.html
+
+点击左侧`编辑`页面,可以看到页面标注
+
+![微信截图_20180406082038](https://i.loli.net/2018/04/06/5ac6bd6b535b2.png)
+
+有了标注我们就开始把大体的HTML和css写好.
+
+设计稿总宽度是1440px,页面宽度如果不足 1440px,按比例缩小，最小缩小到 1024px,不兼容手机.
+
+> 在于设计师交流之前,不要写样式代码.
+
+下面是添加样式的过程:
+
+commit: add reset.css
 
