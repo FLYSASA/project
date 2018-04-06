@@ -452,11 +452,9 @@ import ResumePreview from './components/ResumePreview'
   
    ![微信截图_20180406090238](https://i.loli.net/2018/04/06/5ac6c73923472.png)
    
-   接续:
-   - commit : 调节位置,背景色等
+   继续:
+   - commit : [调节位置,背景色等](https://github.com/FLYSASA/project/commit/1f89a43264870207a0707dbd25a525d82b93691c)
 
-
-   - commit : [add styles for topbar](https://github.com/FLYSASA/project/commit/1f89a43264870207a0707dbd25a525d82b93691c)
 
    > 注意:Vue单文件组件定义的css样式优先级会高于主组件App.vue.
 
@@ -465,6 +463,15 @@ import ResumePreview from './components/ResumePreview'
    ![微信截图_20180406094919](https://i.loli.net/2018/04/06/5ac6d22c22c10.png)
 
    修正如下:
-   
+
+   - commit: [centerd](https://github.com/FLYSASA/project/commit/7024b3f6e94e91ba2dd3209569fc53e5ff2969d1)
+
+
+   另外:
+   - commit : [add styles for topbar]()
+   - commit: 对齐文字,调节内外边距,都改为16px距离
+
+  
+
 
 

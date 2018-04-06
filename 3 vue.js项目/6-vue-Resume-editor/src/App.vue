@@ -53,8 +53,9 @@ export default {
     margin-top: 16px;
     margin-bottom: 16px;
     display: flex;
-    justify-content: space-around;
-    width: 100%;        
+    justify-content: space-between;
+    padding: 0 16px;
+    width: 100%;        /* 记得加width  */
     align-self: center;   /* flex布局中justify-content和align-items都用于父容器,子元素自身调整需要align-self */
    
   }
@@ -65,7 +66,8 @@ export default {
   }
 
   #resumePreview{
-    width: 61.66667%;
+    flex-grow: 1;
+    margin-left: 16px;
     background: #777;
   }
 
