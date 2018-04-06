@@ -375,5 +375,87 @@ UI预览在这里: https://jirengu-inc.github.io/jrg-project-5/resumer_mockups/i
 
 下面是添加样式的过程:
 
-commit: add reset.css
+- commit: add reset.css
+新建reset.css于`assets`文件夹下.并在App.vue中引入`import './assets/reset.css'`
+```css
+/* reset.css */
+*{margin:0; padding:0; box-sizing: border-box; }
+*::after, *::before{box-sizing:border-box;}
+```
+
+- commit: add normalize.css
+安装`normalize.css`依赖,并在App.vue中引入`import 'normalize.css/normalize.css'`
+`npm install --save normalize.css`
+
+- 将normalize.css和reset.css移到最前面
+```js
+//App.vue
+import 'normalize.css/normalize.css'
+import './assets/reset.css'
+
+import Topbar from './components/Topbar'
+import ResumeEditor from './components/ResumeEditor'
+import ResumePreview from './components/ResumePreview'
+```
+
+- 添加flex布局
+```html
+<!-- App.vue -->
+<template>
+  <div class="page">
+    <header>
+      <Topbar/>
+    </header>
+    <main>
+      <ResumeEditor/>
+      <ResumePreview/>
+    </main>
+  </div>
+</template>
+```
+
+```css
+/* App.vue*/
+<style>
+  .page{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #topbar{
+    background: #fff;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.25);
+    height: 64px;
+  }
+  .page>main{
+    flex-grow: 1;
+    min-width: 1024px;
+    max-width: 1440px;
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  #resumeEditor{
+    width: 35%;
+    background: #444;
+  }
+
+  #resumePreview{
+    width: 61.66667%;
+    background: #777;
+  }
+  ```
+
+  到目前为止效果如下:
+  
+   ![微信截图_20180406090238](https://i.loli.net/2018/04/06/5ac6c73923472.png)
+   
+   接续:
+   - commit : 调节位置,背景色等
+
+   
+   - commit : add styles for topbar
+
 

@@ -1,21 +1,25 @@
  主组件
 
 <template>
-  <div>
-    <p>{{text}}</p>
-    <Topbar/>       <!-- 引入三个组件标签 -->
-    <ResumeEditor/>
-    <ResumePreview/>  
-
+  <div class="page">
+    <header>
+      <Topbar/>
+    </header>
+    <main>
+      <ResumeEditor/>
+      <ResumePreview/>
+    </main>
   </div>
 </template>
 
 <script>
+
+import 'normalize.css/normalize.css'
+import './assets/reset.css'
+
 import Topbar from './components/Topbar'
 import ResumeEditor from './components/ResumeEditor'
 import ResumePreview from './components/ResumePreview'
-
-import './assets/reset.css'
 
 export default {
   name: 'app',
@@ -29,5 +33,34 @@ export default {
 </script>
 
 <style>
+  .page{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #topbar{
+    background: #fff;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.25);
+    height: 64px;
+  }
+  .page>main{
+    flex-grow: 1;
+    min-width: 1024px;
+    max-width: 1440px;
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  #resumeEditor{
+    width: 35%;
+    background: #444;
+  }
+
+  #resumePreview{
+    width: 61.66667%;
+    background: #777;
+  }
 
 </style>
