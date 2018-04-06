@@ -46,7 +46,7 @@ export default {
     height: 64px;
   }
   .page>main{
-    flex-grow: 1;
+    flex-grow: 1;   /*  一个人分配整个空间 */
     min-width: 1024px;
     max-width: 1440px;
     margin: 0;
@@ -54,6 +54,9 @@ export default {
     margin-bottom: 16px;
     display: flex;
     justify-content: space-around;
+    width: 100%;        
+    align-self: center;   /* flex布局中justify-content和align-items都用于父容器,子元素自身调整需要align-self */
+   
   }
 
   #resumeEditor{
