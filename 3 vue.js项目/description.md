@@ -478,17 +478,17 @@ import ResumePreview from './components/ResumePreview'
 
 
 ### 预览
-- 首先需要将`config/index.js` 中的`assetsPublicPath` 改为`/my-project/resumer/dist`
+运行`npm run build`,生成dist文件,并在.gitignore里删掉 /dist/(vue默认不上传dist),然后上传至github.
 
-commit: [修改 assetsPublicPath](https://github.com/FLYSASA/project/commit/338dd1edf3cfa614792e69b237f322a4d45e032f)
+我的在线链接: 
 
-然后运行
-```npm run build```
-就会生成一个dist目录,dist/index.html就是可以直接预览的页面(不过必须是http协议)
+http://flysasa.top/project/3%20vue.js%E9%A1%B9%E7%9B%AE/6-vue-Resume-editor/dist/index.html
 
-我的预览链接: 
+![微信截图_20180406115203](https://i.loli.net/2018/04/06/5ac6eeed6b81c.png)
 
+发现报错,找不到资源.这是因为没有**修改  `assetsPublicPath`**
 
+找到config/index.js中的 `assetsPubulicPath` 改为: 
 
 
 
