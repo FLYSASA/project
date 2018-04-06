@@ -455,7 +455,16 @@ import ResumePreview from './components/ResumePreview'
    接续:
    - commit : 调节位置,背景色等
 
+
+   - commit : [add styles for topbar](https://github.com/FLYSASA/project/commit/1f89a43264870207a0707dbd25a525d82b93691c)
+
+   > 注意:Vue单文件组件定义的css样式优先级会高于主组件App.vue.
+
+   然后,当我们把分辨率调到1440px以上之后,发现main并没有居中.
+
+   ![微信截图_20180406094919](https://i.loli.net/2018/04/06/5ac6d22c22c10.png)
+
+   修正如下:
    
-   - commit : add styles for topbar
 
 
