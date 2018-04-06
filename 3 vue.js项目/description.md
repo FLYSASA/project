@@ -480,15 +480,23 @@ import ResumePreview from './components/ResumePreview'
 ### 预览
 运行`npm run build`,生成dist文件,并在.gitignore里删掉 /dist/(vue默认不上传dist),然后上传至github.
 
-我的在线链接: 
-
-http://flysasa.top/project/3%20vue.js%E9%A1%B9%E7%9B%AE/6-vue-Resume-editor/dist/index.html
 
 ![微信截图_20180406115203](https://i.loli.net/2018/04/06/5ac6eeed6b81c.png)
 
 发现报错,找不到资源.这是因为没有**修改  `assetsPublicPath`**
 
-找到config/index.js中的 `assetsPubulicPath` 改为: 
+`assetsPublicPath` : 资源的根目录,这个是通过http服务器运行的url路径。
+
+找到config/index.js中的 `assetsPubulicPath` 改为: `assetsPubulicPath: '',`即可.
+
+然后运行
+```npm run build```
+
+就会生成一个dist目录,dist文件夹里面的index.html即可以在github上预览的页面(**不过必须是 http 协议**)
+
+跟往常的githubpages的预览链接不一样的是, 链接地址到 dist/即可.
+
+我的预览链接: http://flysasa.top/project/3%20vue.js%E9%A1%B9%E7%9B%AE/6-vue-Resume-editor/dist/#/
 
 
 
