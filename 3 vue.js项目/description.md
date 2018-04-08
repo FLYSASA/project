@@ -54,7 +54,7 @@ Press ^C at any time to quit.
 然后全局安装vue-cli(安装到当前目录也可以),并用vue-cli来初始化一个vue项目.(`初始化后这个文件夹里的文件将整个被替换`)
 ```
 > npm install -g vue-cli
-> vue init webpack .   # 注意这里的 . 字符
+> vue init webpack .      #注意这里的 . 字符
 
 ? Generate project in current directory? Yes
   This will install Vue 2.x version of the template.
@@ -149,7 +149,7 @@ autoOpenBrowser: false,//是否自动打开浏览器
 src目录的结构如下:
 ```
 src
-├── App.vue              # App.vue 是**主组件**，后面讲什么是组件
+├── App.vue                # App.vue 是**主组件**，后面讲什么是组件
 ├── assets                 # assets 用于放置代码之外的资源，比如图片、字体等
 ├── components       # components 用于放置主组件之外的组件，vue 组件的后缀都是 .vue
 ├── main.js                # JS 入口文件，浏览器执行的第一行代码在这里，所以我们先看这里
@@ -325,7 +325,7 @@ export default {
 
 ![微信截图_20180405230726](https://i.loli.net/2018/04/05/5ac63bb75e8c0.png)
 
-- 如果不想折腾,就去`build/webpack.base.conf.js`里,把ESLint给注释掉,然后重新运行`npm run dev`. 我们还是选择后者吧...
+- 如果不想折腾,就去`build/webpack.base.conf.js`里,修改一下设置,然后重新运行`npm run dev`. 我们还是选择后者吧...
 
 ```js
 // 第43行
@@ -497,6 +497,35 @@ import ResumePreview from './components/ResumePreview'
 跟往常的githubpages的预览链接不一样的是, 链接地址到 dist/即可.
 
 我的预览链接: http://flysasa.top/project/3%20vue.js%E9%A1%B9%E7%9B%AE/6-vue-Resume-editor/dist/#/
+
+
+
+## Resumer-editor2
+
+UI预览在这里: https://jirengu-inc.github.io/jrg-project-5/resumer_mockups/index.html
+
+这次直接使用上面的resumer,不再新建项目.
+
+上面我们把页面分为三大模块:
+
+1. Topbar
+2. ResumeEditor 
+3. ReseumePreview
+
+今天我们逐个完善.
+
+### LESS/SCSS/Stylus
+之前我们写的样式都是css,现在我们想加上css预处理怎么办? 很简单,抄[vuejs-templates/webpack](https://github.com/vuejs-templates/webpack)的文档[Pre-Processors](http://vuejs-templates.github.io/webpack/pre-processors.html)章节的[示例](http://vuejs-templates.github.io/webpack/pre-processors.html)即可:
+
+为了让node-sass顺利安装,首先在命令行运行:
+```
+export SASS_BINARY_SITE="https://npm.taobao.org/mirrors/node-sass"
+```
+然后
+```
+npm install --save sass-loader node-sass
+```
+
 
 
 

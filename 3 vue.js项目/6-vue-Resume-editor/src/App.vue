@@ -57,7 +57,6 @@ export default {
     padding: 0 16px;
     width: 100%;        /* 记得加width  */
     align-self: center;   /* flex布局中justify-content和align-items都用于父容器,子元素自身调整需要align-self */
-   
   }
 
   #resumeEditor{
