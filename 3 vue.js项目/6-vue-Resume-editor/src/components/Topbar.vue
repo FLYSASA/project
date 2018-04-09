@@ -24,7 +24,7 @@ export default {
         min-width: 1024px;
         max-width: 1440px;
         margin: 0 auto;
-        height: 64px;
+        height: 64px;    //8的倍数
       }
       >.wrapper{
         display: flex;

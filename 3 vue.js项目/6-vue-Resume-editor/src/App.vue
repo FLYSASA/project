@@ -14,8 +14,8 @@
 
 <script>
 
-import 'normalize.css/normalize.css'
-import './assets/reset.css'
+import 'normalize.css/normalize.css'  //默认样式在各个平台一样
+import './assets/reset.css'           //将某些默认样式重置掉,与上面不冲突,但是这个顺序在后面
 
 import Topbar from './components/Topbar'
 import ResumeEditor from './components/ResumeEditor'
@@ -38,13 +38,13 @@ export default {
 
 <style lang="scss">
   .page{
-    height: 100vh;
+    height: 100vh;    //占满整个屏幕
     display: flex;
     flex-direction: column;
     background: #EAEBEC;
   
     >main{
-      flex-grow: 1;
+      flex-grow: 1;      //占满剩余空间
     }
     >main{
       min-width: 1024px;
