@@ -542,10 +542,12 @@ npm install --save sass-loader node-sass
 
 > commit: [添加两个按钮](https://github.com/FLYSASA/project/commit/724783e6e5e5d841fa2bd9e8acd3419f5c306153)
 
+
 #### ResumeEditor
 
 先写基本HTML,CSS
 > commit: [添加左侧导航](https://github.com/FLYSASA/project/commit/6165ac2d58f763813cc1c9ceae4f78dec98b9907)
+> commit: [tab切换](https://github.com/FLYSASA/project/commit/81a1d71da6225010bc389732a2ea4ff39d913b91)
 
 另外在写v-for时vscode会红线报错,如下:
 
@@ -554,9 +556,11 @@ npm install --save sass-loader node-sass
 原因: vue在升级到2.2后，当在组件中使用 v-for 时， key 现在是必须的。这是ESlint的功能,对vue进行了eslint检查.那么我们就把eslint对该插件的检查关闭,在vscode中,打开`文件>首选项>设置`找到 vetur.configuration 把  `"vetur.validation.template": true`  改成`"vetur.validation.template": false,`保存,发现不报错了
 解决办法: 参考-http://www.cnblogs.com/zhouyangla/p/7081077.html
 
+然后是重点,添加SVG icon.
+所有的icon可以在[这里下载](https://github.com/jirengu-inc/jrg-project-5/blob/master/resumer_assets/svg.zip)
 
 
-> commit: [tab切换]()
+> commit:将所有SVG文件放到 static/svg_icons/下
 
 
 
