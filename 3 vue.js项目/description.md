@@ -572,8 +572,25 @@ npm install --save sass-loader node-sass
 
 最后将SVG Symbols插入到页面里
 
-> commit: [将SVG插入到body内](https://github.com/FLYSASA/project/commit/83de96cf0073f0e2eafddff9c7e05ae9b3ed2dae)
+> commit: [将SVG插入到body内1](https://github.com/FLYSASA/project/commit/83de96cf0073f0e2eafddff9c7e05ae9b3ed2dae)
+
+> commit:[修正](https://github.com/FLYSASA/project/commit/3c0411febb90213b43c049624a9d2d59898f734a)
 
 添加SVG icon结束,页面效果如下: 
 
 
+![QQ截图20180409151441](https://i.loli.net/2018/04/0
+
+看到body下面的svg标签了吗?
+
+那么如何使用这些SVG icon呢?
+简要说明一下,只要在页面任意地方使用
+```
+<svg>
+  <use xlink:href="#icon-xxx"></use>
+</svg>
+```
+就可以展示id为`icon-xxx`的图标了.
+
+那么开始使用SVG icon吧:
+> commit: [bio重命名为profile]()

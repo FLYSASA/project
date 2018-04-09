@@ -22,10 +22,10 @@ export default {
   name: 'ResumeEditor',
   data: function(){
       return {
-            selected: 'bio',
+            selected: 'profile',
             resume: {
-                visibleItems: ['bio','work history','education','projects','award','contacts','others'],
-                bio: {
+                visibleItems: ['profile','work history','education','projects','award','contacts','others'],
+                profile: {
                     name: '',
                     city: '',
                     title: ''
