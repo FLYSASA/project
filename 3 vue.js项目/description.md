@@ -562,6 +562,8 @@ npm install --save sass-loader node-sass
 
 > commit:将所有SVG文件放到 static/svg_icons/下
 
+接下来可能有点难以理解,我们要写一个脚本,这个脚本会把所有的SVG文件拼成一个文件:
 
+> commit: [使用脚本将所有svg拼成一个svg,原来的多个svg变成多个symbol]()
 
 
