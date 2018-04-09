@@ -32,12 +32,28 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
   .page{
     height: 100vh;
     display: flex;
     flex-direction: column;
     background: #EAEBEC;
+  
+    >main{
+      flex-grow: 1;
+    }
+    >main{
+      min-width: 1024px;
+      max-width: 1440px;
+      margin: 0;
+      margin-top: 16px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 16px;
+      width: 100%;        /* 记得加width  */
+      align-self: center;
+    }
   }
 
   #topbar{
@@ -45,19 +61,19 @@ export default {
     box-shadow: 0 1px 3px 0 rgba(0,0,0,0.25);
     height: 64px;
   }
-  .page>main{
-    flex-grow: 1;   /*  一个人分配整个空间 */
-    min-width: 1024px;
-    max-width: 1440px;
-    margin: 0;
-    margin-top: 16px;
-    margin-bottom: 16px;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 16px;
-    width: 100%;        /* 记得加width  */
-    align-self: center;   /* flex布局中justify-content和align-items都用于父容器,子元素自身调整需要align-self */
-  }
+  // .page>main{
+  //   flex-grow: 1;   /*  一个人分配整个空间 */
+  //   min-width: 1024px;
+  //   max-width: 1440px;
+  //   margin: 0;
+  //   margin-top: 16px;
+  //   margin-bottom: 16px;
+  //   display: flex;
+  //   justify-content: space-between;
+  //   padding: 0 16px;
+  //   width: 100%;        /* 记得加width  */
+  //   align-self: center;   /* flex布局中justify-content和align-items都用于父容器,子元素自身调整需要align-self */
+  // }
 
   #resumeEditor{
     width: 35%;
