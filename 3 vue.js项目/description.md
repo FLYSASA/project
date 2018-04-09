@@ -594,4 +594,7 @@ npm install --save sass-loader node-sass
 
 那么开始使用SVG icon吧:
 > commit: [bio重命名为profile](https://github.com/FLYSASA/project/commit/152679e73c5204d6b4cacedd4b303d577fd0200b)
-> commit: [将visibleItems改为config]()
+> commit: [将visibleItems改为config](https://github.com/FLYSASA/project/commit/c5a3d60579d0de1c2aa91d3b728baf3118af7e5c)
+> commit: [使用SVG图标]()
+
+效果: 
