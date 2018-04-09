@@ -604,5 +604,27 @@ npm install --save sass-loader node-sass
 
 
 #### 接下来完善panels: 
-> commit:[显示第一个panel的内容]()
+> commit:[显示第一个panel的内容](https://github.com/FLYSASA/project/commit/488a14d0c70e775ce4f7bc71f489ec2497406b18)
+
+效果如下: 
+
+![QQ截图20180409161223](https://i.loli.net/2018/04/09/5acb2077b3956.png)
+
+然后给第二个panel加点数据看看效果:
+
+```
+'work history': [
+            {company: 'AL', content: '我的第二份工作是'},
+            {company: 'TX', content: '我的第一份工作是'},
+          ],
+```
+
+效果令人激动:
+
+![QQ截图20180409161537](https://i.loli.net/2018/04/09/5acb213d26bf8.png)
+
+由于work history属性是个数组,所以我们要判断一下数据类型:
+
+> commit: [resume属性同时支持数组和对象]()
+
 
