@@ -20,6 +20,7 @@ import './assets/reset.css'
 import Topbar from './components/Topbar'
 import ResumeEditor from './components/ResumeEditor'
 import ResumePreview from './components/ResumePreview'
+import icons from './assets/icons'   //插入图标
 
 export default {
   name: 'app',
@@ -28,7 +29,10 @@ export default {
       text: '你好'
     }
   },
-  components: {Topbar,ResumeEditor,ResumePreview}
+  components: {Topbar,ResumeEditor,ResumePreview},
+  created(){
+    document.body.insertAdjacentElement('afterbegin',icons)
+  }
 }
 </script>
 

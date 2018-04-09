@@ -564,6 +564,14 @@ npm install --save sass-loader node-sass
 
 接下来可能有点难以理解,我们要写一个脚本,这个脚本会把所有的SVG文件拼成一个文件:
 
-> commit: [使用脚本将所有svg拼成一个svg,原来的多个svg变成多个symbol]()
+> commit: [使用脚本将所有svg拼成一个svg,原来的多个svg变成多个symbol](https://github.com/FLYSASA/project/commit/f0025fb9d0582fb1d427876f1f671be600a3b66c)
+
+然后运行`node build/svg-symbols.js`脚本,得到`src/assets/icons.js`
+
+> commit: [运行 node build/svg-symbols.js](https://github.com/FLYSASA/project/commit/f0025fb9d0582fb1d427876f1f671be600a3b66c)
+
+最后将SVG Symbols插入到页面里
+
+> commit: [将SVG插入到body内]()
 
 
