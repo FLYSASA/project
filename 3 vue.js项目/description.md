@@ -572,6 +572,8 @@ npm install --save sass-loader node-sass
 
 最后将SVG Symbols插入到页面里
 
-> commit: [将SVG插入到body内]()
+> commit: [将SVG插入到body内](https://github.com/FLYSASA/project/commit/83de96cf0073f0e2eafddff9c7e05ae9b3ed2dae)
+
+添加SVG icon结束,页面效果如下: 
 
 

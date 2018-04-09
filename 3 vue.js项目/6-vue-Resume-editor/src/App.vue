@@ -31,7 +31,7 @@ export default {
   },
   components: {Topbar,ResumeEditor,ResumePreview},
   created(){
-    document.body.insertAdjacentElement('afterbegin',icons)
+    document.body.insertAdjacentHTML('afterbegin',icons)
   }
 }
 </script>
