@@ -526,6 +526,21 @@ export SASS_BINARY_SITE="https://npm.taobao.org/mirrors/node-sass"
 npm install --save sass-loader node-sass
 ```
 
+> commit: [add](https://github.com/FLYSASA/project/commit/daf282a805f6ac8571d11d8f4c77fec4b5f010e8)
+
+为什么要安装`sass-loader node-sass`呢? 因为不装就报错了,你可以先试试不装`sass-loader node-sass`会怎样.
+
+> 你见的bug越多, 你改bug就改的越快.
+
+上面用的是scss,如果你喜欢Stylus/LESS,请自行摸索.
+
+同理,如果你要使用其它预编译的HTML或JS,都可以做到,看上面的文档操作.
+
+### 更多HTML和CSS
+
+#### Topbar
+
+
 
 
 
