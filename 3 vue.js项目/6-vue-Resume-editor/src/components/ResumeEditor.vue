@@ -60,12 +60,12 @@ export default {
                     { school: 'TX', content: '文字' },                   
                 ],
                 projects: [
-                    { school: 'AL', content: '文字' },
-                    { school: 'TX', content: '文字' },   
+                    { name: 'project A', content: '文字' },
+                    { name: 'project B', content: '文字' },   
                 ],
                 awards: [
-                    { school: 'AL', content: '文字' },
-                    { school: 'TX', content: '文字' },  
+                    { school: 'awards A', content: '文字' },
+                    { school: 'awards B', content: '文字' },  
                 ],
                 contacts: [
                     { contact: 'phone', content: '13812345678' },

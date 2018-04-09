@@ -625,6 +625,9 @@ npm install --save sass-loader node-sass
 
 由于work history属性是个数组,所以我们要判断一下数据类型:
 
-> commit: [resume属性同时支持数组和对象]()
+> commit: [resume属性同时支持数组和对象](https://github.com/FLYSASA/project/commit/6a5a61b2316fe7777c7c701f93f63ed22634b9ec)
+
+效果如下: 
+![Animation](https://i.loli.net/2018/04/09/5acb25a4eb7b0.gif)
 
 
