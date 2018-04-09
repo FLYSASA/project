@@ -593,4 +593,5 @@ npm install --save sass-loader node-sass
 就可以展示id为`icon-xxx`的图标了.
 
 那么开始使用SVG icon吧:
-> commit: [bio重命名为profile]()
+> commit: [bio重命名为profile](https://github.com/FLYSASA/project/commit/152679e73c5204d6b4cacedd4b303d577fd0200b)
+> commit: [将visibleItems改为config]()
