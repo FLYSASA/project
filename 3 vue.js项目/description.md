@@ -545,7 +545,18 @@ npm install --save sass-loader node-sass
 #### ResumeEditor
 
 先写基本HTML,CSS
+> commit: [添加左侧导航](https://github.com/FLYSASA/project/commit/6165ac2d58f763813cc1c9ceae4f78dec98b9907)
 
+另外在写v-for时vscode会红线报错,如下:
+
+![QQ截图20180409142159](https://i.loli.net/2018/04/09/5acb06c1ccdb4.png)
+
+原因: vue在升级到2.2后，当在组件中使用 v-for 时， key 现在是必须的。这是ESlint的功能,对vue进行了eslint检查.那么我们就把eslint对该插件的检查关闭,在vscode中,打开`文件>首选项>设置`找到 vetur.configuration 把  `"vetur.validation.template": true`  改成`"vetur.validation.template": false,`保存,发现不报错了
+解决办法: 参考-http://www.cnblogs.com/zhouyangla/p/7081077.html
+
+
+
+> commit: [tab切换]()
 
 
 
