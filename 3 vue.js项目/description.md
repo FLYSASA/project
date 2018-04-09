@@ -579,7 +579,7 @@ npm install --save sass-loader node-sass
 添加SVG icon结束,页面效果如下: 
 
 
-![QQ截图20180409151441](https://i.loli.net/2018/04/0
+[QQ截图20180409151441](https://i.loli.net/2018/04/09/5acb1b27ebee7.png)
 
 看到body下面的svg标签了吗?
 
@@ -595,6 +595,14 @@ npm install --save sass-loader node-sass
 那么开始使用SVG icon吧:
 > commit: [bio重命名为profile](https://github.com/FLYSASA/project/commit/152679e73c5204d6b4cacedd4b303d577fd0200b)
 > commit: [将visibleItems改为config](https://github.com/FLYSASA/project/commit/c5a3d60579d0de1c2aa91d3b728baf3118af7e5c)
-> commit: [使用SVG图标]()
+> commit: [使用SVG图标](https://github.com/FLYSASA/project/commit/6ce9844abe415c2ec9b399e72c19c26931f32c10)
 
 效果: 
+![QQ截图20180409154755](https://i.loli.net/2018/04/09/5acb1b3b501fa.png)
+
+>另外: 无法在.vue文件中使用tab扩展,可以:https://segmentfault.com/q/1010000008680303?_ea=1713330
+
+
+#### 接下来完善panels: 
+> commit:[显示第一个panel的内容]()
+
