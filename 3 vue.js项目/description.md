@@ -906,3 +906,62 @@ commit: [移动数据到store](https://github.com/FLYSASA/project/commit/1065510
 接下来我们让ResumePreview变得完整点/好看点:
 
 > commit: [显示简介、工作经历和毕业院校](https://github.com/FLYSASA/project/commit/50e9e4569f09ec751728b11f433a38c9c7125f03)
+> commit: [获奖情况和联系方式](https://github.com/FLYSASA/project/commit/b0f9ad748ea4c680a84c228bcce9ec3dd1e4b2e8)
+
+
+#### 阶段总结:
+如何引入vuex并使用?
+步骤:
+1. 运行 `npm install vuex --save`
+2. 在src下新建store(库)文件夹,在里面新建index.js
+3. index.js新建内容: 参考文档:https://vuex.vuejs.org/zh-cn/state.html
+```js
+//引入vuex vue
+import Vuex from 'vuex'  
+import Vue from 'vue'
+
+Vue.use(Vuex)   //Vuex机制从根组件将store注入到子组件必备
+
+
+export default new Vuex.Store({   //输出 并创建Vuex.Store的实例
+    state:{   //数据data储存在里面
+      xxx:{}
+    },
+    //事件存储在mutations里
+    mutations: {
+      f1(state,payload){   //回调函数将state作为第一个参数,payload是额外参数
+        state.xxx = payload  //关于 payload 看这里 http://vuex.vuejs.org/zh-cn/mutations.html#提交载荷（payload）
+      }
+    }
+})
+```
+4. 主组件引入store. 
+```js
+import store from './store/index'  //引入store库
+
+export default {
+  store,                          //store作为选项注入,同时也注入到子组件
+  ...
+}
+```
+
+5. 子组件引入store
+```js
+export default {
+  computed: {         //子组件获取store数据一定要放在computed计算属性里面
+      变量名: {       //将数据赋给这个变量名,同时使用getter和setter让数据可读可写
+        get(){
+          return this.$store.state.XXX  //数据存储在全局变量store下的state里
+        },
+        //数据可写,value为写入值
+        set(value){
+          return this.$store.commit('f1',value)  //改变状态state值的唯一方法是提交mutation,在分组件中使用this.$store.commit()提交给mutation中的函数f1,然后赋值给state或其属性
+        }
+      },
+      //不需要可写直接:
+      变量名2(){
+        return this.$store.state.XXX
+      }
+  }
+}
+```

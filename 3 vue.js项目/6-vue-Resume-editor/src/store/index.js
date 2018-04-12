@@ -46,7 +46,7 @@ export default new Vuex.Store({
                 { name: 'project B', content: '文字' },   
             ],
             awards: [
-                { name: '平生最大奖', content: '获得再来一瓶奖励' },
+                { name: '荣耀大奖', content: '获得再来一瓶奖励' },
                 { name: 'awards B', content: '文字' },  
             ],
             contacts: [
