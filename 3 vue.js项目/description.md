@@ -884,6 +884,6 @@ commit: [移动数据到store](https://github.com/FLYSASA/project/commit/1065510
 
 如果想知道如何实现setter和getter,参考 [MDN 的文档](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty#一般的_Setters_和_Getters)
 
-> 
+> commit: [使用setter让数据可写](https://github.com/FLYSASA/project/commit/a12e5ac7f2de9776856501e5f3b73d318ac2e57c)
 
 

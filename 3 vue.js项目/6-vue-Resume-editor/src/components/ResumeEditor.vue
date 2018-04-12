@@ -30,12 +30,6 @@
                     <input type="text" v-model="resume[item.field][key]">
               </div>
           </li>
-
-          <li>
-              {{count}}
-              <button @click="add">test</button>
-          </li>
-
       </ol>
   </div>
 </template>
@@ -45,9 +39,6 @@ export default {
   name: 'ResumeEditor',
   
   computed: {    //计算属性
-      count (){
-          return this.$store.state.count  
-      },
       selected: {
           //让数据可写: https://cn.vuejs.org/v2/guide/computed.html#计算属性的-setter
           //默认只有getter只能读数据
@@ -67,9 +58,6 @@ export default {
       }
   },
   methods: {
-      add(){
-          this.$store.commit('increment')
-      }
   }
 }
 </script>
