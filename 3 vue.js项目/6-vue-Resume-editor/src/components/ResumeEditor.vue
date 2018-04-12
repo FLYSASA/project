@@ -30,10 +30,12 @@
                     <input type="text" v-model="resume[item.field][key]">
               </div>
           </li>
+
           <li>
               {{count}}
               <button @click="add">test</button>
           </li>
+          
       </ol>
   </div>
 </template>

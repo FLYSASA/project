@@ -867,6 +867,13 @@ commit : [npm install vuex --save](https://github.com/FLYSASA/project/commit/eca
 commit: [改变目录结构,创建store](https://github.com/FLYSASA/project/commit/a8f59297084ea8466c2ea5b9d7fff117e8859ea6)
 
 4. 运行例子
+commit: [运行文档中的例子](https://github.com/FLYSASA/project/commit/25e7ac7d497264cf473c08d8f5458c83b0a816d8)
 
+
+![Animation1](https://i.loli.net/2018/04/12/5acf367857541.gif)
+
+
+## 改写data
+将原有数据移动到store里
 
 
