@@ -35,7 +35,7 @@
               {{count}}
               <button @click="add">test</button>
           </li>
-          
+
       </ol>
   </div>
 </template>
@@ -43,49 +43,17 @@
 <script>
 export default {
   name: 'ResumeEditor',
-  data: function(){
-      return {
-            selected: 'profile',  //默认显示第一个tab,selected用于计算是否与item.field相等.求得布尔值.
-            resume: {
-                config: [
-                    { field: 'profile', icon: 'id' },
-                    { field: 'work history', icon: 'work' },
-                    { field: 'education', icon: 'book' },
-                    { field: 'projects', icon: 'heart' },
-                    { field: 'awards', icon: 'cup' },
-                    { field: 'contacts', icon: 'phone' }
-                ],
-                profile: {
-                    name: '',
-                    city: '',
-                    title: ''
-                },
-                'work history' : [
-                    {company: 'AL', content: '我的第二份工作是'},
-                    {company: 'TX', content: '我的第一份工作是'}                  
-                ],
-                education: [
-                    { school: 'AL', content: '文字' },
-                    { school: 'TX', content: '文字' },                   
-                ],
-                projects: [
-                    { name: 'project A', content: '文字' },
-                    { name: 'project B', content: '文字' },   
-                ],
-                awards: [
-                    { school: 'awards A', content: '文字' },
-                    { school: 'awards B', content: '文字' },  
-                ],
-                contacts: [
-                    { contact: 'phone', content: '13812345678' },
-                    { contact: 'qq', content: '12345678' },  
-                ]
-            }
-      }
-  },
-  computed: {
+  
+  computed: {    //计算属性
       count (){
           return this.$store.state.count
+      },
+      selected(){
+          return this.$store.state.selected   //获取储存在store里面的selected属性,子组件使用this.$store.state
+          //文档: https://vuex.vuejs.org/zh-cn/state.html
+      },
+      resume(){
+          return this.$store.state.resume     //获取resume属性
       }
   },
   methods: {
