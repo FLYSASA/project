@@ -46,8 +46,8 @@ export default new Vuex.Store({
                 { name: 'project B', content: '文字' },   
             ],
             awards: [
-                { school: 'awards A', content: '文字' },
-                { school: 'awards B', content: '文字' },  
+                { name: '平生最大奖', content: '获得再来一瓶奖励' },
+                { name: 'awards B', content: '文字' },  
             ],
             contacts: [
                 { contact: 'phone', content: '13812345678' },

@@ -905,4 +905,4 @@ commit: [移动数据到store](https://github.com/FLYSASA/project/commit/1065510
 
 接下来我们让ResumePreview变得完整点/好看点:
 
-> commit: 
+> commit: [显示简介、工作经历和毕业院校](https://github.com/FLYSASA/project/commit/50e9e4569f09ec751728b11f433a38c9c7125f03)
