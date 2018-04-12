@@ -875,5 +875,15 @@ commit: [运行文档中的例子](https://github.com/FLYSASA/project/commit/25e
 
 ## 改写data
 将原有数据移动到store里
+commit: [移动数据到store](https://github.com/FLYSASA/project/commit/10655107e3253b39d7561b9c5bb6fe3d91721994)
+
+我们把selected和resume移到store里会发现tab无法切换
+
+这是因为默认computed只能用于读数据,如果你还想写数据(比如click给selected赋值item.field),就要用到Vue的
+[setter/getter功能](https://cn.vuejs.org/v2/guide/computed.html#计算-setter) .
+
+如果想知道如何实现setter和getter,参考 [MDN 的文档](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty#一般的_Setters_和_Getters)
+
+> 
 
 

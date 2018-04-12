@@ -1,7 +1,8 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
  
-Vue.use(Vuex)
+Vue.use(Vuex)   //Vuex从根组件将store注入到子组件需要 Vue.use(Vuex)
+
 export default new Vuex.Store({
    state: {
         count: 0,

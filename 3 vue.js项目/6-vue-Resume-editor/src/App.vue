@@ -22,10 +22,10 @@ import ResumeEditor from './components/ResumeEditor'
 import ResumePreview from './components/ResumePreview'
 import icons from './assets/icons'   //引入经过图标脚本合并过的icons.js
 
-import store from './store/index'
+import store from './store/index'    //引入store库
 
 export default {
-  store,
+  store,                             //Vuex通过store选项,提供一种机制将状态从根组件App.vue,注入到每一个子组件中(需调用 Vue.use(Vuex)).
   name: 'app',
   
   components: {Topbar,ResumeEditor,ResumePreview},

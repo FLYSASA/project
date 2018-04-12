@@ -46,14 +46,14 @@ export default {
   
   computed: {    //计算属性
       count (){
-          return this.$store.state.count
+          return this.$store.state.count  
       },
       selected(){
           return this.$store.state.selected   //获取储存在store里面的selected属性,子组件使用this.$store.state
           //文档: https://vuex.vuejs.org/zh-cn/state.html
       },
       resume(){
-          return this.$store.state.resume     //获取resume属性
+          return this.$store.state.resume     //获取resume属性,将computed计算后的属性赋给变量resume
       }
   },
   methods: {
