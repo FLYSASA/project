@@ -562,7 +562,7 @@ npm install --save sass-loader node-sass
 
 > commit:将所有SVG文件放到 static/svg_icons/下
 
-接下来可能有点难以理解,我们要写一个脚本,这个脚本会把所有的SVG文件拼成一个文件:
+接下来可能有点难以理解,我们要写一个脚本（放在build文件下）,这个脚本会把所有的SVG文件拼成一个文件:
 
 > commit: [使用脚本将所有svg拼成一个svg,原来的多个svg变成多个symbol](https://github.com/FLYSASA/project/commit/f0025fb9d0582fb1d427876f1f671be600a3b66c)
 
@@ -583,6 +583,8 @@ npm install --save sass-loader node-sass
 
 看到body下面的svg标签了吗?
 
+![QQ截图20180412151528](https://i.loli.net/2018/04/12/5acf0a34d737e.png)
+
 那么如何使用这些SVG icon呢?
 简要说明一下,只要在页面任意地方使用
 ```
@@ -601,6 +603,107 @@ npm install --save sass-loader node-sass
 ![QQ截图20180409154755](https://i.loli.net/2018/04/09/5acb1b3b501fa.png)
 
 >另外: 无法在.vue文件中使用tab扩展,可以:https://segmentfault.com/q/1010000008680303?_ea=1713330
+
+
+##### 1总结图标(本地symbol)引入:
+1. 打开iconfont官网,选择需要的图标添加至项目,下载至本地
+2. 解压后的svg_icons文件夹放在项目文件目录static下.
+3. 将脚本文件`svg-symbols.js`放在build下
+4. 使用命令 ` node build/svg-symbols.js`,打包后在`src/assets`里得到icons.js icons整合文件.
+5. 在主组件App.vue中引入 `import icons form './assets/icons'`
+6. 创建created回调:
+```js
+created: {
+  document.body.insertAdjacentHTML('afterbegin',icons)   //插入到body下第一个标签前面
+}
+```
+7. 使用:  
+```html
+<ol>
+  <li v-for="(item,index) in resume.config"   
+      :class="{active: item.field === selected}"
+      @click="selected = item.field">   <!-- 点击赋给该图标active属性 -->
+          <svg class="icon">
+              <use :xlink:href="`#icon-${item.icon}`"></use>    <!-- ${}占位符 -->
+          </svg> 
+  </li>
+</ol>
+``` 
+
+```js
+data(){
+  return{
+    resume: {
+      config: [
+          { field: 'profile', icon: 'id' },
+          { field: 'work history', icon: 'work' },
+          { field: 'education', icon: 'book' },
+          { field: 'projects', icon: 'heart' },
+          { field: 'awards', icon: 'cup' },
+          { field: 'contacts', icon: 'phone' }
+      ]
+    }
+  }
+}
+```
+
+8. 在主组件中引入属性:
+```css
+  svg.icon{            //symbol iconfont属性
+    height: 1em;
+    width: 1em;
+    fill: currentColor;
+    vertical-align: -0.1em;
+    font-size: 16px;
+  }
+
+```
+
+#### 2总结图标(线上symbol引入):
+1. 在iconfont上将图标添加至项目
+2. 生成在线链接,将链接插入到index.html: 如:
+`<script src="//at.alicdn.com/t/font_623227_jvull62u1vklz0k9.js"></script>`
+3. 在App.vue中插入属性:
+```css
+  svg.icon{            //symbol iconfont属性
+    height: 1em;
+    width: 1em;
+    fill: currentColor;
+    vertical-align: -0.1em;
+    font-size: 16px;
+  }
+```
+4. 写html
+```html
+<ol>
+  <li v-for="(item,index) in resume.config"   
+      :class="{active: item.field === selected}"
+      @click="selected = item.field">   <!-- 点击赋给该图标active属性 -->
+          <svg class="icon">
+              <use :xlink:href="`#icon-${item.icon}`"></use>    <!-- ${}占位符 -->
+          </svg> 
+  </li>
+</ol>
+``` 
+5. 写data:
+```js
+data(){
+  return{
+    resume: {
+      config: [
+          { field: 'profile', icon: 'id' },
+          { field: 'work history', icon: 'work' },
+          { field: 'education', icon: 'book' },
+          { field: 'projects', icon: 'heart' },
+          { field: 'awards', icon: 'cup' },
+          { field: 'contacts', icon: 'phone' }
+      ]
+    }
+  }
+}
+```
+
+<hr>
 
 
 #### 接下来完善panels: 

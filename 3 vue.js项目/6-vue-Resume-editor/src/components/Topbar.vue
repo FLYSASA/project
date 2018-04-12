@@ -16,7 +16,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss"> //scoped功能: https://cn.vuejs.org/v2/guide/comparison.html#HTML-amp-CSS
+<style scoped lang="scss"> //scoped功能: https://cn.vuejs.org/v2/guide/comparison.html#%E7%BB%84%E4%BB%B6%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%86%85%E7%9A%84-CSS
     #topbar{
       background: #fff;
       box-shadow: 0 1px 3px 0 rgba(0,0,0,0.25);
@@ -48,7 +48,7 @@ export default {
       color: #222;
       border-radius: 5px;
       &:hover{  //&连体符,替代button :https://www.w3cplus.com/preprocessor/use-ampersand-in-selector-name-with-Sass.html
-        box-shadow: 1px 1px 1px hsla(0, 0, 0, 0.50);;  //hela:css3 http://www.css88.com/book/css/values/color/hsla.htm
+        box-shadow: 1px 1px 1px hsla(0, 0, 0, 0.50);  //hela:css3 http://www.css88.com/book/css/values/color/hsla.htm
       }
       &.primary{
         background: #02af5f;

@@ -20,7 +20,7 @@ import './assets/reset.css'           //将某些默认样式重置掉,与上面
 import Topbar from './components/Topbar'
 import ResumeEditor from './components/ResumeEditor'
 import ResumePreview from './components/ResumePreview'
-import icons from './assets/icons'   //插入图标
+import icons from './assets/icons'   //引入经过图标脚本合并过的icons.js
 
 export default {
   name: 'app',
@@ -31,7 +31,8 @@ export default {
   },
   components: {Topbar,ResumeEditor,ResumePreview},
   created(){
-    document.body.insertAdjacentHTML('afterbegin',icons)
+    //element.insertAdjacentHTML(position, text); afterBegin：在该元素第一个子元素前插入
+    document.body.insertAdjacentHTML('afterbegin',icons)   //使用脚本将图标插入到body中,insertAdjacentHTML 插入HTML:http://www.css88.com/archives/5040
   }
 }
 </script>
@@ -76,7 +77,7 @@ export default {
     background: #777;
   }
 
-  svg.icon{
+  svg.icon{            //symbol iconfont属性
     height: 1em;
     width: 1em;
     fill: currentColor;

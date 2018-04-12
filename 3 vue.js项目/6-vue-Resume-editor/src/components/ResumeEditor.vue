@@ -2,18 +2,19 @@
   <div id="resumeEditor">
       <nav>
           <ol>
-            <li v-for="(item,index) in resume.config"
+            <!-- resume.config是一个包含图标信息的数组,每一项有field(用于判断是否赋给li active属性)和icon(svg图标显示)属性. -->
+            <li v-for="(item,index) in resume.config"   
                :class="{active: item.field === selected}"
-                @click="selected = item.field">
+                @click="selected = item.field">   <!-- 点击赋给该图标active属性 -->
                     <svg class="icon">
-                        <use :xlink:href="`#icon-${item.icon}`"></use>    
+                        <use :xlink:href="`#icon-${item.icon}`"></use>    <!-- ${}占位符 -->
                     </svg> 
             </li>
           </ol>
       </nav>
       <ol class="panels">
-          <li v-for="item in resume.config" v-show="item.field === selected">
-              <div v-if="resume[item.field] instanceof Array">
+          <li v-for="item in resume.config" v-show="item.field === selected">  <!-- 显示左侧图标被点击对应的panel -->
+              <div v-if="resume[item.field] instanceof Array">   <!-- 是否是Array的实例 -->
                   <div class="subitem" v-for="subitem in resume[item.field]">
                       <div class="resumeField" v-for="(value,key) in subitem" >
                           <label> {{key}} </label>
@@ -36,7 +37,7 @@ export default {
   name: 'ResumeEditor',
   data: function(){
       return {
-            selected: 'profile',
+            selected: 'profile',  //默认显示第一个tab,selected用于计算是否与item.field相等.求得布尔值.
             resume: {
                 config: [
                     { field: 'profile', icon: 'id' },
@@ -83,7 +84,7 @@ export default {
         box-shadow: 0 1px 3px 0 rgba(0,0,0,0.25);
         display: flex;
         flex-direction: row;
-        overflow: auto;
+        overflow: auto;   //滚动条
         >nav{
             width: 80px;
             background: black;
@@ -104,7 +105,7 @@ export default {
             }
         }
         > .panels{
-            flex-grow: 1;
+            flex-grow: 1;    //占满剩余空间
             > li{
                 padding: 24px;
             }
