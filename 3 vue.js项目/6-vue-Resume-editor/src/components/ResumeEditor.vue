@@ -27,7 +27,7 @@
               <!-- data是对象 -->
               <div v-else class="resumeField" v-for="(value,key) in resume[item.field]">
                     <label>{{key}}</label>
-                    <input type="text" v-model="resume[item.field][key]">
+                    <input type="text" :value="value" @input="changeResumeField(item.field,key,$event.target.value)"> <!-- 只有用户输入就触发事件changeResumeField -->
               </div>
           </li>
       </ol>
@@ -58,6 +58,13 @@ export default {
       }
   },
   methods: {
+      changeResumeField(field,subfield,value){   //传入的值分别对应上面: item.field('profile等'),  key('profile对象内的name等属性'), $event.target.value(触发input事件的输入框的输入值)
+          this.$store.commit('updataResume',{    //提交到mutations,改变state
+              field,
+              subfield,
+              value
+          })
+      }
   }
 }
 </script>

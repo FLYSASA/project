@@ -59,6 +59,10 @@ export default new Vuex.Store({
      //payload是一个对象,在子组件中的set中作为参数传入
      switchTab(state,payload){      //mutations里面的事件(回调函数)会接受state作为第一个参数,payload是额外参数
          state.selected = payload   //关于 payload 看这里 http://vuex.vuejs.org/zh-cn/mutations.html#提交载荷（payload）
+     },
+     updataResume(state,{field,subfield,value}){
+         //所有的数据改动必选放在store里完成
+         state.resume[field][subfield] = value    //改变对应tab项内对应输入框的值
      }
    }
  })
