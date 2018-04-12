@@ -14,15 +14,17 @@
       </nav>
       <ol class="panels">
           <li v-for="item in resume.config" v-show="item.field === selected">  <!-- 显示左侧图标被点击对应的panel -->
-              <div v-if="resume[item.field] instanceof Array">   <!-- 是否是Array的实例 -->
-                  <div class="subitem" v-for="subitem in resume[item.field]">
-                      <div class="resumeField" v-for="(value,key) in subitem" >
+                <!-- 分情况,看panel对应的data是否是数组,因为有的是数组有的是对象 -->
+              <div v-if="resume[item.field] instanceof Array">   <!-- 是Array的实例 -->
+                  <div class="subitem" v-for="subitem in resume[item.field]">  <!-- 通过item.field 找到data -->
+                      <div class="resumeField" v-for="(value,key) in subitem" >  <!-- subitem是数组中的某一项,如education里的第一项. -->
                           <label> {{key}} </label>
-                          <input type="text" :value="value">
+                          <input type="text" :value="value">  <!-- 绑定值 双引号里面的value对应data里面的数据 -->
                       </div>
                       <hr>
                   </div>
               </div>
+              <!-- data是对象 -->
               <div v-else class="resumeField" v-for="(value,key) in resume[item.field]">
                     <label>{{key}}</label>
                     <input type="text" v-model="resume[item.field][key]">
