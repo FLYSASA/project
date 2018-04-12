@@ -733,3 +733,129 @@ data(){
 效果如下: 
 ![Animation](https://i.loli.net/2018/04/09/5acb25a4eb7b0.gif)
 
+
+
+###  预览功能
+首先想一个问题:
+> ResumePreview的数据(data)从哪来?
+
+当然是从ResumeEditor来,对吧.
+
+> 但是并列组件如何拿到数据呢?
+
+方案一: 
+最傻的办法是在ResumePreview里去读ResumeEditor的data.
+这种办法是可以的,但是有一个[耦合性] 太高的问题
+
+假如ResumePreview代码是这样的:
+```js
+export default {
+  name: 'ResumePreview',
+  data: function(){
+     return readResumeFromResumeEditor() // 这个函数的具体实现我们不管
+  }
+}
+```
+
+你会发现,ResumePreview严重依赖ResumeEditor,换句话说,ResumePreview必须和ResumeEditor在一起,ResumePreview 不能从其他的地方读入 resume 数据。
+
+这样的代码就很不优雅.
+
+方案二:
+
+将数据处理出来.  我们能不能把resume的数据独立出来,专门供ResumeEditor,ResumePreview甚至其它组件来使用呢? 可以.大概思路是这样:
+```js
+// ResumeEditor
+import globalData from 'globalData'
+export default {
+  name: 'ResumeEditor',
+  data: function(){
+    return {
+      selected: 'profile',
+      resume: globalData.getResume()
+    }
+  }
+}
+
+// ResumePreview
+import globalData from 'globalData'
+export default {
+  name: 'ResumePreview',
+  data: function(){
+    return {
+      resume: globalData.getResume()
+    }
+  }
+}
+```
+
+这样依赖,ResumeEditor和ResumePreview互不干涉,只是数据来自同一个地方.
+
+ResumeEditor 改了 resume 之后，由于 ResumePreview 用的是同一个 resume，所以立马就知道 resume 变化了（Vue.js 可以监听任意一个对象的变化）。
+
+> Tips：可以通过添加中间层来降低耦合
+
+<hr>
+
+## Vuex
+
+### 全局数据源
+基于方案二,我们再进一步想,为什么不把所有的数据都交给globalData来控制呢?
+
+上文中 ResumeEditor 的 selected 属性没有交给 globalData 管理，万一另一个组件要用这个 selected 呢？所以我们还不如把所有的数据都交给 globalData 来控制。
+
+这样,globalData就叫做**全局数据源**,管理所有的数据.
+
+### 双向绑定 V.S 单向绑定
+前面我们学过,可以用Vue.js添加双向绑定:
+
+```
+<input v-model="xxx">
+```
+实际上,双向绑定不是魔法,上面的代码基本等价于
+
+```
+<input :value="xxx" @input="xxx = $evevt.target.value">  //@input监听input事件
+```
+
+也就是说:
+> 双向绑定 = 单向绑定 + UI事件监听
+
+通过这个[JSBin](http://js.jirengu.com/duzo/1/edit?html,console,output),应该可以理解这一点.
+
+#### 那么Vuex为什么推荐单向绑定呢? 
+
+为了[控制欲]
+
+双向绑定是很方便,因为data和页面内容是自动同步的.
+
+但是正因为这个[自动同步],所以有些人不喜欢双向绑定.「自动同步」意味着你不知道 data 什么时候就变了（when），也不知道是谁变的（who），变成了什么也不通知你（what）。
+
+当然你可以加一个watch来监听data的变化,但这就显得很复杂了.
+
+单向绑定牺牲一部分的便捷性,换来更大的**控制力**
+
+单向绑定大概的思路就是:
+1. 所有的数据只有一份
+2. 一旦数据变化,就去更新页面(data -> 页面  单向绑定)
+3. 如果用户在页面上做了变动,那么就把变动手动收集起来(而不是自动的),合并到现有的数据中.
+
+你会发现单向绑定的思路其实也有双向绑定的意味,只不过重点在于**不是自动的**
+
+单向绑定还有其他优点,请看[这个知乎回答](https://www.zhihu.com/question/49964363)
+
+#### 使用Vuex
+Vuex 就是单向数据绑定的践行者之一
+
+最好先过一遍Vuex的文档,来了解Vuex. 需要:
+1. copy - run - modify文档中的例子
+2. 了解五个核心概念: Store、Getters、Mutations、Actions 和 Modules
+
+[Vuex文档](http://vuex.vuejs.org/zh-cn/installation.html)
+
+#### 引入Vuex 运行Vuex文档中的例子
+
+首先我们要把 Vuex 文档里最简单的例子运行在我们的页面里：
+
+
+
