@@ -499,7 +499,7 @@ import ResumePreview from './components/ResumePreview'
 我的预览链接: http://flysasa.top/project/3%20vue.js%E9%A1%B9%E7%9B%AE/6-vue-Resume-editor/dist/#/
 
 
-
+---
 ## Resumer-editor2
 
 UI预览在这里: https://jirengu-inc.github.io/jrg-project-5/resumer_mockups/index.html
@@ -955,7 +955,7 @@ export default {
         },
         //数据可写,value为写入值
         set(value){
-          return this.$store.commit('f1',value)  //改变状态state值的唯一方法是提交mutation,在分组件中使用this.$store.commit()提交给mutation中的函数f1,然后赋值给state或其属性
+          return this.$store.commit('f1',value)  //改变状态state值的唯一方法是提交mutation,在分组件中使用this.$store.commit()提交给mutation中的函数f1,然后改变state或其属性
         }
       },
       //不需要可写直接:
@@ -967,7 +967,21 @@ export default {
 ```
 
 ---
-预览链接: 
+预览链接: http://flysasa.top/project/3%20vue.js%E9%A1%B9%E7%9B%AE/6-vue-Resume-editor/dist/#/
+源码: https://github.com/FLYSASA/project/tree/master/3%20vue.js%E9%A1%B9%E7%9B%AE/6-vue-Resume-editor
 
-此阶段问题:
-1. 现在你在页面左边修改 resume，会发现 ResumePreview 不会自动更新
+#### 此阶段问题:
+在页面左边修改 resume，会发现 ResumePreview 不会自动更新
+
+
+---
+### 最终阶段-单向数据流
+
+什么是单向数据流?
+简单来说就是把一切双向绑定的语法都禁用,同时只在一个地方改动数据,那么留下来的就是单向数据流.
+
+
+单向数据流: 
+- v-model 不允许使用，因为这是双向绑定语法。
+（注意，但是 v-model 配合 computed 的 get 和 set 是可以的，因为数据的操作依然是我们手动控制的，并不是自动双向绑定）
+- 「所有的数据改动」必须放在 store 里完成。
