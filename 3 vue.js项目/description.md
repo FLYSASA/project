@@ -892,6 +892,12 @@ commit: [移动数据到store](https://github.com/FLYSASA/project/commit/1065510
 
 我们来试试在ResumePreview里访问resume数据.
 
-> 
+> commit: [show resume](https://github.com/FLYSASA/project/commit/6df95210db68bfbc987ecfd09e3ebd4f2782933a)
 
+刷新页面,resume数据全部展示:
+
+![QQ截图20180412202526](https://i.loli.net/2018/04/12/5acf504119ffe.png)
+
+1. 不要一次写太多代码,要小步快跑
+2. 目前页面的样式错乱了,我们需要修复,千万不要等bug积累多了再修复
 

@@ -66,7 +66,7 @@ export default {
     height: 64px;
   }
   #resumeEditor{
-    width: 35%;
+    min-width: 35%;    //使用width: 35%;因为flex,所以右边会挤压左边
     background: #444;
   }
 
