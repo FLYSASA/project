@@ -48,9 +48,19 @@ export default {
       count (){
           return this.$store.state.count  
       },
-      selected(){
-          return this.$store.state.selected   //获取储存在store里面的selected属性,子组件使用this.$store.state
-          //文档: https://vuex.vuejs.org/zh-cn/state.html
+      selected: {
+          //让数据可写: https://cn.vuejs.org/v2/guide/computed.html#计算属性的-setter
+          //默认只有getter只能读数据
+          get(){
+              //文档: https://vuex.vuejs.org/zh-cn/state.html
+              //获取储存在store里面的selected属性,子组件使用this.$store.state.属性名  
+              return this.$store.state.selected   
+          },
+          //需要写数据时需要setter
+          set(value){
+              //子组件调用store里面的mutations内的事件,  需使用 this.$store.commit('函数名',传入参数)
+              return this.$store.commit('switchTab',value)   //value = payload
+          }
       },
       resume(){
           return this.$store.state.resume     //获取resume属性,将computed计算后的属性赋给变量resume
