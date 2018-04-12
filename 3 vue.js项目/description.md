@@ -901,3 +901,8 @@ commit: [移动数据到store](https://github.com/FLYSASA/project/commit/1065510
 1. 不要一次写太多代码,要小步快跑
 2. 目前页面的样式错乱了,我们需要修复,千万不要等bug积累多了再修复
 
+> commit:[使用min-width代替width]https://github.com/FLYSASA/project/commit/bec57e676940095775f9f3bc2fc9adb87bd875aa
+
+接下来我们让ResumePreview变得完整点/好看点:
+
+> commit: 
