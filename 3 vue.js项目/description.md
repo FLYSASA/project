@@ -858,6 +858,8 @@ Vuex 就是单向数据绑定的践行者之一
 首先我们要把 Vuex 文档里最简单的例子运行在我们的页面里：
 步骤:
 1. 运行`npm install vuex --save`
-2. commit: 
-
+commit : [npm install vuex --save](https://github.com/FLYSASA/project/commit/eca557614fa39692893b4f6bd85294210fa405f0)
+2. 按照文档中[项目结构](https://vuex.vuejs.org/zh-cn/structure.html)部署文件目录 
+新建store文件夹
+commit: 
 
