@@ -1,12 +1,17 @@
 <template>
   <div id="resumePreview">
-      I am resumePreview
+      {{resume}}
   </div>
 </template>
 
 <script>
 export default {
-  name : 'ResumenPreview'
+  name : 'ResumenPreview',
+  computed: {    //获取store数据在compute计算属性中获取
+      resume(){
+          return this.$store.state.resume
+      }
+  }
 }
 </script>
 

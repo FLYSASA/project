@@ -885,5 +885,13 @@ commit: [移动数据到store](https://github.com/FLYSASA/project/commit/1065510
 如果想知道如何实现setter和getter,参考 [MDN 的文档](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty#一般的_Setters_和_Getters)
 
 > commit: [使用setter让数据可写](https://github.com/FLYSASA/project/commit/a12e5ac7f2de9776856501e5f3b73d318ac2e57c)
+> commit: [删除Vuex测试代码](https://github.com/FLYSASA/project/commit/45b6dc6a05b51205b1f70a9b72ecb3e4495fb3c2)
+
+### ResumeEditor 和 ResumePreview 使用同一个store
+你可以看到我们的store是放到<App/>主组件上的,所以所有组件都可以使用 `this.$store`来访问到它. (**在Vue中所有全局变量都用$开头**)
+
+我们来试试在ResumePreview里访问resume数据.
+
+> 
 
 
