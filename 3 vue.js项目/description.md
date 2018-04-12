@@ -965,3 +965,9 @@ export default {
   }
 }
 ```
+
+---
+预览链接: 
+
+此阶段问题:
+1. 现在你在页面左边修改 resume，会发现 ResumePreview 不会自动更新
