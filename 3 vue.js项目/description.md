@@ -859,7 +859,14 @@ Vuex 就是单向数据绑定的践行者之一
 步骤:
 1. 运行`npm install vuex --save`
 commit : [npm install vuex --save](https://github.com/FLYSASA/project/commit/eca557614fa39692893b4f6bd85294210fa405f0)
+
 2. 按照文档中[项目结构](https://vuex.vuejs.org/zh-cn/structure.html)部署文件目录 
 新建store文件夹
-commit: 
+
+3. 按照 [文档简单例子新建最简单的store](http://vuex.vuejs.org/zh-cn/getting-started.html)
+commit: [改变目录结构,创建store](https://github.com/FLYSASA/project/commit/a8f59297084ea8466c2ea5b9d7fff117e8859ea6)
+
+4. 运行例子
+
+
 

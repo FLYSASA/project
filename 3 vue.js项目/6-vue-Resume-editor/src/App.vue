@@ -22,13 +22,12 @@ import ResumeEditor from './components/ResumeEditor'
 import ResumePreview from './components/ResumePreview'
 import icons from './assets/icons'   //引入经过图标脚本合并过的icons.js
 
+import store from './store/index'
+
 export default {
+  store,
   name: 'app',
-  data: function () {
-    return {
-      text: '你好'
-    }
-  },
+  
   components: {Topbar,ResumeEditor,ResumePreview},
   created(){
     //element.insertAdjacentHTML(position, text); afterBegin：在该元素第一个子元素前插入
