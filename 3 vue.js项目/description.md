@@ -1116,3 +1116,23 @@ methods: {
 
 <hr>
 
+### 使用leancloud注册
+1. `npm install leancloud-storage --save`  
+安装Leancloud SDK https://leancloud.cn/docs/sdk_setup-js.html
+2. 初始化:https://leancloud.cn/docs/sdk_setup-js.html#hash20935048
+3. 在leancloud新建应用resume,进入 控制台 > 设置 > 应用 Key 来获取 App ID 以及 App Key。
+```js
+//初始化
+import Vue from 'vue'
+import AV from 'leancloud-storage'
+
+var APP_ID = 'sbLVjiiurqmnXDdi0zBJsy35-gzGzoHsz'
+var APP_KEY = 'q68Gdtw5uPzJNDvCpYijbluS'
+
+AV.init({
+    appId: APP_ID,
+    appKey: APP_KEY
+})
+
+```
+

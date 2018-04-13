@@ -3,10 +3,13 @@
     <div class="wrapper">
         <span class="logo">Resumer</span>
         <div class="actions">
+          <span>{{user}}</span>   <!-- 从computed计算属性里获取,通过this.$store.state -->
           <!-- 点击注册按钮,@click.prevent阻止默认跳转,并将signUpDialogVisible = true, 此时visible = true,mydialog显示-->
           <a href="#" class="button primary" @click.prevent="signUpDialogVisible = true">注册</a>
           <MyDialog title="注册" :visible="signUpDialogVisible"  @close="signUpDialogVisible = false">
-            我就是slot内容                    <!-- 在父组件中子组件标签里写内容的话,会放在子组件的slot标签内,如果子组件没有slot标签就会被舍弃 -->
+            <!-- 登录表单 -->
+            <SignUpForm @success = "login($event)"/>                   <!-- 在父组件中子组件标签里写内容的话,会放在子组件的slot标签内,如果子组件没有slot标签就会被舍弃 -->
+            <!-- $event是特殊变量 这里指的是this.$emit传递的参数对象 -->
           </MyDialog>
           <a href="#" class="button">登录</a>
           <button class="button primary">保存</button>
@@ -18,6 +21,7 @@
 
 <script>
 import MyDialog from './MyDialog'
+import SignUpForm from './SignUpForm'
 export default {
   name: "Topbar", //name作用: 1.Topbar相当于一个全局Id 2.可以不写 3.写了可以提供更好的调试信息  参见https://cn.vuejs.org/v2/api/#name
   data(){
@@ -25,8 +29,22 @@ export default {
       signUpDialogVisible: false
     }
   },
+  computed: {
+    user(){
+      return this.$store.state.user
+    }
+  },
   components: {
-    MyDialog
+    MyDialog,SignUpForm
+  },
+  methods: {
+    //注册成功后触发父组件的登录事件
+    login(user){   //user = $event
+      console.log(user)
+      this.signUpDialogVisible = false      //隐藏注册对话框
+      this.$store.commit('setUser',user)   //改变state状态的唯一办法是提交commit,两个参数一个是 store中对应的mutations下的方法名,一个是提交载荷即参数对象
+      //触发store里面的setUser方法,并传递参数user
+    }
   }
 };
 </script>

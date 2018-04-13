@@ -7,6 +7,10 @@ Vue.use(Vuex)   //Vuex从根组件将store注入到子组件需要 Vue.use(Vuex)
 export default new Vuex.Store({
    state: {
         selected: 'profile',  //默认显示第一个tab,selected用于计算是否与item.field相等.求得布尔值.
+        user: {
+            id: '',
+            username: ''
+        },
         resume: {
             config: [
                 { field: 'profile', icon: 'id' },
@@ -71,6 +75,10 @@ export default new Vuex.Store({
             //简化传参过程 path是字符串所以前面用反撇号
             localStorage.setItem('state',JSON.stringify(state)) //给本地存储创建'state'(key): state(value)
             //放在mutations里,是为了实现状态实时跟踪及存储至本地.
-        }
+        },
+        setUser(state,payload){
+            Object.assign(state.user,payload)  //将payload中的键值对赋值到state.user
+            console.log(state.user)
+        },
    }
  })
