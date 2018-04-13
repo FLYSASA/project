@@ -57,14 +57,20 @@ export default new Vuex.Store({
         }
    },
    mutations: {
-     //payload是一个对象,在子组件中的set中作为参数传入
-     switchTab(state,payload){      //mutations里面的事件(回调函数)会接受state作为第一个参数,payload是额外参数
-         state.selected = payload   //关于 payload 看这里 http://vuex.vuejs.org/zh-cn/mutations.html#提交载荷（payload）
-     },
-     updataResume(state,{path,value}){
-         //所有的数据改动必选放在store里完成
-         objectPath.set(state.resume,path,value)    //使用objectPath对象的set方法,将state.resume[path] = value
-         //简化传参过程 path是字符串所以前面用反撇号
-     }
+        initState(state,payload){
+            Object.assign(state,payload)  //将payload所有可枚举属性复制到state
+        },
+            //payload是一个对象,在子组件中的set中作为参数传入
+        switchTab(state,payload){      //mutations里面的事件(回调函数)会接受state作为第一个参数,payload是额外参数
+            state.selected = payload   //关于 payload 看这里 http://vuex.vuejs.org/zh-cn/mutations.html#提交载荷（payload）
+            localStorage.setItem('state',JSON.stringify(state))
+        },
+        updataResume(state,{path,value}){
+            //所有的数据改动必选放在store里完成
+            objectPath.set(state.resume,path,value)    //使用objectPath对象的set方法,将state.resume[path] = value
+            //简化传参过程 path是字符串所以前面用反撇号
+            localStorage.setItem('state',JSON.stringify(state)) //给本地存储创建'state'(key): state(value)
+            //放在mutations里,是为了实现状态实时跟踪及存储至本地.
+        }
    }
  })

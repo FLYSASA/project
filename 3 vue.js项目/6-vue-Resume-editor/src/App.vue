@@ -32,6 +32,13 @@ export default {
   created(){
     //element.insertAdjacentHTML(position, text); afterBegin：在该元素第一个子元素前插入
     document.body.insertAdjacentHTML('afterbegin',icons)   //使用脚本将图标插入到body中,insertAdjacentHTML 插入HTML:http://www.css88.com/archives/5040
+
+    //从云端localStorage获取state
+    let state = localStorage.getItem('state')
+    if(state){
+      state = JSON.parse(state)   //将数据字符串化
+    }
+    this.$store.commit('initState',state)   //通过commit改变本地store里的state
   }
 }
 </script>

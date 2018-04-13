@@ -986,6 +986,9 @@ export default {
 （注意，但是 v-model 配合 computed 的 get 和 set 是可以的，因为数据的操作依然是我们手动控制的，并不是自动双向绑定）
 - 「所有的数据改动」必须放在 store 里完成。
 
+
+#### 让panel编辑的时候在preview中同步响应
+
 commit: [使用Vuex思想重构](https://github.com/FLYSASA/project/commit/1dd86a3d791df06631e3e3bb880e02e6640dfac5)
 
 > 不使用v-model双向绑定.
@@ -1010,3 +1013,9 @@ mutations:{
 
 3. 在input中传入参数, @input= "f1(`${item.field}.${key}`,$event.target.value)"  即可,然后在函数中作为参数如:
 `f1(path,value){}`
+
+
+<hr>
+
+### 将数据保存至localStorage  
+
