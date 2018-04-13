@@ -1025,4 +1025,94 @@ mutations:{
 
 #### 添加注册和登录
 
-> commit
+> commit: [点击注册按钮弹出对话框](https://github.com/FLYSASA/project/commit/851f20b464e75accafad93a302d7bbb097f98ba5)
+
+#### 总结为什么点击父组件的按钮,子组件显示?
+主组件和子组件的通信: 
+- 如果是传输data,则将data变量绑定在父组件中的子组件显示标签内.
+**如何绑定?**
+```html
+<!-- 父组件 -->
+<template>
+  <div id="topbar">
+    <div class="wrapper">
+        <span class="logo">Resumer</span>
+        <div class="actions">
+          <a href="#" class="button primary" @click.prevent="signUpDialogVisible = true">注册</a>
+          <MyDialog title="注册" :visible="signUpDialogVisible"  @close="signUpDialogVisible = false">
+            我就是slot内容 
+          </MyDialog>
+          <a href="#" class="button">登录</a>
+          <button class="button primary">保存</button>
+          <button class="button">预览</button>
+        </div>
+    </div>
+ </div>
+</template>
+```
+在上面,父组件中的子组件标签是 `<MyDialog>`
+绑定前,一定要记得在父组件的data中**声明**该属性对应的value变量初始值,负责会报错,`signUpDialogVisible undefined`
+```js
+//父组件
+data(){
+  signUpDialogVisible: true
+}
+```
+**想要给子组件绑定属性data,需要使用 v-bind:属性名="xxx",在这里的是`visible`. 因为部署在子组件的标签内,所以子组件就能接收到.**
+
+
+**如何接收?**
+父组件使用`:visible="xxx"`,传递自定义 visible属性过来,值是变量`signUpDialogVisible`即true. 
+子组件首先使用props接收该属性,这样父子组件变量互通,一方改变另一方也变化,完成通信:
+```js
+export default {
+  props: ['visible','title']   //因为title不需要自定义,所以不需要使用v-bind.
+}
+```
+
+**如何使用**
+```html
+<!-- 子组件 -->
+<template>
+  <div class="wrapper" v-show="visible">  <!-- 父组件传过来的visible属性对应的值决定显隐 -->
+      <div class="dialog">
+          <header>
+              {{title}}                   <!-- 父组件传过来的title属性对应值 -->
+              <span class="close" @click="close">X</span>  
+          </header>
+          <main>
+              <slot></slot>   <!-- 在父组件中的子组件标签内 写上内容,如上面的 `我就是slot内容`会被填充到<slot>里面 -->
+          </main>
+      </div>
+  </div>
+</template>
+```
+
+
+- 如果是事件通信,即在子组件内部触发父组件的事件.需要使用 `this.$emit('事件名')`
+如:
+```js
+methods: {
+      close(){
+          this.$emit('close')  //引号里面的close是父组件的事件,外面的close是子组件本身的close事件.
+  }
+```
+首先决定在子组件哪个位置进行触发事件,这里是绑定在span标签上,如果点击该标签触发 `@click="close"`事件,如果想触发父组件的close事件,需要在父组件的子组件标签上绑定一个自定义监听事件. 这样才能触发,如:
+```html
+<!-- 主组件 -->
+<MyDialog title="注册" :visible="signUpDialogVisible"  @close="signUpDialogVisible = false">
+            我就是slot内容 
+</MyDialog>
+```
+上面在父组件的子组件标签上绑定了一个 `v-on:close="signUpDialogVisible = false"` 的事件,v-on监听close, this.$emit('close')一旦被触发, 就完成赋值`signUpDialogVisible = false`,完成事件通信.
+
+> 弄懂通信方式后,就很好实现显隐问题了.  
+1. 给父组件的注册a标签绑定一个 `@click.prevent="signUpDialogVisible = true"` ,控制变量signUpDialogVisible的值(初始在data里定义为false).
+2. 给父组件的子组件标签绑定一个 `:visible="signUpDialogVisible"` (传递显隐属性)  `@close="signUpDialogVisible = false"`(改变显隐属性值)
+3. 给子组件外围div绑定`v-show="visible"`
+4. 给子组件内部的span  关闭标签绑定  `@click="close"`
+
+整个逻辑就是: 点击主组件注册按钮visble的值变为true >>> 子组件接收到visible属性值, v-show="true"对话框显示. >>> 子组件点击关闭标签触发this.$emit('close') >>> 父组件中将visible值重新改为false >>> 子组件 v-show="false"隐藏
+
+<hr>
+
