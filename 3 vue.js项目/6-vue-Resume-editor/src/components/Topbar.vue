@@ -31,7 +31,7 @@ export default {
   },
   computed: {
     user(){
-      return this.$store.state.user
+      return this.$store.state.user  //获取store库里的user赋给变量user
     }
   },
   components: {

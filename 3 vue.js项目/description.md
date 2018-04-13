@@ -1136,3 +1136,141 @@ AV.init({
 
 ```
 
+
+commit: [leancloud注册](https://github.com/FLYSASA/project/commit/2129cfb21d12c9741375109b384fafc3942b5531)
+
+#### 我们总结一下leancloud注册绑定输入框的流程: 
+1. 运行`npm install leancloud-storage --save` 下载依赖
+2. 在src/lib(依赖库,没有的话新建一个) 新建leancloud.js文件
+3. 封装配置leancloud文件,初始化:
+```js
+//leancloud.js
+import AV from 'leancloud-storage'  //引入
+//初始化,绑定自己账号的id和key
+var APP_ID = 'sbLVjiiurqmnXDdi0zBJsy35-gzGzoHsz'
+var APP_KEY = 'q68Gdtw5uPzJNDvCpYijbluS'
+
+AV.init({
+    appId: APP_ID,
+    appKey: APP_KEY
+})
+
+export default AV  //输出AV对象,方便其它组件调用
+```
+4. 封装组件SignUpForm.vue (注册对话框),内容如下:
+```html
+<template>
+  <div>
+      <form @submit.prevent="signUp">   <!-- 将form表单的提交显式改为自定义的signUp方法 -->
+          <div class="row">
+              <label>用户名</label>
+              <input type="text" v-model="formData.username">
+          </div>
+          <div class="row">
+              <label>密码</label>
+              <input type="password" v-model="formData.password">
+          </div>
+          <div class="actions">
+              <input type="submit" value="提交">
+          </div>
+      </form>
+  </div>
+</template>
+```
+
+```js
+import AV from '../lib/leancloud'    //引入AV
+export default {
+  name: 'SignUpForm',
+  data(){
+      return {
+          formData:{          //定义formDate对象完成与input框的双向绑定
+              username: '',
+              password: ''
+          }
+      }
+  },
+  methods: {
+    signUp(){
+      let {username,password} = this.formData   //解构赋值, 将formData里的数据赋给变量 username,password
+      var user = new AV.User()                  //参考https://leancloud.cn/docs/leanstorage-started-js.html#hash-814093878  
+      user.setUsername(username)
+      user.setPassword(password)
+      user.signUp().then((loginedUser) => {   //loginedUser登录后返回的对象
+              //注册成功触发父组件success事件,并给success回调函数传入参数
+              this.$emit('success',{
+                  username: loginedUser.attributes.username,
+                  id: loginedUser.id
+              })
+          },(error)=>{
+              alert(JSON.stringify(error))
+          })
+    }
+  }
+}
+```
+4. 父组件Topbar引入SignUpForm注册组件
+这里用了`<slot>`将SignUpForm注册组件放在了 MyDialog组件下.
+```html
+<template>
+  <div id="topbar">
+    <div class="wrapper">
+        <span class="logo">Resumer</span>
+        <div class="actions">
+          <span>{{user}}</span>   <!-- 从computed计算属性里获取,通过this.$store.state -->
+          <!-- 点击注册按钮,@click.prevent阻止默认跳转,并将signUpDialogVisible = true, 此时visible = true,mydialog显示-->
+          <a href="#" class="button primary" @click.prevent="signUpDialogVisible = true">注册</a>
+          <MyDialog title="注册" :visible="signUpDialogVisible"  @close="signUpDialogVisible = false">
+            <!-- 登录表单 -->
+            <SignUpForm @success = "login($event)"/>                   <!-- 在父组件中子组件标签里写内容的话,会放在子组件的slot标签内,如果子组件没有slot标签就会被舍弃 -->
+            <!-- $event是特殊变量 这里指的是this.$emit传递的参数对象 -->
+          </MyDialog>
+          <a href="#" class="button">登录</a>
+          <button class="button primary">保存</button>
+          <button class="button">预览</button>
+        </div>
+    </div>
+ </div>
+</template>
+
+<script>
+import MyDialog from './MyDialog'
+import SignUpForm from './SignUpForm'
+export default {
+  name: "Topbar", //name作用: 1.Topbar相当于一个全局Id 2.可以不写 3.写了可以提供更好的调试信息  参见https://cn.vuejs.org/v2/api/#name
+  data(){
+    return {
+      signUpDialogVisible: false
+    }
+  },
+  computed: {
+    user(){
+      return this.$store.state.user   //主要用来在注册按钮旁边展示用户名信息
+    }
+  },
+  components: {
+    MyDialog,SignUpForm
+  },
+  methods: {
+    //注册成功后触发父组件的登录事件
+    login(user){   //user = $event
+      console.log(user)
+      this.signUpDialogVisible = false      //隐藏注册对话框
+      this.$store.commit('setUser',user)   //改变state状态的唯一办法是提交commit,两个参数一个是 store中对应的mutations下的方法名,一个是提交载荷即参数对象
+      //触发store里面的setUser方法,并传递参数user
+    }
+  }
+};
+</script>
+```
+> 总结流程: 用户点击注册 >>> 显示注册对话框signUpDialogVisible: true >>> 用户输入用户名和密码点击提交  >>> form表单触发自定义事件signUp()同时输入框input的值与formData对象双向绑定  >>> signUp主要是通过将用户键入的信息即formData存储到AV.User对象中 >>> 存储完后AV.User.signUp()完成注册并在返回loginedUser对象的同时触发父组件方法 `this.$emit('success',{参数对象})`,
+参数对象是返回的`loginedUser对象`的两个属性 username和id  >>> 父组件触发方法success即`login($event)`  (`$event`即子组件传人的参数对象).  >>> login方法主要将this.signUpDialogVisible = false,对话框隐藏,并将子组件注册后返回的loginedUser对象的两个属性的集合,重新通过 `this.$store.commit('setUser',user)` 提交给本地store库  >>> store触发setUser方法,将传入的两个属性集合重新赋给state.user,完成更新.  >>> 父组件Topbar,通过在计算属性computed中 `user(){return this.$store.state.user }` 获取到更新后的user,然后展示到 {{user}} 页面上. 
+
+**简化上面的流程**
+- 用户点击注册按钮,输入信息,完成本地formData更新
+- 将本地formData储存至AV.User云端对象上,并返回储存后的用户账户上的id和username
+- 子组件通过this.$emit('success',{id,username}),触发父组件事件success
+- 父组件success触发,对话框隐藏,同时将新的属性对象集合提交commit给store库.
+- store库完成user对象值更新
+- 父组件获取到最新的user 通过`computed: {user(){return this.$store.state.user}}`获取
+- {{user}}展示在页面上
