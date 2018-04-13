@@ -1274,3 +1274,7 @@ export default {
 - store库完成user对象值更新
 - 父组件获取到最新的user 通过`computed: {user(){return this.$store.state.user}}`获取
 - {{user}}展示在页面上
+
+以上是我们在TodoList里做过的事情,所以每个步骤应该有个大概印象.
+
+<hr>
