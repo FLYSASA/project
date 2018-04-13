@@ -1019,3 +1019,10 @@ mutations:{
 
 ### 将数据保存至localStorage  
 
+> commit: [将数据保存至localStorage](https://github.com/FLYSASA/project/commit/5fc9926118f013b34752979e5b52074081257510)
+
+至此,不管怎么刷新页面,页面输入的数据还是不变.
+
+#### 添加注册和登录
+
+> commit
