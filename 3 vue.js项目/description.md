@@ -985,3 +985,7 @@ export default {
 - v-model 不允许使用，因为这是双向绑定语法。
 （注意，但是 v-model 配合 computed 的 get 和 set 是可以的，因为数据的操作依然是我们手动控制的，并不是自动双向绑定）
 - 「所有的数据改动」必须放在 store 里完成。
+
+commit: [使用Vuex思想重构](https://github.com/FLYSASA/project/commit/1dd86a3d791df06631e3e3bb880e02e6640dfac5)
+
+> 不使用v-model双向绑定.

@@ -1,5 +1,6 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
+import objectPath from 'object-path'  //方便查找设置属性
  
 Vue.use(Vuex)   //Vuex从根组件将store注入到子组件需要 Vue.use(Vuex)
 
@@ -60,9 +61,10 @@ export default new Vuex.Store({
      switchTab(state,payload){      //mutations里面的事件(回调函数)会接受state作为第一个参数,payload是额外参数
          state.selected = payload   //关于 payload 看这里 http://vuex.vuejs.org/zh-cn/mutations.html#提交载荷（payload）
      },
-     updataResume(state,{field,subfield,value}){
+     updataResume(state,{path,value}){
          //所有的数据改动必选放在store里完成
-         state.resume[field][subfield] = value    //改变对应tab项内对应输入框的值
+         objectPath.set(state.resume,path,value)    //使用objectPath对象的set方法,将state.resume[path] = value
+         //简化传参过程 path是字符串所以前面用反撇号
      }
    }
  })

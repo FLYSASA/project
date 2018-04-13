@@ -16,18 +16,20 @@
           <li v-for="item in resume.config" v-show="item.field === selected">  <!-- 显示左侧图标被点击对应的panel -->
                 <!-- 分情况,看panel对应的data是否是数组,因为有的是数组有的是对象 -->
               <div v-if="resume[item.field] instanceof Array">   <!-- 是Array的实例 -->
-                  <div class="subitem" v-for="subitem in resume[item.field]">  <!-- 通过item.field 找到data -->
+                  <div class="subitem" v-for="(subitem,i) in resume[item.field]">  <!-- 通过item.field 找到data -->
                       <div class="resumeField" v-for="(value,key) in subitem" >  <!-- subitem是数组中的某一项,如education里的第一项. -->
                           <label> {{key}} </label>
-                          <input type="text" :value="value">  <!-- 绑定值 双引号里面的value对应data里面的数据 -->
+                          <input type="text" :value="value" @input="changeResumeField(`${item.field}.${i}.${key}`,$event.target.value)">  <!-- 绑定值 双引号里面的value对应data里面的数据 -->
+                          <!-- 因为是数组所以需要比对象多遍历一次多一层${i} -->
+                          <!-- ${}占位符需要加反撇号 -->
                       </div>
                       <hr>
                   </div>
               </div>
-              <!-- data是对象 -->
+              <!-- data是对象 这里指profile -->
               <div v-else class="resumeField" v-for="(value,key) in resume[item.field]">
                     <label>{{key}}</label>
-                    <input type="text" :value="value" @input="changeResumeField(item.field,key,$event.target.value)"> <!-- 只有用户输入就触发事件changeResumeField -->
+                    <input type="text" :value="value" @input="changeResumeField(`${item.field}.${key}`,$event.target.value)"> <!-- 只有用户输入就触发事件changeResumeField -->
               </div>
           </li>
       </ol>
@@ -58,10 +60,9 @@ export default {
       }
   },
   methods: {
-      changeResumeField(field,subfield,value){   //传入的值分别对应上面: item.field('profile等'),  key('profile对象内的name等属性'), $event.target.value(触发input事件的输入框的输入值)
+      changeResumeField(path,value){   //传入的值分别对应上面: item.field('profile等'),  key('profile对象内的name等属性'), $event.target.value(触发input事件的输入框的输入值)
           this.$store.commit('updataResume',{    //提交到mutations,改变state
-              field,
-              subfield,
+              path,
               value
           })
       }
