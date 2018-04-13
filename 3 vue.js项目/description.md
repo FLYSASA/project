@@ -989,3 +989,24 @@ export default {
 commit: [使用Vuex思想重构](https://github.com/FLYSASA/project/commit/1dd86a3d791df06631e3e3bb880e02e6640dfac5)
 
 > 不使用v-model双向绑定.
+
+commit: [引入object-path,使所有字段可编辑](https://github.com/FLYSASA/project/commit/cd4a508faaf4635e9285e8c6eef9aefc348b14d6)
+
+##### 如何使用object-path?
+参考: https://www.npmjs.com/package/object-path
+作用: 使用路径访问深层属性.
+
+1. `npm install object-path --save`
+2. 在index.js中引入: 
+```js
+import objectPath from 'object-bath'
+
+mutations:{
+  updataResume(state,{path,value}){
+    objectPath.set(state.resume,path,value)   //使用objectPath对象的set方法将第一个参数设置属性为path,值为value,path是个字符串
+  }
+}
+```
+
+3. 在input中传入参数, @input= "f1(`${item.field}.${key}`,$event.target.value)"  即可,然后在函数中作为参数如:
+`f1(path,value){}`
