@@ -1293,3 +1293,6 @@ export default {
 
 ---
 > commit: [实现登录功能](https://github.com/FLYSASA/project/commit/93af7e02ddec9779a7fb7e6fe95cdfb57ef63376)
+
+---
+> commit: [登录成功后关闭对话框,更新store](https://github.com/jirengu-inc/jrg-project-5/commit/880c89e5a38eab7f5153f2ad546c0bd6e49f05d9)

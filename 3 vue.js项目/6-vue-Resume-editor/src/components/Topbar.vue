@@ -12,7 +12,7 @@
           <div v-else class="userActions">
               <!-- 点击注册按钮,@click.prevent阻止默认跳转,并将signUpDialogVisible = true, 此时visible = true,mydialog显示-->
               <a href="#" class="button primary" @click.prevent="signUpDialogVisible = true">注册</a>             
-              <a href="#" class="button" @click.prevent="signUpDialogVisible = true">登录</a>
+              <a href="#" class="button" @click.prevent="signInDialogVisible = true">登录</a>
           </div>
           <button class="button primary">保存</button>
           <button class="button">预览</button>
@@ -62,7 +62,7 @@ export default {
     //注册成功后触发父组件的登录事件
     signIn(user){   //user = $event ,全局可以通过this.user访问到
       console.log(user)
-      this.signUpDialogVisible = false      //隐藏注册对话框
+      this.signInDialogVisible = false      //隐藏注册对话框
       this.$store.commit('setUser',user)   //改变state状态的唯一办法是提交commit,两个参数一个是 store中对应的mutations下的方法名,一个是提交载荷即参数对象
       //触发store里面的setUser方法,并传递参数user
     }
