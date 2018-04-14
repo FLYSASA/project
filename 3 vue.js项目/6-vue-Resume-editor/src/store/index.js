@@ -80,7 +80,7 @@ export default new Vuex.Store({
             Object.assign(state.user,payload)  //将payload中的键值对赋值到state.user
         },
         removeUser(state){
-            state.user.id = null
+            state.user.id = ''
         }
    }
  })
