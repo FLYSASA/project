@@ -1296,3 +1296,7 @@ export default {
 
 ---
 > commit: [登录成功后关闭对话框,更新store](https://github.com/jirengu-inc/jrg-project-5/commit/880c89e5a38eab7f5153f2ad546c0bd6e49f05d9)
+
+> commit: [登录Debug](https://github.com/FLYSASA/project/commit/79b49304e059dc8d3b75ea91245f870f8336c078)
+
+> commit: [show error message]()
