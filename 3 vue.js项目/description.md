@@ -1278,3 +1278,7 @@ export default {
 以上是我们在TodoList里做过的事情,所以每个步骤应该有个大概印象.
 
 <hr>
+一个真实的网页,应该对错误给出友好的提示:
+> commit: [show errorMessage](https://github.com/FLYSASA/project/commit/b2772788586070489700471692be37ddb19ee20a)
+
+---

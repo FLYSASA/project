@@ -3,15 +3,23 @@
     <div class="wrapper">
         <span class="logo">Resumer</span>
         <div class="actions">
-          <span>{{user}}</span>   <!-- 从computed计算属性里获取,通过this.$store.state -->
-          <!-- 点击注册按钮,@click.prevent阻止默认跳转,并将signUpDialogVisible = true, 此时visible = true,mydialog显示-->
-          <a href="#" class="button primary" @click.prevent="signUpDialogVisible = true">注册</a>
-          <MyDialog title="注册" :visible="signUpDialogVisible"  @close="signUpDialogVisible = false">
-            <!-- 登录表单 -->
-            <SignUpForm @success = "login($event)"/>                   <!-- 在父组件中子组件标签里写内容的话,会放在子组件的slot标签内,如果子组件没有slot标签就会被舍弃 -->
-            <!-- $event是特殊变量 这里指的是this.$emit传递的参数对象 -->
-          </MyDialog>
-          <a href="#" class="button">登录</a>
+
+          <div v-if="logined" class="userActions">
+              <span>你好,{{user.username}}</span>
+              <a href="#" class="button">登出</a>
+          </div>
+
+          <div v-else class="userActions">
+              <!-- 点击注册按钮,@click.prevent阻止默认跳转,并将signUpDialogVisible = true, 此时visible = true,mydialog显示-->
+              <a href="#" class="button primary" @click.prevent="signUpDialogVisible = true">注册</a>
+              <MyDialog title="注册" :visible="signUpDialogVisible"  @close="signUpDialogVisible = false">
+                <!-- 登录表单 -->
+                <SignUpForm @success = "login($event)"/>                   <!-- 在父组件中子组件标签里写内容的话,会放在子组件的slot标签内,如果子组件没有slot标签就会被舍弃 -->
+                <!-- $event是特殊变量 这里指的是this.$emit传递的参数对象 -->
+              </MyDialog>
+              <a href="#" class="button">登录</a>
+          </div>
+
           <button class="button primary">保存</button>
           <button class="button">预览</button>
         </div>
@@ -32,6 +40,9 @@ export default {
   computed: {
     user(){
       return this.$store.state.user  //获取store库里的user赋给变量user
+    },
+    logined(){
+      return this.user.id
     }
   },
   components: {
@@ -39,7 +50,7 @@ export default {
   },
   methods: {
     //注册成功后触发父组件的登录事件
-    login(user){   //user = $event
+    login(user){   //user = $event ,全局可以通过this.user访问到
       console.log(user)
       this.signUpDialogVisible = false      //隐藏注册对话框
       this.$store.commit('setUser',user)   //改变state状态的唯一办法是提交commit,两个参数一个是 store中对应的mutations下的方法名,一个是提交载荷即参数对象
@@ -93,7 +104,10 @@ export default {
         color: white;
       }
     }
-    .actions > a{
-
+    .actions{
+        display: flex;
+        .userActions{
+          margin-right: 3em;
+        }
     }
 </style>
