@@ -20,6 +20,7 @@
 <script>
 import AV from '../lib/leancloud'
 import getErrorMessage from '../lib/getErrorMessage'
+import getAVUser from '../lib/getAVUser'
 export default {
   name: 'SignUpForm',
   data(){
@@ -41,12 +42,9 @@ export default {
           var user = new AV.User()
           user.setUsername(username)
           user.setPassword(password)
-          user.signUp().then((loginedUser) => {   //loginedUser登录后返回的对象
+          user.signUp().then(() => {   
               //注册成功触发父组件success事件
-              this.$emit('success',{
-                  username: loginedUser.attributes.username,
-                  id: loginedUser.id
-              })
+              this.$emit('success',getAVUser())
           },(error)=>{
               this.errorMessage = getErrorMessage(error)
           })

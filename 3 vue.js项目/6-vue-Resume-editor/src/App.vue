@@ -23,6 +23,8 @@ import ResumePreview from './components/ResumePreview'
 import icons from './assets/icons'   //引入经过图标脚本合并过的icons.js
 
 import store from './store/index'    //引入store库
+import AV from './lib/leancloud'
+import getAVUser from './lib/getAVUser' 
 
 export default {
   store,                             //Vuex通过store选项,提供一种机制将状态从根组件App.vue,注入到每一个子组件中(需调用 Vue.use(Vuex)).
@@ -39,6 +41,7 @@ export default {
       state = JSON.parse(state)   //将数据字符串化
     }
     this.$store.commit('initState',state)   //通过commit改变本地store里的state
+    this.$store.commit('setUser',getAVUser())
   }
 }
 </script>

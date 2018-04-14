@@ -1286,4 +1286,7 @@ export default {
 > commit: [显示用户名和登出](https://github.com/FLYSASA/project/commit/a4e3245c9ed00ba3ac770e72d52c8b6502a421f8)
 
 ---
-> commit: [完成登出功能]()
+> commit: [完成登出功能](https://github.com/FLYSASA/project/commit/fe155671826d24405efa61b079e1419a51995cff)
+
+---
+> commit: [页面载入是获取已登录用户]()
