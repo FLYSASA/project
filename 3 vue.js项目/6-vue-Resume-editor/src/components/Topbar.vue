@@ -3,7 +3,7 @@
     <div class="wrapper">
         <span class="logo">Resumer</span>
         <div class="actions">
-          
+
           <div v-if="logined" class="userActions">
               <span class="welcome">你好,{{user.username}}</span>
               <a href="#" class="button" @click.prevent="signOut">登出</a>
@@ -25,7 +25,7 @@
       <!-- $event是特殊变量 这里指的是this.$emit传递的参数对象 -->
     </MyDialog>
     <MyDialog title="登录" :visible="signInDialogVisible" @close="signInDialogVisible = false">
-      <SignInForm/>
+      <SignInForm @success="signIn($event)"/>
     </MyDialog>
  </div>
 </template>
