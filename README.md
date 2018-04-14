@@ -1,5 +1,5 @@
-### 1.[My-player 项目预览](http://flysasa.top/project//My-player/index.html)
-[源码地址](https://github.com/FLYSASA/project/tree/master/My-player)   
+### 1.[My-player 项目预览](http://flysasa.top/project/1%20My-player/index.html)
+[源码地址](https://github.com/FLYSASA/project/tree/master/1%20My-player)   
 使用原生 js 实现一个 音乐播放器，涉及的知识：html5 Audo API的使用、组件化思路、ajax、跨域、响应式媒体查询。 
 
 ##### 功能概要
