@@ -1279,6 +1279,11 @@ export default {
 
 <hr>
 一个真实的网页,应该对错误给出友好的提示:
+
 > commit: [show errorMessage](https://github.com/FLYSASA/project/commit/b2772788586070489700471692be37ddb19ee20a)
 
 ---
+> commit: [显示用户名和登出](https://github.com/FLYSASA/project/commit/a4e3245c9ed00ba3ac770e72d52c8b6502a421f8)
+
+---
+> commit: [完成登出功能]()
