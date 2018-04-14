@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper" v-show="visible">  <!-- 当visible为true显示 -->
+  <div class="dialogWrapper" v-show="visible">  <!-- 当visible为true显示 -->
       <div class="dialog">
           <header>
               {{title}}
@@ -28,7 +28,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-    .wrapper{
+    .dialogWrapper{
         position: fixed;
         background: hsla(0, 0%,0%,0.25);
         top: 0;

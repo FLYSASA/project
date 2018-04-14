@@ -3,39 +3,44 @@
     <div class="wrapper">
         <span class="logo">Resumer</span>
         <div class="actions">
-
+          
           <div v-if="logined" class="userActions">
-              <span>你好,{{user.username}}</span>
+              <span class="welcome">你好,{{user.username}}</span>
               <a href="#" class="button" @click.prevent="signOut">登出</a>
           </div>
 
           <div v-else class="userActions">
               <!-- 点击注册按钮,@click.prevent阻止默认跳转,并将signUpDialogVisible = true, 此时visible = true,mydialog显示-->
-              <a href="#" class="button primary" @click.prevent="signUpDialogVisible = true">注册</a>
-              <MyDialog title="注册" :visible="signUpDialogVisible"  @close="signUpDialogVisible = false">
-                <!-- 登录表单 -->
-                <SignUpForm @success = "signIn($event)"/>                   <!-- 在父组件中子组件标签里写内容的话,会放在子组件的slot标签内,如果子组件没有slot标签就会被舍弃 -->
-                <!-- $event是特殊变量 这里指的是this.$emit传递的参数对象 -->
-              </MyDialog>
-              <a href="#" class="button">登录</a>
+              <a href="#" class="button primary" @click.prevent="signUpDialogVisible = true">注册</a>             
+              <a href="#" class="button" @click.prevent="signUpDialogVisible = true">登录</a>
           </div>
-
           <button class="button primary">保存</button>
           <button class="button">预览</button>
         </div>
     </div>
+    <MyDialog title="注册" :visible="signUpDialogVisible" @close="signUpDialogVisible = false">
+      <!-- 登录表单 -->
+      <SignUpForm @success="signIn($event)" />
+      <!-- 在父组件中子组件标签里写内容的话,会放在子组件的slot标签内,如果子组件没有slot标签就会被舍弃 -->
+      <!-- $event是特殊变量 这里指的是this.$emit传递的参数对象 -->
+    </MyDialog>
+    <MyDialog title="登录" :visible="signInDialogVisible" @close="signInDialogVisible = false">
+      <SignInForm/>
+    </MyDialog>
  </div>
 </template>
 
 <script>
 import MyDialog from './MyDialog'
 import SignUpForm from './SignUpForm'
+import SignInForm from './SignInForm'
 import AV from '../lib/leancloud'
 export default {
   name: "Topbar", //name作用: 1.Topbar相当于一个全局Id 2.可以不写 3.写了可以提供更好的调试信息  参见https://cn.vuejs.org/v2/api/#name
   data(){
     return {
-      signUpDialogVisible: false
+      signUpDialogVisible: false,
+      signInDialogVisible: false,
     }
   },
   computed: {
@@ -47,7 +52,7 @@ export default {
     }
   },
   components: {
-    MyDialog,SignUpForm
+    MyDialog,SignUpForm,SignInForm
   },
   methods: {
     signOut(){
@@ -113,6 +118,9 @@ export default {
         display: flex;
         .userActions{
           margin-right: 3em;
+          .welcome{
+            margin-right: .5em;
+          }
         }
     }
 </style>
