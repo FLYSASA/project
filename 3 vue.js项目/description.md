@@ -1330,5 +1330,13 @@ export default {
     this.$store.commit('setUser',getAVUser())
   }
 }
+```
+
+
+---
+### 打包:
+1. `npm run build`
+2. gitpush文件
+3. 生成链接
 
 
