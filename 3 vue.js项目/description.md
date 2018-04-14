@@ -1318,6 +1318,8 @@ export default {
 
 commit: [修复bug](https://github.com/FLYSASA/project/commit/a5d19a263291889523b3823523b22869562ebdfe)
 
+**写在data选项中的对象属性才具有响应式,由于 Vue 会在初始化实例时对属性执行 getter/setter 转化过程，所以属性必须在 data 对象上存在才能让 Vue 转换它，这样才能让它是响应的。**
+
 ---
 另外:
 ```js
