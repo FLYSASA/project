@@ -20,8 +20,8 @@
  5.点击频道,音乐不重复随机匹配
  
  
- ### 2.[工程化 项目预览](http://flysasa.top/project//前端工程化/demo_requireJs/www/index.html)
- [源码地址](https://github.com/FLYSASA/project/tree/master/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96/demo_requireJs/www)  
+ ### 2.[工程化 项目预览](http://flysasa.top/project/2%20前端工程化项目/demo_requireJs/www/index.html)
+ [源码地址](https://github.com/FLYSASA/project/tree/master/2%20%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E9%A1%B9%E7%9B%AE/demo_requireJs/www)  
 使用require js 实现一个html5主页，涉及的知识：各种组件(首屏轮播组件、回到顶部组件、瀑布流ajax获取新闻组件)封装,组件化思路、ajax、跨域、requirejs。 
 
 ##### 功能概要
