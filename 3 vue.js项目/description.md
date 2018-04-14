@@ -1297,6 +1297,36 @@ export default {
 ---
 > commit: [登录成功后关闭对话框,更新store](https://github.com/jirengu-inc/jrg-project-5/commit/880c89e5a38eab7f5153f2ad546c0bd6e49f05d9)
 
+---
 > commit: [登录Debug](https://github.com/FLYSASA/project/commit/79b49304e059dc8d3b75ea91245f870f8336c078)
 
+---
 > commit: [show error message](https://github.com/FLYSASA/project/commit/326b97431f915a1ed6a9b6507be7676e96a0c449)
+
+---
+### 重要bug
+这个 BUG 每个使用 Vue 的人都会遇到，但可能由于不理解 [Object.defineProperty](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty) 的用法，无法「独立解决」这个 BUG
+
+**在Vue实例里面的data选项中的对象,Vue 将遍历此对象所有的属性，并使用 Object.defineProperty 把这些属性全部转为 getter/setter。**
+
+绝对绝对绝对不能让 data 中的对象的任何一个属性值变为 undefined 或者 null， 原因见 https://cn.vuejs.org/v2/guide/reactivity.html
+
+> 将一个对象传给data选项时,如果该对象某个属性一旦被设置为`undefined或null`,vue遍历到data选项的该属性时,由于值为null和undefined,vue无法使用 `Object.defineProperty`(赋予对象新属性) 将属性转为getter/setter. setter也就无法让watcher重新更新,致使使它关联的组件无法得以更新.
+
+![示例](https://cn.vuejs.org/images/data.png)
+
+
+commit: [修复bug](https://github.com/FLYSASA/project/commit/a5d19a263291889523b3823523b22869562ebdfe)
+
+---
+另外:
+```js
+//App.vue
+export default {
+  created(){
+    this.$store.commit('initState',state)   //this指的是vue实例
+    this.$store.commit('setUser',getAVUser())
+  }
+}
+
+
