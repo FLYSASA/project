@@ -42,9 +42,9 @@
 
  ### 4.
  ### [Shopping Mall 首页](http://flysasa.top/project/4%20Shopping%20Mall/index.html)
- 
+
  ### [Shopping Mall 详情页](http://flysasa.top/project/4%20Shopping%20Mall/detail.html)
- [源码地址](https://github.com/FLYSASA/project/tree/master/2%20%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E9%A1%B9%E7%9B%AE/demo_requireJs/www)  
+ [源码地址](https://github.com/FLYSASA/project/tree/master/4%20Shopping%20Mall)  
 使用 jQuery 实现的一个商城主页,涉及的知识: 轮播、动画、Tab切换等
 
 ##### 功能概要
