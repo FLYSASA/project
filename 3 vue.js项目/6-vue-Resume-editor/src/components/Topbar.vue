@@ -23,6 +23,7 @@
       <SignUpForm @success="signIn($event)" />
       <!-- 在父组件中子组件标签里写内容的话,会放在子组件的slot标签内,如果子组件没有slot标签就会被舍弃 -->
       <!-- $event是特殊变量 这里指的是this.$emit传递的参数对象 -->
+      <!-- $event.target 获取绑定success事件的元素 -->
     </MyDialog>
     <MyDialog title="登录" :visible="signInDialogVisible" @close="signInDialogVisible = false">
       <SignInForm @success="signIn($event)"/>

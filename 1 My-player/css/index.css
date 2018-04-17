@@ -405,6 +405,7 @@ footer li.active {
     right: 2vh;
     top: 2vh;
     font-size: 2vh;
+    height: 10vh;   /* 父容器不给高度会继承100%高度 */
 }
 #personal a {
     display: inline-block;
