@@ -93,7 +93,7 @@ export default {
         section[data-name="profile"]{
             >h1{margin: .1em 0; font-size: 4em;}
         }
-        section[data-name="workHistory"]
+        section[data-name="workHistory"],
         section[data-name="projects"],
         section[data-name="awards"]{
             li + li {margin-top: 1em;}

@@ -1,14 +1,13 @@
- 主组件
-
 <template>
-  <div class="page">
+  <div class="page" v-bind:class="{previewMode: previewMode}">
     <header>
-      <Topbar/>
+      <Topbar v-on:preview="preview" id="topbar"/>   <!-- 子组件this.$emit('preview') 触发这个监听事件-->
     </header>
     <main>
       <ResumeEditor/>
-      <ResumePreview/>
+      <ResumePreview id="resumePreview"/>
     </main>
+    <el-button id="exitpreview" v-on:click="exitPreview">退出预览</el-button>
   </div>
 </template>
 
@@ -29,6 +28,20 @@ import getAVUser from './lib/getAVUser'
 export default {
   store,                             //Vuex通过store选项,提供一种机制将状态从根组件App.vue,注入到每一个子组件中(需调用 Vue.use(Vuex)).
   name: 'app',
+  data(){
+    return {
+        previewMode : false
+    }
+  },
+
+  methods: {
+    preview(){
+      this.previewMode = true
+    },
+    exitPreview(){
+      this.previewMode = false
+    }
+  },
   
   components: {Topbar,ResumeEditor,ResumePreview},
   created(){
@@ -77,7 +90,6 @@ export default {
   }
   #resumeEditor{
     min-width: 35%;    //使用width: 35%;因为flex,所以右边会挤压左边
-    background: #444;
   }
 
   #resumePreview{
@@ -93,5 +105,33 @@ export default {
     vertical-align: -0.1em;
     font-size: 16px;
   }
+  
+  .previewMode{
+    height: 100%;
+     #topbar{
+       display: none;
+     }
+     #resumeEditor{
+       display: none;    //子组件css不要使用scope
+     }
+     #resumePreview{
+       height: 100%;
+       max-width: 600px;
+       margin: 32px auto;
+       main{
+         height: 100%;
+       }
+     }  
+  }
+
+  #exitpreview{
+    display: none;
+  }
+  .previewMode #exitpreview{
+  display: inline-block;   //不设置这个会无法定位
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+}
 
 </style>

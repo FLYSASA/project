@@ -12,6 +12,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "element-ui": "^2.3.4",
     "leancloud-storage": "^3.6.5",
     "node-sass": "^4.8.3",
     "normalize.css": "^8.0.0",
