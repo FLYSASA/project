@@ -3,8 +3,9 @@
       <div class="dialog">
           <header>
               {{title}}
-              <span class="close" @click="close">X</span>  <!-- 点x的时候触发父组件的close事件 -->
+              <el-button type="danger" class="close" @click="close"><i class="el-icon-close"></i></el-button>  <!-- 点击的时候触发父组件的close事件 -->
           </header>
+          
           <main>
               <slot></slot>   <!-- 用来放置父组件内子组件标签里的内容 -->
           </main>
@@ -30,7 +31,7 @@ export default {
 <style scoped lang="scss">
     .dialogWrapper{
         position: fixed;
-        background: hsla(0, 0%,0%,0.25);
+        background: hsla(0, 0%,0%,0.25);    //大的遮罩
         top: 0;
         right: 0;
         bottom: 0;
@@ -39,14 +40,22 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
+        z-index: 1;
         .dialog{
             background: #fff;
+            border-radius: 4px;
             min-height: 4em;
             min-width: 10em;
-            > header{
+            > header{             
                 padding: 16px;
+                border-bottom: 1px solid #eee;
                 display: flex;
                 justify-content: space-between;
+                align-items: center;
+                .close{
+                    text-align: center;
+                    padding: 4px 5px;
+                }
             }
             > main{
                 padding: 16px;

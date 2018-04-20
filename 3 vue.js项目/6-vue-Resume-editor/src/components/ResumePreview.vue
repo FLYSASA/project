@@ -1,11 +1,11 @@
 <template>
   <div id="resumePreview">
       <section data-name="profile" v-show="resume.profile">
-          <h1>{{resume.profile.name}}</h1>
-          <h2>{{resume.profile.title}}</h2>
+          <h1>{{resume.profile['姓名']}}</h1>
+          <h2>{{resume.profile['职位']}}</h2>
           <p>
-              <small>{{resume.profile.city}}</small>
-              <small>{{resume.profile.birthday}}</small>
+              <small>{{resume.profile['城市']}}</small>
+              <small>{{resume.profile['出生年月']}}</small>
           </p>
       </section>
 
@@ -13,8 +13,8 @@
           <h2>项目经历</h2>
           <ol>
               <li v-for="item in resume.projects">
-                  <h3>{{item.name}}</h3>
-                  <p v-show="item.content">{{item.content}}</p>
+                  <h3>{{item['项目名称']}}</h3>
+                  <p v-show="item['项目内容']">{{item['项目内容']}}</p>
               </li>
           </ol>
       </section>
@@ -23,8 +23,8 @@
           <h2>工作经历</h2>
           <ol>
               <li v-for="item in resume.workHistory">
-                  <h3>{{item.company}}</h3>
-                  <p v-show="item.content">{{item.content}}</p>
+                  <h3>{{item['公司']}}</h3>
+                  <p v-show="item['工作内容']">{{item['工作内容']}}</p>
               </li>
           </ol>
       </section>
@@ -33,8 +33,8 @@
           <h2>获奖情况</h2>
           <ol>
               <li v-for="item in resume.awards">
-                  <h3>{{item.name}}</h3>
-                  <p v-show="item.content">{{item.content}}</p>
+                  <h3>{{item['荣获奖项']}}</h3>
+                  <p v-show="item['奖励内容']">{{item['奖励内容']}}</p>
               </li>
           </ol>
       </section>  
@@ -43,8 +43,8 @@
           <h2>毕业院校</h2>
           <ol>
               <li v-for="item in resume.education">
-                  <h3>{{item.school}}
-                      <span v-show="item.content">- {{item.content}}</span>
+                  <h3>{{item['学校']}}
+                      <span v-show="item['学位']">- {{item['学位']}}</span>
                   </h3>
               </li>
           </ol>
@@ -54,8 +54,8 @@
           <h2>联系方式</h2>
           <table>
               <tr v-for="item in resume.contacts">
-                  <td>{{item.contact}}</td>
-                  <td v-show="item.content">{{item.content}}</td>
+                  <td>{{item['联系方式']}}</td>
+                  <td v-show="item['号码']">{{item['号码']}}</td>
               </tr>
           </table>
       </section>
@@ -88,7 +88,7 @@ export default {
         section + section{margin-top: 2em;}
         p{ white-space: pre-line;} //合并空白符序列，但是保留换行符,意思是文本在html里换行,在页面上也可以换行。
         section {
-            > h2:first-child{background: #ddd;display: inline-block;padding: .2em;margin-bottom: .5em;}
+            > h2:first-child{background: #ddd;display: inline-block;padding: .2em;margin-bottom: .5em;border-radius: 5px;}
         }
         section[data-name="profile"]{
             >h1{margin: .1em 0; font-size: 4em;}

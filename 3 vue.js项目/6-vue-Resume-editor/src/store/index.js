@@ -21,20 +21,20 @@ export default new Vuex.Store({
                 { field: 'contacts', icon: 'phone' }
             ],
             profile: {
-                name: '',
-                city: '',
-                birthday: '',
-                title: ''
+                姓名: '李明',
+                城市: '深圳',
+                出生年月: '1993.6',
+                职位: '首席架构师'
             },
             workHistory : [
-                {company: 'xx集团', content:   //需要用反撇号
+                {公司: 'xx集团', 工作内容:   //需要用反撇号
                 `公司总部设在XXXX区，先后在北京、上海成立分公司。专注于移动XXX领域，主打产品XXXXX，它将资讯、报纸、杂志、图片、微信等众多内容，按照用户意愿聚合到一起，实现深度个性化定制。
                 我的主要工作如下:
                 1. 完成既定产品需求。
                 2. 修复 bug。
                 `
                 },
-                {company: 'xx集团', content: 
+                {公司: 'xx集团', 工作内容: 
                 `公司总部设在XXXX区，先后在北京、上海成立分公司。专注于移动XXX领域，主打产品XXXXX，它将资讯、报纸、杂志、图片、微信等众多内容，按照用户意愿聚合到一起，实现深度个性化定制。
                 我的主要工作如下:
                 1. 完成既定产品需求。
@@ -43,20 +43,20 @@ export default new Vuex.Store({
                 }                             
             ],
             education: [
-                { school: '中山', content: '本科' },
-                { school: '热血高中', content: '文字' },                   
+                { 学校: '中山大学', 学位: '本科' },
+                { 学校: '黄冈高中', 学位: '高中' },                   
             ],
             projects: [
-                { name: 'project A', content: '文字' },
-                { name: 'project B', content: '文字' },   
+                { 项目名称: 'project 1', 项目内容: '文字' },
+                { 项目名称: 'project 2', 项目内容: '文字' },   
             ],
             awards: [
-                { name: '荣耀大奖', content: '获得再来一瓶奖励' },
-                { name: 'awards B', content: '文字' },  
+                { 荣获奖项: '荣耀大奖', 奖励内容: '获得再来一瓶奖励' },
+                { 荣获奖项: '至尊大奖', 奖励内容: '两次再来一瓶奖励' },  
             ],
             contacts: [
-                { contact: 'phone', content: '13812345678' },
-                { contact: 'qq', content: '12345678' },  
+                { 联系方式: 'phone', 号码: '13812345678' },
+                { 联系方式: 'qq', 号码: '12345678' },  
             ]
         }
    },

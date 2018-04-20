@@ -3,6 +3,7 @@
     <div class="wrapper">
         <span class="logo">Resumer</span>
         <div class="actions">
+          <!-- 登录态显示 -->
             <div v-if="logined" class="userActions">
                 <span class="welcome">你好,{{user.username}}</span>
                 <a href="#" class="button" @click.prevent="signOut">登出</a>
@@ -10,7 +11,7 @@
 
             <div v-else class="userActions">
                 <!-- 点击注册按钮,@click.prevent阻止默认跳转,并将signUpDialogVisible = true, 此时visible = true,mydialog显示-->
-                <a href="#" class="button primary" @click.prevent="signUpDialogVisible = true">注册</a>             
+                <a href="#" class="button primary signup" @click.prevent="signUpDialogVisible = true">注册</a>             
                 <a href="#" class="button" @click.prevent="signInDialogVisible = true">登录</a>
             </div>
             <button class="button primary hold" >保存</button>
@@ -62,8 +63,9 @@ export default {
     //注册成功后触发父组件的登录事件
     signIn(user){   //user = $event ,全局可以通过this.user访问到
       console.log(user)
-      this.signInDialogVisible = false      //隐藏注册对话框
-      this.$store.commit('setUser',user)   //改变state状态的唯一办法是提交commit,两个参数一个是 store中对应的mutations下的方法名,一个是提交载荷即参数对象
+      this.signInDialogVisible = false      //隐藏登录对话框
+      this.signUpDialogVisible = false      //隐藏登录对话框
+      this.$store.commit('setUser',user)    //改变state状态的唯一办法是提交commit,两个参数一个是 store中对应的mutations下的方法名,一个是提交载荷即参数对象
       //触发store里面的setUser方法,并传递参数user
     },
     preview(){
@@ -91,7 +93,7 @@ export default {
         .actions{
           button.watch{
             margin-left: 5px;
-            border: 1px solid #eee;
+            border: 1px solid rgb(202, 201, 201);
             background: none;
           }
         }
@@ -125,9 +127,18 @@ export default {
       }
     }
     .actions{
-        display: flex;
+        display: flex;      
         .userActions{
+          display: flex; 
           margin-right: 3em;
+          align-items: center;
+          color: #303133;
+          .signup{
+            margin-right: 5px;
+          }
+          .button{
+            border: 1px solid rgb(202, 201, 201);
+          }
           .welcome{
             margin-right: .5em;
           }

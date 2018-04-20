@@ -101,8 +101,8 @@ export default {
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    margin-top: 16px;
-                    margin-bottom: 16px;
+                    padding-top: 32px;
+                    padding-bottom: 32px;
                     &.active{
                         background: white;
                         color: black;
