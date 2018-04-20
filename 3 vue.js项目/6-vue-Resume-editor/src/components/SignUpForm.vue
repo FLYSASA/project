@@ -75,7 +75,7 @@ export default {
             border-radius: 5px;
             padding: 5px 10px;
             color: #fff;
-            background: #67C23A;
+            background: #02af5f;
             margin-top: 10px;
             &:hover{
                 background: rgb(87, 168, 47);

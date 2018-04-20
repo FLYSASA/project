@@ -70,7 +70,7 @@ export default new Vuex.Store({
             localStorage.setItem('state',JSON.stringify(state))
         },
         updataResume(state,{path,value}){
-            //所有的数据改动必选放在store里完成
+            //所有的数据改动必需放在store里完成
             objectPath.set(state.resume,path,value)    //使用objectPath对象的set方法,将state.resume[path] = value
             //简化传参过程 path是字符串所以前面用反撇号
             localStorage.setItem('state',JSON.stringify(state)) //给本地存储创建'state'(key): state(value)
@@ -81,6 +81,7 @@ export default new Vuex.Store({
         },
         removeUser(state){
             state.user.id = ''
+            state.resume = this.state.resume
         }
    }
  })
