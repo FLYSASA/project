@@ -64,7 +64,7 @@ export default {
     signIn(user){   //user = $event ,全局可以通过this.user访问到
       console.log(user)
       this.signInDialogVisible = false      //隐藏登录对话框
-      this.signUpDialogVisible = false      //隐藏登录对话框
+      this.signUpDialogVisible = false      //隐藏注册对话框
       this.$store.commit('setUser',user)    //改变state状态的唯一办法是提交commit,两个参数一个是 store中对应的mutations下的方法名,一个是提交载荷即参数对象
       //触发store里面的setUser方法,并传递参数user
     },

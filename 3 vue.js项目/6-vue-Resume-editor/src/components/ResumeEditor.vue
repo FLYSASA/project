@@ -89,8 +89,7 @@ export default {
     #resumeEditor{
         background: #fff;
         box-shadow: 0 1px 3px 0 rgba(0,0,0,0.25);
-        display: flex;
-        flex-direction: row;
+        display: flex;     
         >nav{
             width: 80px;
             background: black;

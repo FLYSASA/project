@@ -1002,7 +1002,7 @@ commit: [引入object-path,使所有字段可编辑](https://github.com/FLYSASA/
 1. `npm install object-path --save`
 2. 在index.js中引入: 
 ```js
-import objectPath from 'object-bath'
+import objectPath from 'object-path'
 
 mutations:{
   updataResume(state,{path,value}){

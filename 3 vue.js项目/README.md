@@ -733,7 +733,7 @@ http://flysasa.top/project/3%20vue.js%E5%9C%A8%E7%BA%BF%E7%AE%80%E5%8E%86%E7%BC%
 这次我们使用**LeanCloud**的免费服务来存储我们的所有数据.
 
 #### 创建LeanCloud账户
-去https://leancloud.cn/创建一个账户.
+去https://leancloud.cn/   创建一个账户.
 创建成功后,你需要验证你的邮箱,否则无法创建应用.
 
 #### 创建resumer应用:

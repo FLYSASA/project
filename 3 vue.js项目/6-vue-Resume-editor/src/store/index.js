@@ -81,7 +81,6 @@ export default new Vuex.Store({
         },
         removeUser(state){
             state.user.id = ''
-            state.resume = this.state.resume
         }
    }
  })
