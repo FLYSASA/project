@@ -54,7 +54,7 @@ banner轮播、商品分类展示、商品罗列、添加购物车、皮肤切�
 
 ### 5.[My Vue-Resume](http://flysasa.top/resume/dist/)
  [源码地址](https://github.com/FLYSASA/resume)  
-基于 Vue + vue-cli +webpack 搭建的用于展示个人简历的地方
+基于 Vue + vue-cli +webpack + hexo + githubpages搭建的用于展示个人简历的地方
 
 ##### 功能概要
 基本功能:
