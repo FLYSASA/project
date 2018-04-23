@@ -156,7 +156,7 @@ var Fm = {
 
         //播放进度点选更新
         _this.$container.find('.aside .bar').on('click',function(event) {
-            var barWidth = $(this)[0].clientWidth
+            var barWidth = $(this)[0].clientWidth  //clientWidth是DOM对象属性,需要先将jquery对象转为dom对象.使用$a[0]
             var newCurrentTime = (event.offsetX / barWidth) * _this.audio.duration
             _this.audio.currentTime = newCurrentTime
 
